@@ -8,6 +8,8 @@ package com.mycompany.gestioninventariomercado;
  *
  * @author diazv
  */
-public class Productos {
+
+
+public class Tienda {
     
 }
