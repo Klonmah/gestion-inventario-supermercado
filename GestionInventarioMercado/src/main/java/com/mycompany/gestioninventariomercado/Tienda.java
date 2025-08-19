@@ -4,6 +4,8 @@
  */
 package com.mycompany.gestioninventariomercado;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author diazv
@@ -11,5 +13,32 @@ package com.mycompany.gestioninventariomercado;
 
 
 public class Tienda {
+    /*Variables y Objetos*/
+    private ArrayList<Seccion> secciones ;
+    private String nombreTienda;
     
+    /*Constructor*/
+    public Tienda(String nombreTienda){
+        this.secciones = new ArrayList<>();
+        this.nombreTienda = nombreTienda;
+    }
+    
+    /*Setters*/
+    public void setNombreTienda(String nombreTienda){
+        this.nombreTienda = nombreTienda;
+    }
+    
+    /*Getters*/
+    public String getNombreTienda(){
+        return this.nombreTienda;
+    }
+    
+    public Seccion getSeccion(String nombreTienda){
+        for(Seccion i: secciones){
+            if(i.getNombreSeccion().equalsIgnoreCase(nombreTienda)){
+                return i;
+            }
+        }
+        return null;
+    }
 }

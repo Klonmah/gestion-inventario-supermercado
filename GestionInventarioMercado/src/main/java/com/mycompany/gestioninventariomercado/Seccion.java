@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author diazv
  */
 public class Seccion {
-    /**/
+    /*Variables y Objetos*/
     private ArrayList<Producto> productos;
     private String nombreSeccion;
     
@@ -20,9 +20,38 @@ public class Seccion {
         this.nombreSeccion = nombreSeccion;
     }
     
+    /*Setter*/
+    public void setNombreSeccion(String nombreSeccion){
+        this.nombreSeccion = nombreSeccion;
+    }
+    /*Getter*/
+    public String getNombreSeccion(){
+        return this.nombreSeccion;
+    }
+    
+    public Producto getProductoCodigo(int codigoProducto){
+        for(Producto i : productos){
+            if(i.getCodigo() == codigoProducto){
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    public Producto getProductoNombre(String nombreProducto){
+        for(Producto i : productos){
+            if(i.getNombre().equalsIgnoreCase(nombreProducto)){
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    /*Resto Funciones*/
     public void agregarProducto(Producto producto){
         this.productos.add(producto);
     }
+    
     
     public void mostrarProductos(){
         if(productos.isEmpty()){
