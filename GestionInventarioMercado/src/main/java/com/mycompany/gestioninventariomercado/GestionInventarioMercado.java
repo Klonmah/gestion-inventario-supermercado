@@ -23,14 +23,16 @@ public class GestionInventarioMercado {
         
         Seccion electronicos = new Seccion("Electronicos");
         Producto celular_moco = new Producto(021, "Celular MOCO",10, (float) 400.0);
-        Producto consola_while = new Producto(022, "Celular While",10, (float) 699.0);
+        Producto consola_while = new Producto(022, "Consola While",10, (float) 699.0);
         electronicos.agregarProducto(celular_moco);
         electronicos.agregarProducto(consola_while);
         tienda.agregarSeccion(electronicos);
         
         Seccion juguetes = new Seccion("Juguetes");
         Producto hugomon_tcg = new Producto(031, "Hugomon TCG",200, (float) 5.9);
+        Producto aguaneitor = new Producto(032, "Aguaneitor",49, (float) 50.9);
         juguetes.agregarProducto(hugomon_tcg);
+        juguetes.agregarProducto(aguaneitor);
         tienda.agregarSeccion(juguetes);
         
         //FIN DATOS DE INICIO
