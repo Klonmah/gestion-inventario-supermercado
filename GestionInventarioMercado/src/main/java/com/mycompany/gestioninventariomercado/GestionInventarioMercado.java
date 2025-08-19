@@ -11,6 +11,30 @@ public class GestionInventarioMercado {
 
     public static void main(String[] args) throws IOException {
         Tienda tienda = new Tienda("Supermerca dos");
+        
+        //DATOS DE INICIO
+        
+        Seccion lacteos = new Seccion("Lacteos");
+        Producto leche = new Producto(011, "Lechita Mumu",3, (float) 2.5);
+        Producto yogurt = new Producto(012, "Yogurt Gurt-Sahur",3, (float) 2.5);
+        lacteos.agregarProducto(leche);
+        lacteos.agregarProducto(yogurt);
+        tienda.agregarSeccion(lacteos);
+        
+        Seccion electronicos = new Seccion("Electronicos");
+        Producto celular_moco = new Producto(021, "Celular MOCO",10, (float) 400.0);
+        Producto consola_while = new Producto(022, "Celular While",10, (float) 699.0);
+        electronicos.agregarProducto(celular_moco);
+        electronicos.agregarProducto(consola_while);
+        tienda.agregarSeccion(electronicos);
+        
+        Seccion juguetes = new Seccion("Juguetes");
+        Producto hugomon_tcg = new Producto(031, "Hugomon TCG",200, (float) 5.9);
+        juguetes.agregarProducto(hugomon_tcg);
+        tienda.agregarSeccion(juguetes);
+        
+        //FIN DATOS DE INICIO
+        
         String ingresado;
         int opcion = -1;
         
@@ -33,6 +57,10 @@ public class GestionInventarioMercado {
             switch(opcion){
                 case 1:
                     tienda.printSecciones();
+                    
+                    break;
+                case 4:
+                    tienda.printTienda();
                     
                     break;
             }    
