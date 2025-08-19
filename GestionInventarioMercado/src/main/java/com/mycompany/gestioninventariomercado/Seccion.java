@@ -30,7 +30,7 @@ public class Seccion {
     }
     
     public Producto getProductoCodigo(int codigoProducto){
-        for(Producto i : productos){
+        for(Producto i : this.productos){
             if(i.getCodigo() == codigoProducto){
                 return i;
             }
@@ -39,7 +39,7 @@ public class Seccion {
     }
     
     public Producto getProductoNombre(String nombreProducto){
-        for(Producto i : productos){
+        for(Producto i : this.productos){
             if(i.getNombre().equalsIgnoreCase(nombreProducto)){
                 return i;
             }
@@ -54,11 +54,11 @@ public class Seccion {
     
     
     public void mostrarProductos(){
-        if(productos.isEmpty()){
+        if(this.productos.isEmpty()){
              System.out.println("La Sección " + this.nombreSeccion + " está vacía.");
         } else{
             /*Recorre todos los productos y los printea*/
-            for(Producto i : productos){
+            for(Producto i : this.productos){
                 System.out.println(i);
             }
         }

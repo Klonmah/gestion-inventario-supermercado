@@ -33,12 +33,20 @@ public class Tienda {
         return this.nombreTienda;
     }
     
-    public Seccion getSeccion(String nombreTienda){
+    public Seccion getSeccion(String nombreSeccion){
         for(Seccion i: secciones){
-            if(i.getNombreSeccion().equalsIgnoreCase(nombreTienda)){
+            if(i.getNombreSeccion().equalsIgnoreCase(nombreSeccion)){
                 return i;
             }
         }
         return null;
     }
+    
+    public void printSecciones(){
+        for(Seccion i: secciones){
+            System.out.println(String.valueOf(i)+ ": "+i.getNombreSeccion()+" \n");
+        }
+    }
+    
+    
 }
