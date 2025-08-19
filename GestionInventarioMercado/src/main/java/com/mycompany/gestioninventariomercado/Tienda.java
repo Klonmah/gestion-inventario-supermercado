@@ -42,11 +42,21 @@ public class Tienda {
         return null;
     }
     
+    public void agregarSeccion(Seccion seccion){
+        this.secciones.add(seccion);
+    }
+    
     public void printSecciones(){
         for(Seccion i: secciones){
             System.out.println(String.valueOf(i)+ ": "+i.getNombreSeccion()+" \n");
         }
     }
     
-    
+    public void printTienda(){
+        for(Seccion i: secciones){
+            System.out.println(String.valueOf(i)+ ": "+i.getNombreSeccion()+" \n");
+            i.mostrarProductos();
+            System.out.println("\n\n");
+        }
+    }
 }
