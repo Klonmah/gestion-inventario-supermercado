@@ -38,18 +38,20 @@ public class GestionInventarioMercado {
         //FIN DATOS DE INICIO
         
         String ingresado;
+        String seccionProducto;
+        Seccion seccion;
         int opcion = -1;
         
         while(opcion != 0){
             System.out.println("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
-            System.out.println("1: Agregar Producto\n");
-            System.out.println("2: Comprar Producto\n");
-            System.out.println("3: Vender Producto\n");
-            System.out.println("4: Listar Productos\n");
-            System.out.println("5: Buscar Producto\n");
-            System.out.println("6: Eliminar Producto\n");
-            System.out.println("7: Agregar Seccion\n");
-            System.out.println("8: Eliminar Seccion\n");
+            System.out.println("1: Agregar Producto");
+            System.out.println("2: Comprar Producto");
+            System.out.println("3: Vender Producto");
+            System.out.println("4: Listar Productos");
+            System.out.println("5: Buscar Producto");
+            System.out.println("6: Eliminar Producto");
+            System.out.println("7: Agregar Seccion");
+            System.out.println("8: Eliminar Seccion");
             System.out.println("0: Salir\n");
             
             BufferedReader lector = new BufferedReader (new InputStreamReader(System.in));
@@ -59,7 +61,16 @@ public class GestionInventarioMercado {
             switch(opcion){
                 case 1:
                     tienda.printSecciones();
-                    
+                    System.out.println("Ingrese de Que seccion es el Producto que desea Ingresar:\n");
+                    seccionProducto = lector.readLine();
+                    seccion = tienda.getSeccion(ingresado);
+                    if(seccion == null){
+                        System.out.println("Error: Seccion no encontrada");
+                    }else{
+                        System.out.println("Ingrese de Que :\n");
+                        ingresado = lector.readLine();
+                        
+                    }
                     break;
                 case 4:
                     tienda.printTienda();
@@ -67,6 +78,11 @@ public class GestionInventarioMercado {
                     break;
             }    
             
+            System.out.printf("Desea Hacer Otra Operacion?\n");
+            System.out.printf("0: No\n");
+            System.out.printf("Cualqier otro numero: Si\n");
+            ingresado = lector.readLine();
+            opcion = Integer.parseInt(ingresado);
             
         }
         

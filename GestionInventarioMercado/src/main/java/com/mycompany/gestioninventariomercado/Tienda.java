@@ -48,13 +48,13 @@ public class Tienda {
     
     public void printSecciones(){
         for(Seccion i: secciones){
-            System.out.println(String.valueOf(i)+ ": "+i.getNombreSeccion()+" \n");
+            System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
         }
     }
     
     public void printTienda(){
         for(Seccion i: secciones){
-            System.out.println(String.valueOf(i)+ ": "+i.getNombreSeccion()+" \n");
+            System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
             i.mostrarProductos();
             System.out.println("\n\n");
         }
