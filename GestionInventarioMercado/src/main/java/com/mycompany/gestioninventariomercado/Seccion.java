@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.gestioninventariomercado;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -11,12 +12,12 @@ import java.util.ArrayList;
  */
 public class Seccion {
     /*Variables y Objetos*/
-    private ArrayList<Producto> productos;
+    private Map<Integer,Producto> productos;
     private String nombreSeccion;
     
     /*Constructor*/
     public Seccion(String nombreSeccion){
-        this.productos = new ArrayList<>();
+        this.productos = new HashMap<>();
         this.nombreSeccion = nombreSeccion;
     }
     
@@ -24,32 +25,23 @@ public class Seccion {
     public void setNombreSeccion(String nombreSeccion){
         this.nombreSeccion = nombreSeccion;
     }
+    /*Sobrecarga de metodos 2*/
+    public void setNombreSeccion(char nombreSeccion){
+        this.nombreSeccion = Character.toString(nombreSeccion);
+    }
+    
     /*Getter*/
     public String getNombreSeccion(){
         return this.nombreSeccion;
     }
     
     public Producto getProductoCodigo(int codigoProducto){
-        for(Producto i : this.productos){
-            if(i.getCodigo() == codigoProducto){
-                return i;
-            }
-        }
-        return null;
-    }
-    
-    public Producto getProductoNombre(String nombreProducto){
-        for(Producto i : this.productos){
-            if(i.getNombre().equalsIgnoreCase(nombreProducto)){
-                return i;
-            }
-        }
-        return null;
+        return this.productos.get(codigoProducto);
     }
     
     /*Resto Funciones*/
-    public void agregarProducto(Producto producto){
-        this.productos.add(producto);
+    public void agregarProducto(int codigoProducto,Producto producto){
+        this.productos.put(codigoProducto,producto);
     }
     
     
@@ -58,8 +50,9 @@ public class Seccion {
              System.out.println("La Sección " + this.nombreSeccion + " está vacía.");
         } else{
             /*Recorre todos los productos y los printea*/
-            for(Producto i : this.productos){
-                System.out.println(i);
+            for (Integer key : this.productos.keySet()) {
+                System.out.printf("Codigo: " + key);
+                System.out.println(productos.get(key));
             }
         }
         

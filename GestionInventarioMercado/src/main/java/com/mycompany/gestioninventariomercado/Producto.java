@@ -10,55 +10,71 @@ package com.mycompany.gestioninventariomercado;
  */
 public class Producto {
     /*Variables*/
-    private int codigoProducto;
+  
     private String nombreProducto;
     private int cantidadProducto;
-    private float precio;
+    private float precioVenta;
+    private String vendedor;
+    private float precioCompra;
     
     /*Constructor*/
-    public Producto(int codigoProducto, String nombreProducto, int cantidadProducto, float precio){
-        this.codigoProducto = codigoProducto;
+    public Producto(String nombreProducto, int cantidadProducto, float precioVenta,String vendedor, float precioCompra){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
-        this.precio = precio;
+        this.precioVenta = precioVenta;
+        this.vendedor = vendedor;
+        this.precioCompra = precioCompra;
     }
     
     /*Setters*/
-    public void setCodigoProducto(){
-        this.codigoProducto = codigoProducto;
-    }
-    public void setNombreProducto(){
+    public void setNombreProducto(String nombreProducto){
         this.nombreProducto = nombreProducto;
     }
-    public void setCandidadProducto(){
+    public void setCandidadProducto(int cantidadProducto){
         this.cantidadProducto = cantidadProducto;
     }
-    public void setPrecio(){
-        this.precio = precio;
+    public void setPrecioVenta(float precioVenta){
+        this.precioVenta = precioVenta;
+    }
+    public void setVendedor(String vendedor){
+        this.vendedor = vendedor;
+    }
+    public void setPrecioCompra(float precioCompra){
+        this.precioCompra = precioCompra;
+    }
+    
+    /*sobrecarga de metodos*/
+    public void setPrecioCompra(int precioCompra){
+        this.precioCompra = (float)precioCompra;
+    }
+    public void setPrecioCompra(double precioCompra){
+        this.precioCompra = (float)precioCompra;
     }
     
     /*Getters*/
-    public int getCodigo(){
-        return this.codigoProducto;
-    }
     public String getNombre(){
         return this.nombreProducto;
     }
     public int getCantidad(){
         return this.cantidadProducto;
     }
-    public float getPrecio(){
-        return this.precio;
+    public float getPrecioVenta(){
+        return this.precioVenta;
     }
+    public String getVendedor(){
+        return this.vendedor;
+    }
+    public float getPrecioCompra(){
+        return this.precioCompra;
+    }
+   
     
-    public void setCodigo(){
-        
-    }
     /*Funcion para Printear los datos del producto*/
     @Override
     public String toString() {
-        return "Codigo: " + this.codigoProducto + ", Nombre: " + this.nombreProducto 
-                + ", Cantidad: " + this.cantidadProducto + ", Precio: " + this.precio;
+        return ", Nombre: " + this.nombreProducto 
+                + ", Cantidad: " + this.cantidadProducto + ", Precio Venta: " 
+                + this.precioVenta + ", Vendedor = " + this.vendedor + ", Precio Compra = " + this.precioCompra;
     }
     
 }
