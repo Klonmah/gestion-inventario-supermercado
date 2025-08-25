@@ -101,6 +101,7 @@ public class GestionInventarioMercado {
                     System.out.println("Ingrese Codigo del producto que desea comprar:");
                     codigo = Integer.parseInt(lector.readLine());
                     
+                    
                     break;
                 case 4:
                     tienda.printTienda();

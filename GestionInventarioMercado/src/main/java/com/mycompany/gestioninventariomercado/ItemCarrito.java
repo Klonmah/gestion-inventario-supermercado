@@ -10,12 +10,12 @@ import java.util.Map;
  *
  * @author diazv
  */
-public class ItemCarro {
+public class ItemCarrito {
     /*Variables*/
     private Producto producto;
     private int cantidad;
     /*Constructor*/
-    public ItemCarro(Producto producto, int cantidad) {
+    public ItemCarrito(Producto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
     }
@@ -28,6 +28,10 @@ public class ItemCarro {
     /*Getters*/
     public int getCantidad(){
         return this.cantidad;
+    }
+    
+    public Producto getProducto(){
+        return this.producto;
     }
     
     public float valorTotal(int compraOventa){
