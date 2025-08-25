@@ -38,8 +38,19 @@ public class GestionInventarioMercado {
         //FIN DATOS DE INICIO
         
         String ingresado;
-        
+
+        /*variables y clases a usar*/
         int opcion = -1;
+        int codigo;
+        String nombre;
+        int cantidad;
+        float precioVenta;
+        String vendedor;
+        float precioCompra;
+        Seccion seccion;
+        Producto producto;
+        tienda.printSecciones();
+        
         
         while(opcion != 0){
             System.out.println("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
@@ -59,16 +70,8 @@ public class GestionInventarioMercado {
             
             switch(opcion){
                 case 1:
-                    /*variables y clases a usar*/
-                    int codigo;
-                    String nombre;
-                    int cantidad;
-                    float precioVenta;
-                    String vendedor;
-                    float precioCompra;
-                    Seccion seccion;
-                    Producto producto;
-                    tienda.printSecciones();
+                    
+                 
                     System.out.println("Ingrese de Que seccion es el Producto que desea Ingresar:");
                     
                     seccion = tienda.getSeccion(lector.readLine());
@@ -93,6 +96,12 @@ public class GestionInventarioMercado {
                     }
                     
                     break;
+                
+                case 2:
+                    System.out.println("Ingrese Codigo del producto que desea comprar:");
+                    codigo = Integer.parseInt(lector.readLine());
+                    
+                    break;
                 case 4:
                     tienda.printTienda();
                     
@@ -111,11 +120,3 @@ public class GestionInventarioMercado {
     
 }
 
-//class Producto{
-  //  private String[]nombresProducto;
-    //private double[]preciosProducto;
-    //public Producto(int tamaño){
-       // nombresProducto = new String[tamaño];
-        //preciosProducto = new double[tamaño];
-    //}
-//}
