@@ -25,6 +25,15 @@ public class Producto {
         this.vendedor = vendedor;
         this.precioCompra = precioCompra;
     }
+    /*Sobrecarga de Constructor*/
+    public Producto(String nombreProducto, int cantidadProducto, int precioVenta,String vendedor, int precioCompra){
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.precioVenta = (float)precioVenta;
+        this.vendedor = vendedor;
+        this.precioCompra = (float) precioCompra;       
+    
+    }
     
     /*Setters*/
     public void setNombreProducto(String nombreProducto){
@@ -70,7 +79,7 @@ public class Producto {
    
     
     /*Funcion para Printear los datos del producto*/
-    @Override
+
     public String toString() {
         return ", Nombre: " + this.nombreProducto 
                 + ", Cantidad: " + this.cantidadProducto + ", Precio Venta: " 
