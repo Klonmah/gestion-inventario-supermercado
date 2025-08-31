@@ -20,21 +20,30 @@ public class CarroVentas {
     this.cantidadProductos = 0;
     }
     
-    /*Funciones propias*/
+    
+    public int getCantidadProductos(){
+        return this.cantidadProductos;
+    }
+    
+    public double getPrecioTotal()
+    {
+        return this.precioAcumulado;
+    }
+        /*Funciones propias*/
     
     public void añadirItem(ItemCarrito itemCarro){
         this.carritoVentas.add(itemCarro);
         this.cantidadProductos += itemCarro.getCantidad();
         this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioVenta()); 
     }
-    
-    public int retornarCantidadProductos(){
-        return this.cantidadProductos;
-    }
-    
-    public double retornarPrecioTotal()
-    {
-        return this.precioAcumulado;
+    public void eliminarItem(ItemCarrito itemCarro){
+        for(int i = 0; i < this.carritoVentas.size();i++){
+            if(itemCarro == this.carritoVentas.get(i)){
+                this.cantidadProductos += itemCarro.getCantidad();
+                this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioVenta()); 
+                this.carritoVentas.remove(i);
+            }
+        }
     }
     
 }

@@ -34,13 +34,8 @@ public class ItemCarrito {
         return this.producto;
     }
     
-    public float valorTotal(int compraOventa){
-        if(compraOventa == 0){
-            return (float) this.cantidad * this.producto.getPrecioCompra();
-        }else{
-            return (float) this.cantidad * this.producto.getPrecioVenta();
-        }
+    public String toString() {
+        return "Producto: " + this.producto.getNombre() + ", Cantidad: " + this.cantidad + " ,";
     }
-    
     
 }

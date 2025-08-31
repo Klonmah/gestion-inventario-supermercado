@@ -49,7 +49,7 @@ public class GestionInventarioMercado {
         float precioCompra;
         Seccion seccion;
         Producto producto;
-        tienda.printSecciones();
+        
         
         
         while(opcion != 0){
@@ -70,8 +70,7 @@ public class GestionInventarioMercado {
             
             switch(opcion){
                 case 1:
-                    
-                 
+                    tienda.printSecciones();
                     System.out.println("Ingrese de Que seccion es el Producto que desea Ingresar:");
                     
                     seccion = tienda.getSeccion(lector.readLine());
@@ -91,7 +90,7 @@ public class GestionInventarioMercado {
                         System.out.println("Ingrese precio de Compra(Precio que se compra el producto al vendedor):");
                         precioCompra = Float.parseFloat(lector.readLine());
                         producto = new Producto(nombre,cantidad,precioVenta,vendedor,precioCompra);
-                        seccion.agregarProducto(codigo,producto);
+                        tienda.getSeccion(seccion.getNombreSeccion()).agregarProducto(codigo, producto);
                         
                     }
                     

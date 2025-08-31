@@ -20,24 +20,39 @@ public class CarroCompras {
     this.cantidadProductos = 0;
     }
     
-    /*Funciones propias*/
+    /*Getters*/
+    public double getCantidadProductos()
+    {
+        return this.precioAcumulado;
+    }
+    
+    public double getPrecioTotal()
+    {
+        return this.precioAcumulado;
+    }
+     /*Funciones propias*/
     
     public void añadirItem(ItemCarrito itemCarro){
         this.carritoCompras.add(itemCarro);
         this.cantidadProductos += itemCarro.getCantidad();
         this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioCompra()); 
-    
     }
     
-    public double retornarCantidadProductos()
-    {
-        return this.precioAcumulado;
+    public void eliminarItem(ItemCarrito itemCarro){
+        for(int i = 0; i < this.carritoCompras.size();i++){
+            if(itemCarro == this.carritoCompras.get(i)){
+                this.cantidadProductos += itemCarro.getCantidad();
+                this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioCompra()); 
+                this.carritoCompras.remove(i);
+            }
+        }
     }
     
-    public double retornarPrecioTotal()
-    {
-        return this.precioAcumulado;
-    }
+    //public void printCarrito(){
+    //    for(int i = 0; i < this.carritoCompras.size();i++){
+    //        System.out.printf(this.carritoCompras.get(i));
+    //    }
+    //(())}
 }
     
 
