@@ -5,6 +5,7 @@
 package com.mycompany.gestioninventariomercado;
 
 import java.util.ArrayList;
+import java.io.*;
 
 /**
  *
@@ -57,6 +58,34 @@ public class Tienda {
             System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
             i.mostrarProductos();
             System.out.println("\n\n");
+        }
+    }
+    
+    public void cargarDatos(String archivo) throws IOException
+    {
+        BufferedReader lector = new BufferedReader(new FileReader(archivo));
+        String linea;
+        Seccion i = null;
+        while ((linea=lector.readLine()) != null)
+        {
+            if(linea.isBlank()) continue;
+            String[] datos = linea.split(";");
+            if(datos[0].equals("Seccion"))
+            {
+                i = new Seccion(datos[1]);
+                agregarSeccion(i);
+            }
+            else if (datos[0].equals("Producto") && i!= null)
+            {
+                int codigo = Integer.parseInt(datos[1]);
+                String nombre= datos[2];
+                int cantidad = Integer.parseInt(datos[3]);
+                float precioVenta= Float.parseFloat(datos[4]);
+                String vendedor = datos[5];
+                float precioCompra = Float.parseFloat(datos[6]);
+                Producto p = new Producto(nombre, cantidad, precioVenta, vendedor, precioCompra);
+                i.agregarProducto(codigo,p);
+            }
         }
     }
 }

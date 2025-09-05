@@ -14,26 +14,11 @@ public class GestionInventarioMercado {
         
         //DATOS DE INICIO
         
-        Seccion lacteos = new Seccion("Lacteos");
-        Producto leche = new Producto( "Lechita Mumu",3, (float) 2.5,"Soprole",(float)1.1);
-        Producto yogurt = new Producto("Yogurt Gurt-Sahur",3, (float) 2.5,"Colun", (float)1.1);
-        lacteos.agregarProducto(011,leche);
-        lacteos.agregarProducto(012,yogurt);
-        tienda.agregarSeccion(lacteos);
-        
-        Seccion electronicos = new Seccion("Electronicos");
-        Producto celular_moco = new Producto("Celular MOCO",10, (float) 400.0,"Samsung",(float)300.0);
-        Producto consola_while = new Producto("Consola While",10, (float) 699.0,"Sony", (float)500.0);
-        electronicos.agregarProducto(021,celular_moco);
-        electronicos.agregarProducto(022,consola_while);
-        tienda.agregarSeccion(electronicos);
-        
-        Seccion juguetes = new Seccion("Juguetes");
-        Producto hugomon_tcg = new Producto("Hugomon TCG",200, (float) 5.9,"PokeCo",(float) 3.0);
-        Producto aguaneitor = new Producto("Aguaneitor",49, (float) 50.9,"Hasbro",(float)30.9);
-        juguetes.agregarProducto(031,hugomon_tcg);
-        juguetes.agregarProducto(032,aguaneitor);
-        tienda.agregarSeccion(juguetes);
+        File archivo = new File("inventario.txt");
+        if(archivo.exists()){
+            tienda.cargarDatos("inventario.txt");
+            System.out.println("Datos cargados desde archivo");
+        }
         
         //FIN DATOS DE INICIO
         
