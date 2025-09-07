@@ -88,4 +88,16 @@ public class Tienda {
             }
         }
     }
+    
+    public Producto getProductoEnSeccionPorCodigo(int codigo)
+    {
+        for (Seccion sec : secciones) {
+            Producto p = sec.getProductoCodigo(codigo);
+            if (p != null){
+                return p;
+            }
+        }
+        return null; 
+    }
 }
+A
