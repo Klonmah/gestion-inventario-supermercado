@@ -61,6 +61,23 @@ public class Tienda {
         }
     }
     
+    public void guardarDatos(String archivo) throws IOException{
+        BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
+        for (Seccion sec : secciones){
+            escritor.write("Seccion;"+sec.getNombreSeccion());
+            escritor.newLine();
+            System.out.println("a\n");
+            for (Integer key : sec.getProductos().keySet()) {
+                Producto p = sec.getProductoCodigo(key);
+                escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getPrecioVenta()+";"+p.getVendedor()+";"+p.getPrecioCompra());
+                escritor.newLine();
+                System.out.println("b\n");
+            }
+            escritor.newLine();
+        }
+        escritor.close();
+    }
+    
     public void cargarDatos(String archivo) throws IOException
     {
         BufferedReader lector = new BufferedReader(new FileReader(archivo));

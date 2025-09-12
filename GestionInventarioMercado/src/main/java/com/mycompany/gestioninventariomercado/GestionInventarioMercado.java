@@ -145,6 +145,10 @@ public class GestionInventarioMercado {
                     idiommenu = !idiommenu;
                     
                     break;
+                case 0:
+                    tienda.guardarDatos("inventario.txt");
+                    
+                    break;
             }    
             
             if ( idiommenu ) { System.out.println("Desea Hacer Otra Operacion?\n");}else{
@@ -156,6 +160,7 @@ public class GestionInventarioMercado {
             
             opcion = lectorInts.leer(idiommenu);
             
+            if(opcion==0)tienda.guardarDatos("inventario.txt");
         }
         
     }

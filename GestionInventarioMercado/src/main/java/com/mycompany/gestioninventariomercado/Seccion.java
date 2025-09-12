@@ -39,6 +39,10 @@ public class Seccion {
         return this.productos.get(codigoProducto);
     }
     
+    public Map<Integer,Producto> getProductos(){
+        return this.productos;
+    }
+    
     /*Resto Funciones*/
     public void agregarProducto(int codigoProducto,Producto producto){
         this.productos.put(codigoProducto,producto);
