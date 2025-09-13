@@ -76,7 +76,14 @@ public class Producto {
     public float getPrecioCompra(){
         return this.precioCompra;
     }
-   
+    
+    public void aumentarStock(int cantidad){
+        this.cantidadProducto += cantidad; 
+    }
+    
+    public void reducirStock(int cantidad){
+        this.cantidadProducto -= cantidad;
+    }
     
     /*Funcion para Printear los datos del producto*/
 
