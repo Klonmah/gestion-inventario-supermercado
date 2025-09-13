@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestioninventariomercado;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,19 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
     
     private Tienda tienda; // atributo de clase
     private int opcion = -1;
+    //ult opcion se encarga de que no se repitan ultimas acciones
+    private int ultopcion;
     private boolean idiommenu = true; /*true Espaniol, false Ingles*/
+    private String entrada = "";
+    private int codigo;
+    private String nombre;
+    private int cantidad;
+    private float precioVenta;
+    private String vendedor;
+    private float precioCompra;
+    private Seccion seccion = null;
+    private Producto producto;
+
      
     public VentanaMenuGestion() {
         initComponents();
@@ -34,6 +47,17 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
                 TextAreaMiniTerminal.append("Error al cargar archivo: " + e.getMessage() + "\n");
             }
         }
+        TextAreaMiniTerminal.append("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
+        TextAreaMiniTerminal.append("1: Agregar Producto\n");
+        TextAreaMiniTerminal.append("2: Comprar Producto\n");
+        TextAreaMiniTerminal.append("3: Vender Producto\n");
+        TextAreaMiniTerminal.append("4: Listar Productos\n");
+        TextAreaMiniTerminal.append("5: Buscar Producto\n");
+        TextAreaMiniTerminal.append("6: Eliminar Producto\n");
+        TextAreaMiniTerminal.append("7: Agregar Seccion\n");
+        TextAreaMiniTerminal.append("8: Eliminar Seccion\n");
+        TextAreaMiniTerminal.append("9: Change Language\n");
+        TextAreaMiniTerminal.append("0: Salir\n");
     }
 
     /**
@@ -45,18 +69,28 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnMande = new javax.swing.JButton();
+        Btnop1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextAreaMiniTerminal = new javax.swing.JTextArea();
         InputTextField = new javax.swing.JTextField();
+        BtnOp2 = new javax.swing.JButton();
+        BtnOp3 = new javax.swing.JButton();
+        BtnOp4 = new javax.swing.JButton();
+        BtnOp5 = new javax.swing.JButton();
+        BtnOp6 = new javax.swing.JButton();
+        BtnOp7 = new javax.swing.JButton();
+        BtnOp8 = new javax.swing.JButton();
+        BtnOp9 = new javax.swing.JButton();
+        BtnClose = new javax.swing.JButton();
+        Btnmande = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnMande.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        BtnMande.setText("Mande");
-        BtnMande.addActionListener(new java.awt.event.ActionListener() {
+        Btnop1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Btnop1.setText("-1-");
+        Btnop1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnMandeActionPerformed(evt);
+                Btnop1ActionPerformed(evt);
             }
         });
 
@@ -66,6 +100,84 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
 
         InputTextField.setToolTipText("escribe aqui..");
 
+        BtnOp2.setText("-2-");
+        BtnOp2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp2ActionPerformed(evt);
+            }
+        });
+
+        BtnOp3.setText("-3-");
+        BtnOp3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp3ActionPerformed(evt);
+            }
+        });
+
+        BtnOp4.setText("-4-");
+        BtnOp4.setToolTipText("");
+        BtnOp4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp4ActionPerformed(evt);
+            }
+        });
+
+        BtnOp5.setText("-5-");
+        BtnOp5.setToolTipText("");
+        BtnOp5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp5ActionPerformed(evt);
+            }
+        });
+
+        BtnOp6.setText("-6-");
+        BtnOp6.setToolTipText("");
+        BtnOp6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp6ActionPerformed(evt);
+            }
+        });
+
+        BtnOp7.setText("-7-");
+        BtnOp7.setToolTipText("");
+        BtnOp7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp7ActionPerformed(evt);
+            }
+        });
+
+        BtnOp8.setText("-8-");
+        BtnOp8.setToolTipText("");
+        BtnOp8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp8ActionPerformed(evt);
+            }
+        });
+
+        BtnOp9.setText("-9-");
+        BtnOp9.setToolTipText("");
+        BtnOp9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOp9ActionPerformed(evt);
+            }
+        });
+
+        BtnClose.setText("Salir y Guardar");
+        BtnClose.setToolTipText("");
+        BtnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCloseActionPerformed(evt);
+            }
+        });
+
+        Btnmande.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Btnmande.setText("Mande");
+        Btnmande.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnmandeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,219 +185,281 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(InputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnMande))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InputTextField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btnop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnOp9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Btnmande, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnMande)
-                    .addComponent(InputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(InputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btnmande, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(Btnop1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnOp9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnMandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMandeActionPerformed
+    private void Btnop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btnop1ActionPerformed
         // TODO add your handling code here:
-        String entrada = InputTextField.getText();
-        
-        
-        /*variables y clases a usar*/
-        int codigo;
-        String nombre;
-        int cantidad;
-        float precioVenta;
-        String vendedor;
-        float precioCompra;
-        Seccion seccion;
-        Producto producto;
+        ultopcion = 1;
         TextAreaMiniTerminal.setText("");
         
-            if (idiommenu) {
-                TextAreaMiniTerminal.append("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
-                TextAreaMiniTerminal.append("1: Agregar Producto\n");
-                TextAreaMiniTerminal.append("2: Comprar Producto\n");
-                TextAreaMiniTerminal.append("3: Vender Producto\n");
-                TextAreaMiniTerminal.append("4: Listar Productos\n");
-                TextAreaMiniTerminal.append("5: Buscar Producto\n");
-                TextAreaMiniTerminal.append("6: Eliminar Producto\n");
-                TextAreaMiniTerminal.append("7: Agregar Seccion\n");
-                TextAreaMiniTerminal.append("8: Eliminar Seccion\n");
-                TextAreaMiniTerminal.append("9: Change Language\n");
-                TextAreaMiniTerminal.append("0: Salir\n\n");
-            } else {
-                TextAreaMiniTerminal.append("----------INVENTORY MANAGEMENT SYSTEM----------\n\n");
-                TextAreaMiniTerminal.append("1: Add Product\n");
-                TextAreaMiniTerminal.append("2: Buy Product\n");
-                TextAreaMiniTerminal.append("3: Sell Product\n");
-                TextAreaMiniTerminal.append("4: List Products\n");
-                TextAreaMiniTerminal.append("5: Search Products\n");
-                TextAreaMiniTerminal.append("6: Erase Products\n");
-                TextAreaMiniTerminal.append("7: Add Section\n");
-                TextAreaMiniTerminal.append("8: Erase Section\n");
-                TextAreaMiniTerminal.append("9: Cambiar Idioma\n");
-                TextAreaMiniTerminal.append("0: Exit\n\n");
-            }
+        if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese de Que seccion es el Producto que desea Ingresar:");}else{
+        TextAreaMiniTerminal.append("Enter the section of the product you wish to enter:");}
+        
+        TextAreaMiniTerminal.append("\n");
+        
+        tienda.printSecciones(TextAreaMiniTerminal);
+        
+
+    }//GEN-LAST:event_Btnop1ActionPerformed
+
+    private void BtnOp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp2ActionPerformed
+        // TODO add your handling code here:
+        if ( idiommenu ) { TextAreaMiniTerminal.append("\nIngrese Codigo del producto que desea comprar:");}else{
+        TextAreaMiniTerminal.append("\nEnter the code of the product you wish to purchase:"); }
+        ultopcion = 2;
+    }//GEN-LAST:event_BtnOp2ActionPerformed
+
+    private void BtnOp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOp3ActionPerformed
+
+    private void BtnOp4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp4ActionPerformed
+        // TODO add your handling code here:
+        ArrayList seccioneslist = tienda.getListSecciones();
+        for(int i = 0 ; i < seccioneslist.size() ; i++ ){
+            Seccion seccionsacada = (Seccion)seccioneslist.get(i);
+            TextAreaMiniTerminal.append("Seccion: "+ seccionsacada.getNombreSeccion()+" \n");
+            seccionsacada.mostrarProductos(TextAreaMiniTerminal);
+            TextAreaMiniTerminal.append("\n");
+        }
+    }//GEN-LAST:event_BtnOp4ActionPerformed
+
+    private void BtnOp5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOp5ActionPerformed
+
+    private void BtnOp6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOp6ActionPerformed
+
+    private void BtnOp7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOp7ActionPerformed
+
+    private void BtnOp8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnOp8ActionPerformed
+
+    private void BtnOp9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOp9ActionPerformed
+        // TODO add your handling code here:
+        idiommenu = !idiommenu;
+        TextAreaMiniTerminal.setText("");
+        ultopcion = 9;
+        if (idiommenu) {
+            TextAreaMiniTerminal.append("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
+            TextAreaMiniTerminal.append("1: Agregar Producto\n");
+            TextAreaMiniTerminal.append("2: Comprar Producto\n");
+            TextAreaMiniTerminal.append("3: Vender Producto\n");
+            TextAreaMiniTerminal.append("4: Listar Productos\n");
+            TextAreaMiniTerminal.append("5: Buscar Producto\n");
+            TextAreaMiniTerminal.append("6: Eliminar Producto\n");
+            TextAreaMiniTerminal.append("7: Agregar Seccion\n");
+            TextAreaMiniTerminal.append("8: Eliminar Seccion\n");
+            TextAreaMiniTerminal.append("9: Change Language\n");
+            TextAreaMiniTerminal.append("0: Salir\n");
+        } else {
+            TextAreaMiniTerminal.append("----------INVENTORY MANAGEMENT SYSTEM----------\n\n");
+            TextAreaMiniTerminal.append("1: Add Product\n");
+            TextAreaMiniTerminal.append("2: Buy Product\n");
+            TextAreaMiniTerminal.append("3: Sell Product\n");
+            TextAreaMiniTerminal.append("4: List Products\n");
+            TextAreaMiniTerminal.append("5: Search Products\n");
+            TextAreaMiniTerminal.append("6: Erase Products\n");
+            TextAreaMiniTerminal.append("7: Add Section\n");
+            TextAreaMiniTerminal.append("8: Erase Section\n");
+            TextAreaMiniTerminal.append("9: Cambiar Idioma\n");
+            TextAreaMiniTerminal.append("0: Exit\n");
+        }
+
+    }//GEN-LAST:event_BtnOp9ActionPerformed
+
+    private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
+        // TODO add your handling code here:
+        try {
+        tienda.guardarDatos("inventario.txt");
+        TextAreaMiniTerminal.append("Datos guardados correctamente\n");
+        } catch (IOException e) {
+            TextAreaMiniTerminal.append("Error al guardar archivo: " + e.getMessage() + "\n");
+        }
+        System.exit(0);        // termina la aplicación
+    }//GEN-LAST:event_BtnCloseActionPerformed
+
+    private void BtnmandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnmandeActionPerformed
+        // TODO add your handling code here:
+        
+        // TODO AQUÍ DEPENDE DE ULTOPCION, POR LO CÚAL RECORDARA QUE OPERACIÓN QUEREMOS HACER
             
+        /*
         if (entrada.isEmpty()) {
             TextAreaMiniTerminal.append("Por favor, ingrese un valor.\n");
             return; // no continuar
         }
-        
-            /*
-            BufferedReader lector = new BufferedReader (new InputStreamReader(System.in));
-            ingresado = entrada;
-            ingresado = ingresado.trim()
-            if (ingresado.equals("")) 
-            {
-                ingresado = "0";
-            }
-            */
-            
-            // lector para carácteres
-            try {
-            opcion = Integer.parseInt(entrada);
-            } catch (NumberFormatException e) {
-                TextAreaMiniTerminal.append("Por favor ingrese un número válido.\n");
-                return;
-            }
-            
-            /*
-            if ( idiommenu ) { }else{
-            }
-            */
-            switch(opcion){
-                case 1:
-                    tienda.printSecciones();
-                    if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese de Que seccion es el Producto que desea Ingresar:");}else{
-                    TextAreaMiniTerminal.append("Enter the section of the product you wish to enter:");}
-                    
-                    seccion = tienda.getSeccion(entrada);
-                    if(seccion == null){
-                        if ( idiommenu ) { TextAreaMiniTerminal.append("Error: Seccion no encontrada");}else{
-                        TextAreaMiniTerminal.append("Error: Section not found"); }
-                        
-                    }else{
-                        if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese Codigo del producto:");}else{
-                        TextAreaMiniTerminal.append("Enter product code:"); }
-                        codigo = Integer.parseInt(entrada);
-                        
-                        if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese Nombre del producto:");}else{
-                        TextAreaMiniTerminal.append("Enter Product Name:"); }
-                        nombre = entrada;
-                        
-                        if ( idiommenu ) {TextAreaMiniTerminal.append("Ingrese Cantidad de productos en Stock:"); }else{
-                        TextAreaMiniTerminal.append("Enter Quantity of products in Stock:"); }
-                        cantidad = Integer.parseInt(entrada);
-                        
-                        if ( idiommenu ) {TextAreaMiniTerminal.append("Ingrese Precio de Venta:"); }else{
-                        TextAreaMiniTerminal.append("Enter Selling Price:"); }
-                        
-                        precioVenta = Float.parseFloat(entrada);
-                        
-                        if ( idiommenu ) {TextAreaMiniTerminal.append("Ingrese Nombre de Vendedor:"); }else{
-                        TextAreaMiniTerminal.append("Enter Vendor Name:"); }
-                        vendedor = entrada;
-                        
-                        if ( idiommenu ) {TextAreaMiniTerminal.append("Ingrese precio de Compra(Precio que se compra el producto al vendedor):"); }else{
-                        TextAreaMiniTerminal.append("Enter the Purchase Price (Price at which the product is purchased from the seller):"); }
-                        precioCompra = Float.parseFloat(entrada);
-                        
-                        producto = new Producto(nombre,cantidad,precioVenta,vendedor,precioCompra);
-                        tienda.getSeccion(seccion.getNombreSeccion()).agregarProducto(codigo, producto);
-                        
-                    }
-                    
-                    break;
-                
-                case 2:
-                    if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese Codigo del producto que desea comprar:");}else{
-                    TextAreaMiniTerminal.append("Enter the code of the product you wish to purchase:"); }
-                    codigo = Integer.parseInt(entrada);
-                    Producto productocompra = tienda.getProductoEnSeccionPorCodigo(codigo);
-                    TextAreaMiniTerminal.append(productocompra.toString());
-                    
-                    break;
-                case 4:
-                    tienda.printTienda();
-                    
-                    break;
-                case 9:
-                    idiommenu = !idiommenu;
-                    if (idiommenu) {
-                        TextAreaMiniTerminal.append("----------SISTEMA DE GESTION DE INVENTARIO----------\n\n");
-                        TextAreaMiniTerminal.append("1: Agregar Producto\n");
-                        TextAreaMiniTerminal.append("2: Comprar Producto\n");
-                        TextAreaMiniTerminal.append("3: Vender Producto\n");
-                        TextAreaMiniTerminal.append("4: Listar Productos\n");
-                        TextAreaMiniTerminal.append("5: Buscar Producto\n");
-                        TextAreaMiniTerminal.append("6: Eliminar Producto\n");
-                        TextAreaMiniTerminal.append("7: Agregar Seccion\n");
-                        TextAreaMiniTerminal.append("8: Eliminar Seccion\n");
-                        TextAreaMiniTerminal.append("9: Change Language\n");
-                        TextAreaMiniTerminal.append("0: Salir\n\n");
-                    } else {
-                        TextAreaMiniTerminal.append("----------INVENTORY MANAGEMENT SYSTEM----------\n\n");
-                        TextAreaMiniTerminal.append("1: Add Product\n");
-                        TextAreaMiniTerminal.append("2: Buy Product\n");
-                        TextAreaMiniTerminal.append("3: Sell Product\n");
-                        TextAreaMiniTerminal.append("4: List Products\n");
-                        TextAreaMiniTerminal.append("5: Search Products\n");
-                        TextAreaMiniTerminal.append("6: Erase Products\n");
-                        TextAreaMiniTerminal.append("7: Add Section\n");
-                        TextAreaMiniTerminal.append("8: Erase Section\n");
-                        TextAreaMiniTerminal.append("9: Cambiar Idioma\n");
-                        TextAreaMiniTerminal.append("0: Exit\n\n");
-                    }
-                    
-                    break;
-                case 0:
-                    try {
-                        tienda.guardarDatos("inventario.txt");
-                        TextAreaMiniTerminal.append("Datos guardados correctamente\n");
-                    } catch (IOException e) {
-                        TextAreaMiniTerminal.append("Error al guardar archivo: " + e.getMessage() + "\n");
-                    }
+        */
+        entrada = InputTextField.getText();
 
-                    
-                    break;
-            }    
+        /*variables y clases a usar*/
+        
+        if (ultopcion == 2){
+        int codigoproducto = Integer.parseInt(entrada);
+        Producto productocompra = tienda.getProductoEnSeccionPorCodigo(codigoproducto);
+        TextAreaMiniTerminal.append("\n" + productocompra.toString());
+        }
+        else if (ultopcion == 1)
+        {
+            TextAreaMiniTerminal.setText("");
+            if ( idiommenu ) { TextAreaMiniTerminal.append("Ingrese de Que seccion es el Producto que desea Ingresar:\n");}else{
+            TextAreaMiniTerminal.append("Enter the section of the product you wish to enter:\n");}
+            tienda.printSecciones(TextAreaMiniTerminal);
+
+            if (entrada.isEmpty()) {
+                TextAreaMiniTerminal.append("Por favor, ingrese un valor.\n");
+                ultopcion = 11;
+                return; // no continuar
+            }
+
+            seccion = tienda.getSeccion(entrada);
             
-            if ( idiommenu ) { TextAreaMiniTerminal.append("Desea Hacer Otra Operacion?\n");}else{
-            TextAreaMiniTerminal.append("Would you like to make another operation?\n");}
-            
-            TextAreaMiniTerminal.append("0: No\n");
-            if ( idiommenu ) { TextAreaMiniTerminal.append("Cualquier otro numero: Si\n");}else{
-            TextAreaMiniTerminal.append("Any other number: Yes\n"); }
-            
-            try {
-            opcion = Integer.parseInt(entrada);
-            } catch (NumberFormatException e) {
-                TextAreaMiniTerminal.append("Por favor ingrese un número válido.\n");
-                return;
+            if(seccion == null){
+                if ( idiommenu ) { TextAreaMiniTerminal.append("\n\nError: Seccion no encontrada");}else{
+                TextAreaMiniTerminal.append("\n\nError: Section not found"); }
+            } else {
+                if ( idiommenu ) { TextAreaMiniTerminal.append("\nIngrese Codigo del producto:");}else{
+                TextAreaMiniTerminal.append("\nEnter product code:"); }
+                ultopcion = 11;
             }
             
-            if(opcion==0)
-            {
-                try {
-                        tienda.guardarDatos("inventario.txt");
-                        TextAreaMiniTerminal.append("Datos guardados correctamente\n");
-                    } catch (IOException e) {
-                        TextAreaMiniTerminal.append("Error al guardar archivo: " + e.getMessage() + "\n");
-                    }
-                System.exit(0);        // termina la aplicación
+        }
+        else if (ultopcion == 11){
+            /* no se preocupen por el not initilized, la subopcion 11, siendo la subtarea 1 de
+            de la opcion solo puede ocurrir si se ejecuto la tarea que inicializa.*/
+            entrada = InputTextField.getText();
+            if(seccion == null){
+                if ( idiommenu ) { TextAreaMiniTerminal.append("\n\nError: Seccion NO encontrada");}else{
+                TextAreaMiniTerminal.append("\n\nError: Section NOT found"); }
+                ultopcion = 1;
+
+            }else{
+                //subtarea 1
+                if ( idiommenu ) { TextAreaMiniTerminal.append("\nIngrese Codigo del producto:");}else{
+                TextAreaMiniTerminal.append("\nEnter product code:"); }
+                codigo = Integer.parseInt(entrada);
+                ultopcion = 12;
+                
+                //subtarea 2 titulo
+                if ( idiommenu ) { TextAreaMiniTerminal.append("\nIngrese Nombre del producto:");}else{
+                TextAreaMiniTerminal.append("\nEnter Product Name:"); }
+
             }
-    }//GEN-LAST:event_BtnMandeActionPerformed
+        }
+        else if (ultopcion == 12){
+            /* tarea 1 subtarea 2.*/
+            
+            entrada = InputTextField.getText();
+            nombre = entrada;
+
+            //subtarea 3 titulo
+            if ( idiommenu ) {TextAreaMiniTerminal.append("\nIngrese Cantidad de productos en Stock:"); }else{
+            TextAreaMiniTerminal.append("\nEnter Quantity of products in Stock:"); }
+            
+            ultopcion = 13;
+        }
+        else if (ultopcion == 13){
+            /* tarea 1 subtarea 3.*/
+            cantidad = Integer.parseInt(entrada);
+
+            //subtarea 4 titulo
+            if ( idiommenu ) {TextAreaMiniTerminal.append("\nIngrese Precio de Venta:"); }else{
+            TextAreaMiniTerminal.append("\nEnter Selling Price:"); }
+            
+            ultopcion = 14;
+        }
+        else if (ultopcion == 14){
+            /* tarea 1 subtarea 4.*/
+            precioVenta = Float.parseFloat(entrada);
+
+            //subtarea 5 titulo
+            if ( idiommenu ) {TextAreaMiniTerminal.append("\nIngrese Nombre de Vendedor:"); }else{
+            TextAreaMiniTerminal.append("\nEnter Vendor Name:"); }
+            
+            ultopcion = 15;
+            
+        }
+        else if (ultopcion == 15){
+            /* tarea 1 subtarea 5.*/
+            vendedor = entrada;
+
+            //subtarea 6 titulo
+            if ( idiommenu ) {TextAreaMiniTerminal.append("\nIngrese precio de Compra(Precio que se compra el producto al vendedor):"); }else{
+            TextAreaMiniTerminal.append("\nEnter the Purchase Price (Price at which the product is purchased from the seller):"); }
+            
+            ultopcion = 16;
+        }
+        else if (ultopcion == 16){
+            /* tarea 1 subtarea 6.*/
+            precioCompra = Float.parseFloat(entrada);
+
+            producto = new Producto(nombre,cantidad,precioVenta,vendedor,precioCompra);
+            tienda.getSeccion(seccion.getNombreSeccion()).agregarProducto(codigo, producto);
+            
+            if ( idiommenu ) {TextAreaMiniTerminal.append("\nEscrito!"); }else{
+            TextAreaMiniTerminal.append("\nWritten!"); }
+            
+
+        }
+    }//GEN-LAST:event_BtnmandeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,7 +497,17 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnMande;
+    private javax.swing.JButton BtnClose;
+    private javax.swing.JButton BtnOp2;
+    private javax.swing.JButton BtnOp3;
+    private javax.swing.JButton BtnOp4;
+    private javax.swing.JButton BtnOp5;
+    private javax.swing.JButton BtnOp6;
+    private javax.swing.JButton BtnOp7;
+    private javax.swing.JButton BtnOp8;
+    private javax.swing.JButton BtnOp9;
+    private javax.swing.JButton Btnmande;
+    private javax.swing.JButton Btnop1;
     private javax.swing.JTextField InputTextField;
     private javax.swing.JTextArea TextAreaMiniTerminal;
     private javax.swing.JScrollPane jScrollPane1;
