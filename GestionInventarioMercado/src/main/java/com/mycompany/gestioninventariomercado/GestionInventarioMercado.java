@@ -10,6 +10,8 @@ import java.io.*;
 public class GestionInventarioMercado {
 
     public static void main(String[] args) throws IOException {
+        
+        /* PARA RESTAURAR EL CODIGO (LA TERMINAL ANTERIOR) BORRA LAS LINEAS CON ---------%
         Tienda tienda = new Tienda("Supermerca dos");
         
         //DATOS DE INICIO
@@ -23,10 +25,17 @@ public class GestionInventarioMercado {
         //FIN DATOS DE INICIO
         
         String ingresado;
-
+        -------------------------------------------------------------------------------------------------%*/
+        VentanaMenuGestion ventanaprincipal = new VentanaMenuGestion();
+        ventanaprincipal.setVisible(true);
+        
+        
+        
         /*variables y clases a usar*/
+        /*-------------------------------------------------------------------------------------------------%
         int opcion = -1;
         boolean idiommenu = true; /*true Espaniol, false Ingles*/
+        /*-------------------------------------------------------------------------------------------------%
         int codigo;
         String nombre;
         int cantidad;
@@ -74,6 +83,7 @@ public class GestionInventarioMercado {
             */
             
             // lector para carácteres
+            /*-------------------------------------------------------------------------------------------------%
             BufferedReader lector = new BufferedReader (new InputStreamReader(System.in));
             
             //lectura para enteros
@@ -85,6 +95,7 @@ public class GestionInventarioMercado {
             if ( idiommenu ) { }else{
             }
             */
+            /*-------------------------------------------------------------------------------------------------%
             switch(opcion){
                 case 1:
                     tienda.printSecciones();
@@ -162,6 +173,7 @@ public class GestionInventarioMercado {
             
             if(opcion==0)tienda.guardarDatos("inventario.txt");
         }
+        -------------------------------------------------------------------------------------------------%*/
         
     }
     
