@@ -6,6 +6,7 @@ package com.mycompany.gestioninventariomercado;
 
 import java.util.ArrayList;
 import java.io.*;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -43,20 +44,24 @@ public class Tienda {
         return null;
     }
     
+    public ArrayList getListSecciones(){
+        return secciones;
+    }
+    
     public void agregarSeccion(Seccion seccion){
         this.secciones.add(seccion);
     }
     
-    public void printSecciones(){
+    public void printSecciones( JTextArea miniterminal ){
         for(Seccion i: secciones){
-            System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
+            miniterminal.append("Seccion: "+i.getNombreSeccion()+" \n");
         }
     }
     
-    public void printTienda(){
+    public void printTienda( JTextArea miniterminal ){
         for(Seccion i: secciones){
             System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
-            i.mostrarProductos();
+            i.mostrarProductos(miniterminal);
             System.out.println("\n\n");
         }
     }
@@ -66,12 +71,10 @@ public class Tienda {
         for (Seccion sec : secciones){
             escritor.write("Seccion;"+sec.getNombreSeccion());
             escritor.newLine();
-            System.out.println("a\n");
             for (Integer key : sec.getProductos().keySet()) {
                 Producto p = sec.getProductoCodigo(key);
                 escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getPrecioVenta()+";"+p.getVendedor()+";"+p.getPrecioCompra());
                 escritor.newLine();
-                System.out.println("b\n");
             }
             escritor.newLine();
         }
