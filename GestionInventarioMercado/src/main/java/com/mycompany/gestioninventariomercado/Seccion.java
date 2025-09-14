@@ -5,6 +5,7 @@
 package com.mycompany.gestioninventariomercado;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -49,14 +50,13 @@ public class Seccion {
     }
     
     
-    public void mostrarProductos(){
-        if(this.productos.isEmpty()){
-             System.out.println("La Sección " + this.nombreSeccion + " está vacía.");
-        } else{
-            /*Recorre todos los productos y los printea*/
+    public void mostrarProductos( JTextArea miniterminal ){
+        if (this.productos.isEmpty()) {
+            miniterminal.append("La Sección " + this.nombreSeccion + " está vacía.\n");
+        } else {
             for (Integer key : this.productos.keySet()) {
-                System.out.printf("Codigo: " + key);
-                System.out.println(productos.get(key));
+                miniterminal.append("Código: " + key + "\n");
+                miniterminal.append(productos.get(key).toString() + "\n");
             }
         }
         
