@@ -58,7 +58,7 @@ public class Tienda {
         }
     }
     
-    public void printTienda( JTextArea miniterminal ){
+    public void printTienda( JTextArea miniterminal ) throws IOException{
         for(Seccion i: secciones){
             System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
             i.mostrarProductos(miniterminal);

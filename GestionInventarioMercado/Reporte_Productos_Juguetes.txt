@@ -1,0 +1,9 @@
+Código: 32
+, Nombre: Aguaneitor, Cantidad: 49, Precio Venta: 50.9, Vendedor = Hasbro, Precio Compra = 30.9
+
+Código: 33
+, Nombre: Peluche Jolonai, Cantidad: 9, Precio Venta: 49.99, Vendedor = Don Cereza, Precio Compra = 37.0
+
+Código: 31
+, Nombre: Hugomon TCG, Cantidad: 200, Precio Venta: 5.9, Vendedor = PokeCo, Precio Compra = 3.0
+

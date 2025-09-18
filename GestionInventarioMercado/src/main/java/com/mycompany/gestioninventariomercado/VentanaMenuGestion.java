@@ -5,6 +5,8 @@
 package com.mycompany.gestioninventariomercado;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -272,7 +274,11 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
         for(int i = 0 ; i < seccioneslist.size() ; i++ ){
             Seccion seccionsacada = (Seccion)seccioneslist.get(i);
             TextAreaMiniTerminal.append("Seccion: "+ seccionsacada.getNombreSeccion()+" \n");
-            seccionsacada.mostrarProductos(TextAreaMiniTerminal);
+            try {
+                seccionsacada.mostrarProductos(TextAreaMiniTerminal);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaMenuGestion.class.getName()).log(Level.SEVERE, null, ex);
+            }
             TextAreaMiniTerminal.append("\n");
         }
     }//GEN-LAST:event_BtnOp4ActionPerformed

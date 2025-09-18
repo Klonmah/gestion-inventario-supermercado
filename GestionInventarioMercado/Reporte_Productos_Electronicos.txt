@@ -1,0 +1,6 @@
+Código: 21
+, Nombre: Celular MOCO, Cantidad: 10, Precio Venta: 400.0, Vendedor = Samsung, Precio Compra = 300.0
+
+Código: 22
+, Nombre: Consola While, Cantidad: 10, Precio Venta: 699.0, Vendedor = Sony, Precio Compra = 500.0
+

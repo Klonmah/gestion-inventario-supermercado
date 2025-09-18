@@ -1,0 +1,6 @@
+Código: 11
+, Nombre: Lechita Mumu, Cantidad: 3, Precio Venta: 2.5, Vendedor = Soprole, Precio Compra = 1.1
+
+Código: 12
+, Nombre: Yogurt Gurt-Sahur, Cantidad: 3, Precio Venta: 2.5, Vendedor = Colun, Precio Compra = 1.1
+

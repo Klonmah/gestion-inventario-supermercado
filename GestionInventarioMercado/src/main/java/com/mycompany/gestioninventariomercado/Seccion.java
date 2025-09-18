@@ -6,6 +6,8 @@ package com.mycompany.gestioninventariomercado;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTextArea;
+import java.io.*;
+
 
 /**
  *
@@ -50,17 +52,22 @@ public class Seccion {
     }
     
     
-    public void mostrarProductos( JTextArea miniterminal ){
+    public void mostrarProductos( JTextArea miniterminal ) throws IOException{
         if (this.productos.isEmpty()) {
             miniterminal.append("La Sección " + this.nombreSeccion + " está vacía.\n");
         } else {
+            File archivo = new File("Reporte_Productos_"+this.nombreSeccion+".txt");
+            BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
+          
             for (Integer key : this.productos.keySet()) {
                 miniterminal.append("Código: " + key + "\n");
                 miniterminal.append(productos.get(key).toString() + "\n");
+                escritor.write("Código: " + key + "\n");
+                escritor.write(productos.get(key).toString() + "\n");
+                escritor.newLine();
             }
-        }
-        
-        
+            escritor.close();
+        }  
     }
     
     
