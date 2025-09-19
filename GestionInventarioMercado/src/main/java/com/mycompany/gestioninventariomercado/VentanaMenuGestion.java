@@ -457,7 +457,7 @@ public class VentanaMenuGestion extends javax.swing.JFrame {
             /* tarea 1 subtarea 6.*/
             precioCompra = Float.parseFloat(entrada);
 
-            producto = new Producto(nombre,cantidad,precioVenta,vendedor,precioCompra);
+            producto = new Producto(nombre,cantidad,precioVenta,vendedor,precioCompra,codigo);
             tienda.getSeccion(seccion.getNombreSeccion()).agregarProducto(codigo, producto);
             
             if ( idiommenu ) {TextAreaMiniTerminal.append("\nEscrito!"); }else{

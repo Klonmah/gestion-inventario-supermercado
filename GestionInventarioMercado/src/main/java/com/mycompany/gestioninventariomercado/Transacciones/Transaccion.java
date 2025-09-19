@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.gestioninventariomercado.Transacciones;
+import com.mycompany.gestioninventariomercado.Tienda;
 import java.util.ArrayList;
+
 /**
  *
  * @author matia
@@ -18,12 +20,13 @@ public class Transaccion {
         this.carrito = new ArrayList<>();
         this.precioAcumulado = 0.0;
         this.cantidadProductos = 0;
+
     }
     
     /*Getters*/
-    public double getCantidadProductos()
+    public int getCantidadProductos()
     {
-        return this.precioAcumulado;
+        return this.cantidadProductos;
     }
     
     public double getPrecioTotal()
@@ -34,24 +37,20 @@ public class Transaccion {
         return this.carrito;
     }
     
+    /*Setters*/
+    public void setCantidadProductos(int cantidadProductos){
+        this.cantidadProductos = cantidadProductos;
+    }
+    public void setPrecioTotal(double precioAcumulado){
+        this.precioAcumulado = precioAcumulado;
+    }
+    
     
      /*Funciones propias*/
     
-    public void añadirItem(ItemCarrito itemCarro){
-        this.carrito.add(itemCarro);
-        this.cantidadProductos += itemCarro.getCantidad();
-        this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioCompra()); 
-    }
+    public void añadirItem(ItemCarrito itemCarro){}
     
-    public void eliminarItem(ItemCarrito itemCarro){
-        for(int i = 0; i < this.carrito.size();i++){
-            if(itemCarro == this.carrito.get(i)){
-                this.cantidadProductos += itemCarro.getCantidad();
-                this.precioAcumulado += (itemCarro.getCantidad() * itemCarro.getProducto().getPrecioCompra()); 
-                this.carrito.remove(i);
-            }
-        }
-    }
+    public void eliminarItem(ItemCarrito itemCarro){}
     
     public void borrarCarrito(){
         this.carrito.clear();
@@ -59,13 +58,8 @@ public class Transaccion {
         this.cantidadProductos = 0;
     }
     
-    public void procesar(){}
+    public void procesar(Tienda tienda, String nombreArchivo){}
     
-    //public void printCarrito(){
-    //    for(int i = 0; i < this.carritoCompras.size();i++){
-    //        System.out.printf(this.carritoCompras.get(i));
-    //    }
-    //}
 }
     
 

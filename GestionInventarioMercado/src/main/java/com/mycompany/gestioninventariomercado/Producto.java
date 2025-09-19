@@ -16,22 +16,25 @@ public class Producto {
     private float precioVenta;
     private String vendedor;
     private float precioCompra;
+    private int codigo;
     
     /*Constructor*/
-    public Producto(String nombreProducto, int cantidadProducto, float precioVenta,String vendedor, float precioCompra){
+    public Producto(String nombreProducto, int cantidadProducto, float precioVenta,String vendedor, float precioCompra,int codigo){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
         this.precioVenta = precioVenta;
         this.vendedor = vendedor;
         this.precioCompra = precioCompra;
+        this.codigo = codigo;
     }
     /*Sobrecarga de Constructor*/
-    public Producto(String nombreProducto, int cantidadProducto, int precioVenta,String vendedor, int precioCompra){
+    public Producto(String nombreProducto, int cantidadProducto, int precioVenta,String vendedor, int precioCompra, int codigo){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
         this.precioVenta = (float)precioVenta;
         this.vendedor = vendedor;
-        this.precioCompra = (float) precioCompra;       
+        this.precioCompra = (float) precioCompra;    
+        this.codigo = codigo;
     
     }
     
@@ -50,6 +53,9 @@ public class Producto {
     }
     public void setPrecioCompra(float precioCompra){
         this.precioCompra = precioCompra;
+    }
+    public void setCodigo(int codigo){
+        this.codigo = codigo;
     }
     
     /*sobrecarga de metodos*/
@@ -75,6 +81,9 @@ public class Producto {
     }
     public float getPrecioCompra(){
         return this.precioCompra;
+    }
+    public int getCodigo(){
+        return this.codigo;
     }
     
     public void aumentarStock(int cantidad){

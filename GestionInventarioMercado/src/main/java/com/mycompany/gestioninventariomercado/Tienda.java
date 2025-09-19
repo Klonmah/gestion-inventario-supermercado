@@ -103,7 +103,7 @@ public class Tienda {
                 float precioVenta= Float.parseFloat(datos[4]);
                 String vendedor = datos[5];
                 float precioCompra = Float.parseFloat(datos[6]);
-                Producto p = new Producto(nombre, cantidad, precioVenta, vendedor, precioCompra);
+                Producto p = new Producto(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo);
                 i.agregarProducto(codigo,p);
             }
         }
