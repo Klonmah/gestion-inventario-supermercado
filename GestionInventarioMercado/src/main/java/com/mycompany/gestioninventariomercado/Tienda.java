@@ -64,6 +64,25 @@ public class Tienda {
         this.secciones.add(seccion);
     }
     
+    public Seccion buscarSeccion(String nombre){
+        for(Seccion i: secciones){
+            if(i.getNombreSeccion().equals(nombre)){
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    public boolean existeSeccion(String nombre){
+        for(Seccion i: secciones){
+            if(i.getNombreSeccion().equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     public void printSecciones( JTextArea miniterminal ){
         for(Seccion i: secciones){
             miniterminal.append("Seccion: "+i.getNombreSeccion()+" \n");
@@ -131,4 +150,13 @@ public class Tienda {
         }
         return null; 
     }
+    @Override
+    public String toString(){
+        String text = "";
+        for(Seccion i: this.secciones){
+            text+= i.toString();
+        }
+        return text;
+    }
 }
+

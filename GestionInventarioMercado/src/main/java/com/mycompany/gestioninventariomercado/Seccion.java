@@ -55,6 +55,22 @@ public class Seccion {
             return true;
         }
     }
+    public boolean eliminarProducto(int codigoProducto){
+        if(this.productos.containsKey(codigoProducto)){
+            return false;
+        }else{
+            this.productos.remove(codigoProducto);
+            return true;
+        }
+    }
+    public Producto buscarProducto(int codigoProducto){
+         if(this.productos.containsKey(codigoProducto)){
+            return this.productos.get(codigoProducto);
+        }else{
+            this.productos.remove(codigoProducto);
+            return null;
+        }
+    }
     
     
     public void mostrarProductos( JTextArea miniterminal ) throws IOException{
@@ -73,6 +89,21 @@ public class Seccion {
             }
             escritor.close();
         }  
+    }
+    
+    @Override
+    public String toString(){
+        String texto = "";
+        if (this.productos.isEmpty()) {
+            return "";
+        }else{
+            for (Integer key : this.productos.keySet()) {
+                texto+= this.getNombreSeccion();
+                texto+= this.productos.get(key).toString();
+                texto+= "\n";
+            }
+        }
+        return texto;
     }
     
     
