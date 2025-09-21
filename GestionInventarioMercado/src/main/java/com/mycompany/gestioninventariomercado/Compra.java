@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestioninventariomercado.Transacciones;
-import com.mycompany.gestioninventariomercado.Tienda;
-import com.mycompany.gestioninventariomercado.Transacciones.ReporteExcel;
+package com.mycompany.gestioninventariomercado;
+
+
 /**
  *
  * @author matia

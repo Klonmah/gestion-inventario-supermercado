@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestioninventariomercado.Transacciones;
+package com.mycompany.gestioninventariomercado;
 import java.io.FileOutputStream;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import com.mycompany.gestioninventariomercado.Tienda;
-import com.mycompany.gestioninventariomercado.Transacciones.ItemCarrito;
+
+
 
 /**
  *

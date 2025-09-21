@@ -18,11 +18,15 @@ public class Tienda {
     /*Variables y Objetos*/
     private ArrayList<Seccion> secciones ;
     private String nombreTienda;
+    private Venta carritoVenta;
+    private Compra carritoCompra;
     
     /*Constructor*/
     public Tienda(String nombreTienda){
         this.secciones = new ArrayList<>();
         this.nombreTienda = nombreTienda;
+        this.carritoVenta = new Venta();
+        this.carritoCompra = new Compra();
     }
     
     /*Setters*/
@@ -31,6 +35,14 @@ public class Tienda {
     }
     
     /*Getters*/
+    public Venta getCarritoVenta(){
+        return this.carritoVenta;
+    }
+    
+    public Compra getCarritoCompra(){
+        return this.carritoCompra;
+    }
+    
     public String getNombreTienda(){
         return this.nombreTienda;
     }

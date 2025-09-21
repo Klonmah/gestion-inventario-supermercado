@@ -47,8 +47,13 @@ public class Seccion {
     }
     
     /*Resto Funciones*/
-    public void agregarProducto(int codigoProducto,Producto producto){
-        this.productos.put(codigoProducto,producto);
+    public boolean agregarProducto(int codigoProducto,Producto producto){
+        if(this.productos.containsKey(codigoProducto)){
+            return false;
+        }else{
+            this.productos.put(codigoProducto,producto);
+            return true;
+        }
     }
     
     

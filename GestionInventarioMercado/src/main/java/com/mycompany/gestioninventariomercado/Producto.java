@@ -37,6 +37,15 @@ public class Producto {
         this.codigo = codigo;
     
     }
+    public Producto(String nombreProducto, int cantidadProducto, double precioVenta,String vendedor, double precioCompra, int codigo){
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.precioVenta = (float)precioVenta;
+        this.vendedor = vendedor;
+        this.precioCompra = (float) precioCompra;    
+        this.codigo = codigo;
+    
+    }
     
     /*Setters*/
     public void setNombreProducto(String nombreProducto){
@@ -59,11 +68,19 @@ public class Producto {
     }
     
     /*sobrecarga de metodos*/
+    /*Precio Compra*/
     public void setPrecioCompra(int precioCompra){
         this.precioCompra = (float)precioCompra;
     }
     public void setPrecioCompra(double precioCompra){
         this.precioCompra = (float)precioCompra;
+    }
+    /*Precio Venta*/
+    public void setPrecioVenta(int precioVenta){
+        this.precioVenta = (float)precioVenta;
+    }
+    public void setPrecioVenta(double precioVenta){
+        this.precioVenta = (float)precioVenta;
     }
     
     /*Getters*/
@@ -95,7 +112,7 @@ public class Producto {
     }
     
     /*Funcion para Printear los datos del producto*/
-
+@Override
     public String toString() {
         return ", Nombre: " + this.nombreProducto 
                 + ", Cantidad: " + this.cantidadProducto + ", Precio Venta: " 
