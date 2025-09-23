@@ -73,6 +73,14 @@ public class Tienda {
         return null;
     }
     
+    public void eliminarSeccionPorNombre(String nombre){
+        for(Seccion i: secciones){
+            if(i.getNombreSeccion().equals(nombre)){
+                this.secciones.remove(i);
+            }
+        }
+    }
+    
     public boolean existeSeccion(String nombre){
         for(Seccion i: secciones){
             if(i.getNombreSeccion().equals(nombre)){
