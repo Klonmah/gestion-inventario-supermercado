@@ -4,6 +4,8 @@
  */
 package com.mycompany.gestioninventariomercado;
 
+import java.awt.Color;
+
 /**
  *
  * @author diazv
@@ -13,8 +15,10 @@ public class VentanaSecciones extends javax.swing.JFrame {
     /**
      * Creates new form VentanaSecciones
      */
-    public VentanaSecciones() {
+    private Tienda tienda;
+    public VentanaSecciones(Tienda tienda) {
         initComponents();
+        this.tienda = tienda;
     }
 
     /**
@@ -30,22 +34,22 @@ public class VentanaSecciones extends javax.swing.JFrame {
         agregarSecciones = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        botonAgregar = new javax.swing.JButton();
+        nombreSeccionAgregar = new javax.swing.JTextField();
         eliminarSecciones = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        botonEliminar = new javax.swing.JButton();
+        nombreSeccionaBorrar = new javax.swing.JTextField();
         botonSalir = new javax.swing.JButton();
         salirGuardar = new javax.swing.JButton();
         modificarSecciones = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        botonRenombrar = new javax.swing.JButton();
+        nombreSeccionArenombrar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        nombreSeccionRenombreFinal = new javax.swing.JTextField();
         textoError = new javax.swing.JLabel();
         textoError1 = new javax.swing.JLabel();
 
@@ -60,16 +64,16 @@ public class VentanaSecciones extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre Seccion:");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAgregar.setText("Agregar");
+        botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAgregarActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        nombreSeccionAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nombreSeccionAgregarActionPerformed(evt);
             }
         });
 
@@ -84,9 +88,9 @@ public class VentanaSecciones extends javax.swing.JFrame {
             .addGroup(agregarSeccionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(agregarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, agregarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombreSeccionAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -98,10 +102,10 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(nombreSeccionAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonAgregar)
+                .addContainerGap())
         );
 
         eliminarSecciones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -110,16 +114,16 @@ public class VentanaSecciones extends javax.swing.JFrame {
 
         jLabel7.setText("Nombre Seccion:");
 
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminar.setText("Eliminar");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonEliminarActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        nombreSeccionaBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                nombreSeccionaBorrarActionPerformed(evt);
             }
         });
 
@@ -132,11 +136,11 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGroup(eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(eliminarSeccionesLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextField3))
+                                .addComponent(nombreSeccionaBorrar))
                             .addComponent(jLabel7))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,11 +151,11 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombreSeccionaBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(41, 41, 41))
+                .addComponent(botonEliminar)
+                .addContainerGap())
         );
 
         botonSalir.setText("Salir");
@@ -174,24 +178,24 @@ public class VentanaSecciones extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre Seccion a editar:");
 
-        jButton5.setText("Modificar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonRenombrar.setText("Modificar");
+        botonRenombrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonRenombrarActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        nombreSeccionArenombrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nombreSeccionArenombrarActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Renombrar a:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        nombreSeccionRenombreFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                nombreSeccionRenombreFinalActionPerformed(evt);
             }
         });
 
@@ -203,9 +207,9 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addGroup(modificarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreSeccionArenombrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonRenombrar)
+                    .addComponent(nombreSeccionRenombreFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarSeccionesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,13 +226,13 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombreSeccionArenombrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombreSeccionRenombreFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(botonRenombrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -300,41 +304,97 @@ public class VentanaSecciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (nombreSeccionAgregar.getText().isEmpty())
+        {
+            textoError1.setText("Ingrese un nombre");
+            textoError1.setForeground(Color.red);
+            return;
+        }
+        if (this.tienda.existeSeccion(nombreSeccionAgregar.getText()) )
+        {
+            textoError1.setText("Esta seccion ya existe");
+            textoError1.setForeground(Color.red);
+            return;
+        }else
+        {
+            textoError1.setText("Seccion agregada");
+            Seccion seccionnueva = new Seccion(nombreSeccionAgregar.getText());
+            this.tienda.agregarSeccion(seccionnueva);
+        }
+    }//GEN-LAST:event_botonAgregarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nombreSeccionAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nombreSeccionAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (nombreSeccionaBorrar.getText().isEmpty())
+        {
+            textoError1.setText("Ingrese un nombre");
+            textoError1.setForeground(Color.red);
+            return;
+        }
+        if (this.tienda.existeSeccion(nombreSeccionaBorrar.getText()) )
+        {
+            textoError1.setText("Seccion borrada");
+            this.tienda.eliminarSeccionPorNombre(nombreSeccionaBorrar.getText());
+        }else
+        {
+            textoError1.setText("Seccion no encontrada");
+            textoError1.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void nombreSeccionaBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionaBorrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_nombreSeccionaBorrarActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void salirGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirGuardarActionPerformed
         // TODO add your handling code here:
+        
+        // NO COMPLETADO (I NEED HELP JERE)
     }//GEN-LAST:event_salirGuardarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRenombrarActionPerformed
+        // TODO add your handling code here:        
+        if (nombreSeccionRenombreFinal.getText().isEmpty())
+        {
+            textoError1.setText("Ingrese un nombre");
+            textoError1.setForeground(Color.red);
+            return;
+        }
+        if (this.tienda.existeSeccion(nombreSeccionArenombrar.getText()) )
+        {
+            textoError1.setText("Seccion editada");
+            Seccion seccionrenombrada = this.tienda.getSeccion(nombreSeccionArenombrar.getText());
+            
+            this.tienda.eliminarSeccionPorNombre(nombreSeccionArenombrar.getText());
+            
+            seccionrenombrada.setNombreSeccion(nombreSeccionRenombreFinal.getText());
+            
+            this.tienda.agregarSeccion(seccionrenombrada);
+        }else
+        {
+            textoError1.setText("Seccion no encontrada");
+            textoError1.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_botonRenombrarActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nombreSeccionArenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionArenombrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nombreSeccionArenombrarActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void nombreSeccionRenombreFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionRenombreFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_nombreSeccionRenombreFinalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,22 +422,23 @@ public class VentanaSecciones extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaSecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        Tienda tienda = new Tienda("");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaSecciones().setVisible(true);
+                new VentanaSecciones(tienda).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel agregarSecciones;
+    private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonRenombrar;
     private javax.swing.JButton botonSalir;
     private javax.swing.JPanel eliminarSecciones;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -385,11 +446,11 @@ public class VentanaSecciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel modificarSecciones;
+    private javax.swing.JTextField nombreSeccionAgregar;
+    private javax.swing.JTextField nombreSeccionArenombrar;
+    private javax.swing.JTextField nombreSeccionRenombreFinal;
+    private javax.swing.JTextField nombreSeccionaBorrar;
     private javax.swing.JButton salirGuardar;
     private javax.swing.JLabel textoError;
     private javax.swing.JLabel textoError1;
