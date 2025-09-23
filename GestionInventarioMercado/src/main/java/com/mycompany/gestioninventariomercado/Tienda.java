@@ -150,6 +150,17 @@ public class Tienda {
         }
         return null; 
     }
+    
+    public boolean cambiarSeccionProducto(int codigoProducto,String nombreSeccionVieja,String nombreSeccionNueva){
+        if(this.buscarSeccion(nombreSeccionVieja) != null && this.buscarSeccion(nombreSeccionNueva)!= null && this.getProductoEnSeccionPorCodigo(codigoProducto)!= null) {
+            this.buscarSeccion(nombreSeccionNueva).agregarProducto(codigoProducto, this.getProductoEnSeccionPorCodigo(codigoProducto));
+            this.buscarSeccion(nombreSeccionVieja).eliminarProducto(codigoProducto);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     @Override
     public String toString(){
         String text = "";

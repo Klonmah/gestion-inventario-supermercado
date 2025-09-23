@@ -4,6 +4,9 @@
  */
 package com.mycompany.gestioninventariomercado;
 
+import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author diazv
@@ -13,8 +16,10 @@ public class BuscarProducto extends javax.swing.JFrame {
     /**
      * Creates new form BuscarProducto
      */
-    public BuscarProducto() {
+   private Tienda tienda;
+    public BuscarProducto(Tienda tienda) {
         initComponents();
+        this.tienda = tienda;
     }
 
     /**
@@ -34,6 +39,7 @@ public class BuscarProducto extends javax.swing.JFrame {
         botonBuscar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
+        textoError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +54,16 @@ public class BuscarProducto extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tablaBuscado);
@@ -68,6 +81,11 @@ public class BuscarProducto extends javax.swing.JFrame {
         });
 
         botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -83,31 +101,37 @@ public class BuscarProducto extends javax.swing.JFrame {
             }
         });
 
+        textoError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoError.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botonBuscar)
-                .addGap(299, 299, 299))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(textoCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(botonSalir)
                         .addGap(180, 180, 180)
-                        .addComponent(botonModificar)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                        .addComponent(botonModificar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textoError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textoCodigo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(154, 154, 154))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonBuscar)
+                .addGap(299, 299, 299))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +144,9 @@ public class BuscarProducto extends javax.swing.JFrame {
                     .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(botonBuscar)
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
+                .addComponent(textoError)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,7 +169,37 @@ public class BuscarProducto extends javax.swing.JFrame {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         // TODO add your handling code here:
+        Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(Integer.parseInt(this.inputCodigo.getText()));
+        String[] arrayText = new String[7];
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
+        for(int i = 0; i < arrayText.length;i++){
+            arrayText[i] = modelo.getValueAt(1,i).toString();
+            if(arrayText[i].isEmpty()){
+                textoError.setText("Ningun Espacio debe estar Vacio");
+                textoError.setForeground(Color.red);
+                return;
+            }
+        }
+       
+            
+            
+        
     }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        // TODO add your handling code here:
+        Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(Integer.parseInt(this.inputCodigo.getText()));
+        if(buscado == null){
+            textoError.setText("El codigo de producto ingresado no existe.");
+            textoError.setForeground(Color.red);
+        }else{
+            String[] arrayTexto = buscado.toString().split(",");
+            DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
+            for(int i = 0; i < arrayTexto.length;i++){
+                modelo.addRow(arrayTexto);
+            }
+        }
+    }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,11 +227,12 @@ public class BuscarProducto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(BuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        Tienda tienda = new Tienda("");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscarProducto().setVisible(true);
+                new BuscarProducto(tienda).setVisible(true);
             }
         });
     }
@@ -188,6 +245,7 @@ public class BuscarProducto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaBuscado;
     private javax.swing.JLabel textoCodigo;
+    private javax.swing.JLabel textoError;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

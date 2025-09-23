@@ -67,9 +67,19 @@ public class Seccion {
          if(this.productos.containsKey(codigoProducto)){
             return this.productos.get(codigoProducto);
         }else{
-            this.productos.remove(codigoProducto);
             return null;
         }
+    }
+    public boolean cambiarCodigoProducto(int codigoProducto, int codigoNuevo){
+        if(this.productos.containsKey(codigoProducto)){
+            this.productos.get(codigoProducto).setCodigo(codigoNuevo);
+            this.productos.put(codigoNuevo, this.productos.get(codigoProducto));
+            this.productos.remove(codigoProducto);
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
     
