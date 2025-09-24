@@ -10,13 +10,13 @@ import java.io.File;
  *
  * @author diazv
  */
-public class ListarProductos extends javax.swing.JFrame {
+public class VentanaListarProductos extends javax.swing.JFrame {
 
     /**
      * Creates new form ModificarProducto
      */
     private Tienda tienda;
-    public ListarProductos(Tienda tienda) {
+    public VentanaListarProductos(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         String texto = tienda.toString();
@@ -123,7 +123,7 @@ public class ListarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            tienda.guardarDatos("inventario.txt");
+            tienda.guardarDatos("invetario.txt");
             File archivo = new File("inventario.txt");
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(archivo);
@@ -153,13 +153,13 @@ public class ListarProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -167,7 +167,7 @@ public class ListarProductos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarProductos(tienda).setVisible(true);
+                new VentanaListarProductos(tienda).setVisible(true);
             }
         });
     }

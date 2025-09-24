@@ -158,11 +158,21 @@ public class Tienda {
         }
         return null; 
     }
+    public boolean eliminarProductoPorCodigo(int codigo){
+        for (Seccion sec : secciones) {
+            if(sec.getProductoCodigo(codigo) != null){
+                sec.eliminarProducto(codigo);
+                return true;
+            }
+        }
+        return false;
+    }
     
-    public boolean cambiarSeccionProducto(int codigoProducto,String nombreSeccionVieja,String nombreSeccionNueva){
-        if(this.buscarSeccion(nombreSeccionVieja) != null && this.buscarSeccion(nombreSeccionNueva)!= null && this.getProductoEnSeccionPorCodigo(codigoProducto)!= null) {
-            this.buscarSeccion(nombreSeccionNueva).agregarProducto(codigoProducto, this.getProductoEnSeccionPorCodigo(codigoProducto));
-            this.buscarSeccion(nombreSeccionVieja).eliminarProducto(codigoProducto);
+    public boolean cambiarSeccionProducto(int codigoProducto,String nombreSeccionNueva){
+        Producto buscado = this.getProductoEnSeccionPorCodigo(codigoProducto);
+        if(buscado != null){
+            this.eliminarProductoPorCodigo(codigoProducto);
+            this.getSeccion(nombreSeccionNueva).agregarProducto(codigoProducto, buscado);
             return true;
         }else{
             return false;

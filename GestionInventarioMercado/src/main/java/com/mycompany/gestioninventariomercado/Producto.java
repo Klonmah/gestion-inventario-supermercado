@@ -116,9 +116,7 @@ public class Producto {
     /*Funcion para Printear los datos del producto*/
 @Override
     public String toString() {
-        return ", Nombre: " + this.nombreProducto 
-                + ", Cantidad: " + this.cantidadProducto + ", Precio Venta: " 
-                + this.precioVenta + ", Vendedor = " + this.vendedor + ", Precio Compra = " + this.precioCompra;
+        return this.codigo + "," + this.nombreProducto + "," + this.cantidadProducto + "," + this.precioVenta + "," + this.vendedor + "," + this.precioCompra;
     }
     
 }

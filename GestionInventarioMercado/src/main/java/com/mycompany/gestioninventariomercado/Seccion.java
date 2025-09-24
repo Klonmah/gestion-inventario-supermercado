@@ -108,7 +108,7 @@ public class Seccion {
             return "";
         }else{
             for (Integer key : this.productos.keySet()) {
-                texto+= this.getNombreSeccion();
+                texto+= this.getNombreSeccion() + ",";
                 texto+= this.productos.get(key).toString();
                 texto+= "\n";
             }

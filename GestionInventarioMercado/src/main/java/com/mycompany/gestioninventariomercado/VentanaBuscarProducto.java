@@ -5,19 +5,21 @@
 package com.mycompany.gestioninventariomercado;
 
 import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author diazv
  */
-public class BuscarProducto extends javax.swing.JFrame {
+public class VentanaBuscarProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form BuscarProducto
      */
    private Tienda tienda;
-    public BuscarProducto(Tienda tienda) {
+    public VentanaBuscarProducto(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
     }
@@ -179,6 +181,22 @@ public class BuscarProducto extends javax.swing.JFrame {
                 textoError.setForeground(Color.red);
                 return;
             }
+            try{
+                this.tienda.cambiarSeccionProducto(buscado.getCodigo(),arrayText[0]);
+                this.tienda.buscarSeccion(arrayText[0]).cambiarCodigoProducto(buscado.getCodigo(),Integer.parseInt(arrayText[1]));
+                buscado.setNombreProducto(arrayText[2]);
+                buscado.setCandidadProducto(Integer.parseInt(arrayText[3]));
+                buscado.setPrecioVenta(Float.parseFloat(arrayText[4]));
+                buscado.setVendedor(arrayText[5]);
+                buscado.setPrecioCompra(Float.parseFloat(arrayText[6]));
+            }catch (NumberFormatException e) {
+                this.textoError.setText("Ha ingresado un valor erroneo en una casilla");
+                textoError.setForeground(Color.red);
+                return;
+            }
+            this.dispose();
+                    
+                   
         }
        
             
@@ -218,13 +236,13 @@ public class BuscarProducto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         Tienda tienda = new Tienda("");
@@ -232,7 +250,7 @@ public class BuscarProducto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscarProducto(tienda).setVisible(true);
+                new VentanaBuscarProducto(tienda).setVisible(true);
             }
         });
     }

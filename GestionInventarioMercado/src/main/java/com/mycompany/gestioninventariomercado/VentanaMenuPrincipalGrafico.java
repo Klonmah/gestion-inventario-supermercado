@@ -8,13 +8,15 @@ package com.mycompany.gestioninventariomercado;
  *
  * @author diazv
  */
-public class MenuPrincipalGrafico extends javax.swing.JFrame {
+public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
     /**
      * Creates new form AgregarItem
      */
-    public MenuPrincipalGrafico() {
+    private Tienda tienda;
+    public VentanaMenuPrincipalGrafico(Tienda tienda) {
         initComponents();
+        this.tienda = tienda;
     }
 
     /**
@@ -47,24 +49,18 @@ public class MenuPrincipalGrafico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu15 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu14 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        menuProductos = new javax.swing.JMenu();
+        agregarEliminarProducto = new javax.swing.JMenuItem();
+        listarProductos = new javax.swing.JMenuItem();
+        buscarModificarProducto = new javax.swing.JMenuItem();
+        menuSecciones = new javax.swing.JMenu();
+        editarSecciones = new javax.swing.JMenuItem();
+        menuCompra = new javax.swing.JMenu();
+        administrarCompra = new javax.swing.JMenuItem();
+        menuVenta = new javax.swing.JMenu();
+        administrarVenta = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenu();
+        confirmarSalida = new javax.swing.JMenuItem();
 
         jMenu6.setText("File");
         jMenuBar2.add(jMenu6);
@@ -108,94 +104,81 @@ public class MenuPrincipalGrafico extends javax.swing.JFrame {
 
         jLabel2.setText("SISTEMA PARA GESTIONAR UN SUPERMERCADO");
 
-        jMenu1.setText("Productos");
+        menuProductos.setText("Productos");
 
-        jMenuItem1.setText("Agregar Producto");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        agregarEliminarProducto.setText("Agregar/Eliminar Producto");
+        agregarEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                agregarEliminarProductoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuProductos.add(agregarEliminarProducto);
 
-        jMenuItem4.setText("Listar Productos");
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem5.setText("Buscar Producto");
-        jMenu1.add(jMenuItem5);
-
-        jMenuItem6.setText("Eliminar Producto");
-        jMenu1.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Secciones");
-
-        jMenuItem7.setText("Agregar Seccion");
-        jMenu2.add(jMenuItem7);
-
-        jMenuItem8.setText("Eliminar Seccion");
-        jMenu2.add(jMenuItem8);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Compra");
-
-        jMenuItem2.setText("Agregar Compra");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        listarProductos.setText("Listar Productos");
+        listarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                listarProductosActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        menuProductos.add(listarProductos);
 
-        jMenuItem3.setText("Eliminar Compra");
-        jMenu3.add(jMenuItem3);
-
-        jMenuItem13.setText("Terminar Compra");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        buscarModificarProducto.setText("Buscar y/o Modificar Producto");
+        buscarModificarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                buscarModificarProductoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem13);
+        menuProductos.add(buscarModificarProducto);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menuProductos);
 
-        jMenu15.setText("Venta");
+        menuSecciones.setText("Secciones");
 
-        jMenuItem14.setText("Agregar Venta");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        editarSecciones.setText("Editar Secciones");
+        editarSecciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                editarSeccionesActionPerformed(evt);
             }
         });
-        jMenu15.add(jMenuItem14);
+        menuSecciones.add(editarSecciones);
 
-        jMenuItem15.setText("Eliminar Venta");
-        jMenu15.add(jMenuItem15);
+        jMenuBar1.add(menuSecciones);
 
-        jMenuItem16.setText("Terminar Venta");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+        menuCompra.setText("Compra");
+
+        administrarCompra.setText("Administrar Compra");
+        administrarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
+                administrarCompraActionPerformed(evt);
             }
         });
-        jMenu15.add(jMenuItem16);
+        menuCompra.add(administrarCompra);
 
-        jMenuBar1.add(jMenu15);
+        jMenuBar1.add(menuCompra);
 
-        jMenu14.setText("Salir");
+        menuVenta.setText("Venta");
 
-        jMenuItem12.setText("Confirmar");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        administrarVenta.setText("Administrar Venta");
+        administrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                administrarVentaActionPerformed(evt);
             }
         });
-        jMenu14.add(jMenuItem12);
+        menuVenta.add(administrarVenta);
 
-        jMenuBar1.add(jMenu14);
+        jMenuBar1.add(menuVenta);
+
+        menuSalir.setText("Salir");
+
+        confirmarSalida.setText("Confirmar");
+        confirmarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarSalidaActionPerformed(evt);
+            }
+        });
+        menuSalir.add(confirmarSalida);
+
+        jMenuBar1.add(menuSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -226,30 +209,47 @@ public class MenuPrincipalGrafico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void agregarEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEliminarProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        VentanaAgregarProducto ventanaAgregar = new VentanaAgregarProducto(this.tienda,this);
+        ventanaAgregar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_agregarEliminarProductoActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void confirmarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSalidaActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_confirmarSalidaActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void administrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        VentanaCompra ventanaCompra = new VentanaCompra(this.tienda);
+        ventanaCompra.setVisible(true);
+    }//GEN-LAST:event_administrarCompraActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void administrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+        VentanaVenta ventanaVenta = new VentanaVenta(this.tienda);
+        ventanaVenta.setVisible(true);
+    }//GEN-LAST:event_administrarVentaActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void editarSeccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarSeccionesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+        VentanaSecciones ventanaSecciones = new VentanaSecciones(this.tienda);
+        ventanaSecciones.setVisible(true);
+    }//GEN-LAST:event_editarSeccionesActionPerformed
 
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+    private void buscarModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarModificarProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
+        VentanaBuscarProducto ventanaBuscar = new VentanaBuscarProducto(this.tienda);
+        ventanaBuscar.setVisible(true);
+    }//GEN-LAST:event_buscarModificarProductoActionPerformed
+
+    private void listarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProductosActionPerformed
+        // TODO add your handling code here:
+        VentanaListarProductos ventanaListar = new VentanaListarProductos(this.tienda);
+        ventanaListar.setVisible(true);
+    }//GEN-LAST:event_listarProductosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,37 +268,41 @@ public class MenuPrincipalGrafico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMenuPrincipalGrafico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
-
+        //</editor-fold>
+        //</editor-fold>
+        Tienda tienda = new  Tienda("");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new MenuPrincipalGrafico().setVisible(true);
+                new VentanaMenuPrincipalGrafico(tienda).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem administrarCompra;
+    private javax.swing.JMenuItem administrarVenta;
+    private javax.swing.JMenuItem agregarEliminarProducto;
+    private javax.swing.JMenuItem buscarModificarProducto;
+    private javax.swing.JMenuItem confirmarSalida;
+    private javax.swing.JMenuItem editarSecciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu15;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -311,21 +315,14 @@ public class MenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuBar jMenuBar6;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem listarProductos;
+    private javax.swing.JMenu menuCompra;
+    private javax.swing.JMenu menuProductos;
+    private javax.swing.JMenu menuSalir;
+    private javax.swing.JMenu menuSecciones;
+    private javax.swing.JMenu menuVenta;
     // End of variables declaration//GEN-END:variables
 }
