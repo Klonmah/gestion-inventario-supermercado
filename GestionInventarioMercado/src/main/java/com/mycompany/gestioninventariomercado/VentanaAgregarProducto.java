@@ -237,6 +237,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                 Integer.parseInt(inputCodigo.getText()));
         if(tienda.getSeccion(inputSeccion.getText()).agregarProducto(Integer.parseInt(inputCodigo.getText()), nuevo)){
             this.dispose();
+            this.ventanaPrincipal.setVisible(true);
         }else{
             TextoError.setText("El codigo de producto ingresado ya existe");
             TextoError.setForeground(Color.red);
