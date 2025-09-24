@@ -233,9 +233,10 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
         Producto nuevo = new Producto(inputNombre.getText(),Integer.parseInt(inputCantidadProductos.getText()),
-                Float.parseFloat(inputPrecioVenta.getText()), inputNombreVendedor.getName(),Float.parseFloat(inputPrecioCompra.getText()),
+                Float.parseFloat(inputPrecioVenta.getText()), inputNombreVendedor.getText(),Float.parseFloat(inputPrecioCompra.getText()),
                 Integer.parseInt(inputCodigo.getText()));
         if(tienda.getSeccion(inputSeccion.getText()).agregarProducto(Integer.parseInt(inputCodigo.getText()), nuevo)){
+            
             this.dispose();
             this.ventanaPrincipal.setVisible(true);
         }else{
