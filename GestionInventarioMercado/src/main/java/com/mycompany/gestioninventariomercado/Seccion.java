@@ -5,8 +5,7 @@
 package com.mycompany.gestioninventariomercado;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JTextArea;
-import java.io.*;
+import java.time.LocalDate;
 
 
 /**
@@ -33,7 +32,7 @@ public class Seccion {
         this.nombreSeccion = Character.toString(nombreSeccion);
     }
     
-    /*Getter*/
+    /*Getters*/
     public String getNombreSeccion(){
         return this.nombreSeccion;
     }
@@ -82,23 +81,45 @@ public class Seccion {
         
     }
     
-    
-    public void mostrarProductos( JTextArea miniterminal ) throws IOException{
-        if (this.productos.isEmpty()) {
-            miniterminal.append("La Sección " + this.nombreSeccion + " está vacía.\n");
-        } else {
-            File archivo = new File("Reporte_Productos_"+this.nombreSeccion+".txt");
-            BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
-          
-            for (Integer key : this.productos.keySet()) {
-                miniterminal.append("Código: " + key + "\n");
-                miniterminal.append(productos.get(key).toString() + "\n");
-                escritor.write("Código: " + key + "\n");
-                escritor.write(productos.get(key).toString() + "\n");
-                escritor.newLine();
+    public void eliminarProductosVencidosPorSeccion(){
+        for (Integer key : this.productos.keySet()) {
+            Producto p = this.productos.get(key);
+            /*Revisa si el Producto es Perecible*/
+            if(p instanceof ProductoPerecible){
+                ProductoPerecible perecible = (ProductoPerecible) p;
+                if (LocalDate.now().isAfter(perecible.getFechaVencimiento())) {
+                    this.productos.remove(key);
+                }
+            /*Revisa si el producto es Perecible y por lote*/
+            }else if(p instanceof ProductoPereciblePorLote){
+                ProductoPereciblePorLote perecible = (ProductoPereciblePorLote) p;
+                if(LocalDate.now().isAfter(perecible.getFechaVencimiento())){
+                    this.productos.remove(key);
+                }
             }
-            escritor.close();
-        }  
+        }
+    }
+    
+    public String listarProductosVencidos(){
+        String texto = "";
+        if (this.productos.isEmpty()) {
+            return "";
+        }else{
+            for (Integer key : this.productos.keySet()) {
+                if(this.productos.get(key) instanceof ProductoPerecible){
+                    texto+= this.getNombreSeccion() + ",";
+                    texto+= this.productos.get(key).toString();
+                    texto+= "1,";
+                    texto+= "\n";
+                }else if(this.productos.get(key) instanceof ProductoPereciblePorLote){
+                    texto+= this.getNombreSeccion() + ",";
+                    texto+= this.productos.get(key).toString();
+                    texto+= "\n";
+                }
+            }
+        }
+        return texto;
+        
     }
     
     @Override
@@ -108,8 +129,22 @@ public class Seccion {
             return "";
         }else{
             for (Integer key : this.productos.keySet()) {
+                
+                if(this.productos.get(key) instanceof ProductoPerecible){
+                    texto+= this.getNombreSeccion() + ",";
+                    texto+= this.productos.get(key).toString();
+                    texto+= "1,";
+                    texto+= "\n";
+                }else if(this.productos.get(key) instanceof ProductoPereciblePorLote){
+                    texto+= this.getNombreSeccion() + ",";
+                    texto+= this.productos.get(key).toString();
+                    texto+= "\n";
+                }
+                
                 texto+= this.getNombreSeccion() + ",";
                 texto+= this.productos.get(key).toString();
+                texto += ",No Perecible,";
+                texto += "1";
                 texto+= "\n";
             }
         }

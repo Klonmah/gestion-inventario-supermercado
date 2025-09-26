@@ -46,7 +46,6 @@ public class Producto {
         this.vendedor = vendedor;
         this.precioCompra = (float) precioCompra;    
         this.codigo = codigo;
-    
     }
     
     /*Setters*/

@@ -25,11 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-              <Component id="botonImprimir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="botonListarVencidos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-              <Component id="filtroSecciones" min="-2" max="-2" attributes="0"/>
+              <Component id="botonBorrarVencidos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="botonSalir" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -49,9 +45,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botonSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonImprimir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonListarVencidos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filtroSecciones" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonBorrarVencidos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
@@ -145,34 +139,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonSalirActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botonImprimir">
+    <Component class="javax.swing.JButton" name="botonBorrarVencidos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Imprimir en txt"/>
+        <Property name="text" type="java.lang.String" value="Borrar Productos Vencidos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonImprimirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBorrarVencidosActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="botonListarVencidos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Listar Productos Vencidos"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonListarVencidosActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="filtroSecciones">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroSeccionesActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

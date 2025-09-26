@@ -55,10 +55,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         buscarModificarProducto = new javax.swing.JMenuItem();
         menuSecciones = new javax.swing.JMenu();
         editarSecciones = new javax.swing.JMenuItem();
-        menuCompra = new javax.swing.JMenu();
-        administrarCompra = new javax.swing.JMenuItem();
-        menuVenta = new javax.swing.JMenu();
-        administrarVenta = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenu();
         confirmarSalida = new javax.swing.JMenuItem();
 
@@ -144,30 +140,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
         jMenuBar1.add(menuSecciones);
 
-        menuCompra.setText("Compra");
-
-        administrarCompra.setText("Administrar Compra");
-        administrarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administrarCompraActionPerformed(evt);
-            }
-        });
-        menuCompra.add(administrarCompra);
-
-        jMenuBar1.add(menuCompra);
-
-        menuVenta.setText("Venta");
-
-        administrarVenta.setText("Administrar Venta");
-        administrarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administrarVentaActionPerformed(evt);
-            }
-        });
-        menuVenta.add(administrarVenta);
-
-        jMenuBar1.add(menuVenta);
-
         menuSalir.setText("Salir");
 
         confirmarSalida.setText("Confirmar");
@@ -220,18 +192,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_confirmarSalidaActionPerformed
-
-    private void administrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarCompraActionPerformed
-        // TODO add your handling code here:
-        VentanaCompra ventanaCompra = new VentanaCompra(this.tienda);
-        ventanaCompra.setVisible(true);
-    }//GEN-LAST:event_administrarCompraActionPerformed
-
-    private void administrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarVentaActionPerformed
-        // TODO add your handling code here:
-        VentanaVenta ventanaVenta = new VentanaVenta(this.tienda);
-        ventanaVenta.setVisible(true);
-    }//GEN-LAST:event_administrarVentaActionPerformed
 
     private void editarSeccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarSeccionesActionPerformed
         // TODO add your handling code here:
@@ -291,8 +251,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem administrarCompra;
-    private javax.swing.JMenuItem administrarVenta;
     private javax.swing.JMenuItem agregarEliminarProducto;
     private javax.swing.JMenuItem buscarModificarProducto;
     private javax.swing.JMenuItem confirmarSalida;
@@ -319,10 +277,8 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem listarProductos;
-    private javax.swing.JMenu menuCompra;
     private javax.swing.JMenu menuProductos;
     private javax.swing.JMenu menuSalir;
     private javax.swing.JMenu menuSecciones;
-    private javax.swing.JMenu menuVenta;
     // End of variables declaration//GEN-END:variables
 }

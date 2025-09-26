@@ -10,27 +10,22 @@ import java.io.File;
  *
  * @author diazv
  */
-public class VentanaListarProductos extends javax.swing.JFrame {
+public class VentanaListarProductosVencidos extends javax.swing.JFrame {
 
     /**
      * Creates new form ModificarProducto
      */
     private Tienda tienda;
-    public VentanaListarProductos(Tienda tienda) {
+    public VentanaListarProductosVencidos(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
-        String texto = tienda.toString();
+        String texto = tienda.listarProductosVencidos();
         String [] arrayTexto = texto.split("\n");
         DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
         
         for(int i = 0; i< arrayTexto.length;i++){
             String[] fila = arrayTexto[i].split(",");
             modelo.addRow(fila);
-        }
-        
-        this.filtroSecciones.addItem("Todas");
-        for(int i = 0; i < this.tienda.getListSecciones().size();i++){
-            this.filtroSecciones.addItem(this.tienda.getListSecciones().get(i).getNombreSeccion());
         }
     }
 
@@ -46,9 +41,7 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaLista = new javax.swing.JTable();
         botonSalir = new javax.swing.JButton();
-        botonImprimir = new javax.swing.JButton();
-        botonListarVencidos = new javax.swing.JButton();
-        filtroSecciones = new javax.swing.JComboBox<>();
+        botonBorrarVencidos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,23 +77,10 @@ public class VentanaListarProductos extends javax.swing.JFrame {
             }
         });
 
-        botonImprimir.setText("Imprimir en txt");
-        botonImprimir.addActionListener(new java.awt.event.ActionListener() {
+        botonBorrarVencidos.setText("Borrar Productos Vencidos");
+        botonBorrarVencidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonImprimirActionPerformed(evt);
-            }
-        });
-
-        botonListarVencidos.setText("Listar Productos Vencidos");
-        botonListarVencidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonListarVencidosActionPerformed(evt);
-            }
-        });
-
-        filtroSecciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filtroSeccionesActionPerformed(evt);
+                botonBorrarVencidosActionPerformed(evt);
             }
         });
 
@@ -110,11 +90,7 @@ public class VentanaListarProductos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(botonImprimir)
-                .addGap(35, 35, 35)
-                .addComponent(botonListarVencidos)
-                .addGap(133, 133, 133)
-                .addComponent(filtroSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonBorrarVencidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonSalir)
                 .addGap(50, 50, 50))
@@ -131,9 +107,7 @@ public class VentanaListarProductos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSalir)
-                    .addComponent(botonImprimir)
-                    .addComponent(botonListarVencidos)
-                    .addComponent(filtroSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonBorrarVencidos))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -145,48 +119,11 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
+    private void botonBorrarVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarVencidosActionPerformed
         // TODO add your handling code here:
-        
-        try {
-            tienda.guardarDatos("inventario.txt");
-            File archivo = new File("inventario.txt");
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(archivo);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }//GEN-LAST:event_botonImprimirActionPerformed
-
-    private void botonListarVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarVencidosActionPerformed
-        // TODO add your handling code here:
-        VentanaListarProductosVencidos ventanaVencidos = new VentanaListarProductosVencidos(this.tienda);
-        ventanaVencidos.setVisible(true);
-        
-    }//GEN-LAST:event_botonListarVencidosActionPerformed
-
-    private void filtroSeccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroSeccionesActionPerformed
-
-    String seccionSeleccionada = (String) filtroSecciones.getSelectedItem();
-    
-    
-    DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
-    modelo.setRowCount(0);
-
-    String texto = tienda.toString();
-    String[] arrayTexto = texto.split("\n");
-
-    
-    for (int i = 0; i < arrayTexto.length; i++) {
-        String[] fila = arrayTexto[i].split(","); 
-        /*Se imprime el producto si es de la seccion que se indica o si las indicaciones es que se imprima todo*/
-        if (seccionSeleccionada.equals("Todas") || fila[0].equals(seccionSeleccionada)) {
-            modelo.addRow(fila);
-        }
-    }
-    }//GEN-LAST:event_filtroSeccionesActionPerformed
+        this.tienda.eliminarProductosVencidos();
+        this.dispose();
+    }//GEN-LAST:event_botonBorrarVencidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,13 +142,13 @@ public class VentanaListarProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductosVencidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductosVencidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductosVencidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaListarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaListarProductosVencidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -219,17 +156,15 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaListarProductos(tienda).setVisible(true);
+                new VentanaListarProductosVencidos(tienda).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaLista;
-    private javax.swing.JButton botonImprimir;
-    private javax.swing.JButton botonListarVencidos;
+    private javax.swing.JButton botonBorrarVencidos;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JComboBox<String> filtroSecciones;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

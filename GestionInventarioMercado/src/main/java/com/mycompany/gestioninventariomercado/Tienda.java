@@ -6,7 +6,6 @@ package com.mycompany.gestioninventariomercado;
 
 import java.util.ArrayList;
 import java.io.*;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -18,15 +17,12 @@ public class Tienda {
     /*Variables y Objetos*/
     private ArrayList<Seccion> secciones ;
     private String nombreTienda;
-    private Venta carritoVenta;
-    private Compra carritoCompra;
+   
     
     /*Constructor*/
     public Tienda(String nombreTienda){
         this.secciones = new ArrayList<>();
         this.nombreTienda = nombreTienda;
-        this.carritoVenta = new Venta();
-        this.carritoCompra = new Compra();
     }
     
     /*Setters*/
@@ -35,14 +31,6 @@ public class Tienda {
     }
     
     /*Getters*/
-    public Venta getCarritoVenta(){
-        return this.carritoVenta;
-    }
-    
-    public Compra getCarritoCompra(){
-        return this.carritoCompra;
-    }
-    
     public String getNombreTienda(){
         return this.nombreTienda;
     }
@@ -56,7 +44,7 @@ public class Tienda {
         return null;
     }
     
-    public ArrayList getListSecciones(){
+    public ArrayList<Seccion> getListSecciones(){
         return secciones;
     }
     
@@ -90,20 +78,6 @@ public class Tienda {
         return false;
     }
     
-    
-    public void printSecciones( JTextArea miniterminal ){
-        for(Seccion i: secciones){
-            miniterminal.append("Seccion: "+i.getNombreSeccion()+" \n");
-        }
-    }
-    
-    public void printTienda( JTextArea miniterminal ) throws IOException{
-        for(Seccion i: secciones){
-            System.out.println("Seccion: "+i.getNombreSeccion()+" \n");
-            i.mostrarProductos(miniterminal);
-            System.out.println("\n\n");
-        }
-    }
     
     public void guardarDatos(String archivo) throws IOException{
         BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
@@ -177,6 +151,20 @@ public class Tienda {
         }else{
             return false;
         }
+    }
+    
+    public void eliminarProductosVencidos(){
+        for(int i = 0; i < this.secciones.size();i++){
+            this.secciones.get(i).eliminarProductosVencidosPorSeccion();
+        }
+    }
+    
+    public String listarProductosVencidos(){
+        String text = "";
+        for(Seccion i: this.secciones){
+            text+= i.listarProductosVencidos();
+        }
+        return text;
     }
     
     @Override
