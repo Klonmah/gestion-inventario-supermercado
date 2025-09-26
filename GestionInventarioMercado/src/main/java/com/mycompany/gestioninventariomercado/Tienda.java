@@ -6,6 +6,8 @@ package com.mycompany.gestioninventariomercado;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -86,8 +88,29 @@ public class Tienda {
             escritor.newLine();
             for (Integer key : sec.getProductos().keySet()) {
                 Producto p = sec.getProductoCodigo(key);
-                escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getPrecioVenta()+";"+p.getVendedor()+";"+p.getPrecioCompra());
-                escritor.newLine();
+                if (p instanceof ProductoPerecible)
+                {
+                    ProductoPerecible per = (ProductoPerecible) p;
+                    escritor.write("ProductoPerecible;"+key+";"+per.getNombre()+";"+per.getCantidad()+";"+per.getPrecioVenta()+";"+per.getVendedor()+";"+per.getPrecioCompra()+";"+per.getFechaVencimiento());
+                    escritor.newLine();
+                }
+                else if (p instanceof ProductoPorLote)
+                {
+                    ProductoPorLote lote = (ProductoPorLote) p;
+                    escritor.write("ProductoPorLote;"+key+";"+lote.getNombre()+";"+lote.getCantidad()+";"+lote.getPrecioVenta()+";"+lote.getVendedor()+";"+lote.getPrecioCompra()+";"+lote.getCantidadLote());
+                    escritor.newLine();
+                }
+                else if (p instanceof ProductoPereciblePorLote)
+                {
+                    ProductoPereciblePorLote perlote = (ProductoPereciblePorLote) p;
+                    escritor.write("ProductoPereciblePorLote;"+key+";"+perlote.getNombre()+";"+perlote.getCantidad()+";"+perlote.getPrecioVenta()+";"+perlote.getVendedor()+";"+perlote.getPrecioCompra()+";"+perlote.getFechaVencimiento()+";"+perlote.getCantidadLote());
+                    escritor.newLine();
+                }
+                else
+                {
+                    escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getPrecioVenta()+";"+p.getVendedor()+";"+p.getPrecioCompra());
+                    escritor.newLine();
+                }
             }
             escritor.newLine();
         }
@@ -99,6 +122,7 @@ public class Tienda {
         BufferedReader lector = new BufferedReader(new FileReader(archivo));
         String linea;
         Seccion i = null;
+        String seccionActual = null;
         while ((linea=lector.readLine()) != null)
         {
             if(linea.isBlank()) continue;
@@ -107,6 +131,7 @@ public class Tienda {
             {
                 i = new Seccion(datos[1]);
                 agregarSeccion(i);
+                seccionActual=datos[1];
             }
             else if (datos[0].equals("Producto") && i!= null)
             {
@@ -117,6 +142,43 @@ public class Tienda {
                 String vendedor = datos[5];
                 float precioCompra = Float.parseFloat(datos[6]);
                 Producto p = new Producto(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo);
+                i.agregarProducto(codigo,p);
+            }
+            else if (datos[0].equals("ProductoPerecible") && i!= null)
+            {
+                int codigo = Integer.parseInt(datos[1]);
+                String nombre= datos[2];
+                int cantidad = Integer.parseInt(datos[3]);
+                float precioVenta= Float.parseFloat(datos[4]);
+                String vendedor = datos[5];
+                float precioCompra = Float.parseFloat(datos[6]);
+                LocalDate FechaVencimiento = LocalDate.parse(datos[7]);
+                ProductoPerecible p = new ProductoPerecible(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,FechaVencimiento);
+                i.agregarProducto(codigo,p);
+            }
+            else if (datos[0].equals("ProductoPorLote") && i!= null)
+            {
+                int codigo = Integer.parseInt(datos[1]);
+                String nombre= datos[2];
+                int cantidad = Integer.parseInt(datos[3]);
+                float precioVenta= Float.parseFloat(datos[4]);
+                String vendedor = datos[5];
+                float precioCompra = Float.parseFloat(datos[6]);
+                int cantidadLote = Integer.parseInt(datos[7]);
+                ProductoPorLote p = new ProductoPorLote(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,cantidadLote);
+                i.agregarProducto(codigo,p);
+            }
+            else if (datos[0].equals("ProductoPereciblePorLote") && i!= null)
+            {
+                int codigo = Integer.parseInt(datos[1]);
+                String nombre= datos[2];
+                int cantidad = Integer.parseInt(datos[3]);
+                float precioVenta= Float.parseFloat(datos[4]);
+                String vendedor = datos[5];
+                float precioCompra = Float.parseFloat(datos[6]);
+                LocalDate fechaVencimiento = LocalDate.parse(datos[7]);
+                int cantidadLote = Integer.parseInt(datos[8]);
+                ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,cantidadLote,fechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
         }
