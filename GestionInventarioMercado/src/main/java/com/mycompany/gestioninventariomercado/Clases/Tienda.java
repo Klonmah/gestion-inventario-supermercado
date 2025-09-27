@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Clases;
 
+import com.mycompany.gestioninventariomercado.Clases.ProductoPerecible;
+import com.mycompany.gestioninventariomercado.Clases.Producto;
 import java.util.ArrayList;
 import java.io.*;
 import java.time.LocalDate;
@@ -97,7 +99,7 @@ public class Tienda {
                 else if (p instanceof ProductoPorLote)
                 {
                     ProductoPorLote lote = (ProductoPorLote) p;
-                    escritor.write("ProductoPorLote;"+key+";"+lote.getNombre()+";"+lote.getCantidad()+";"+";"+lote.getVendedor()+";"+lote.getPrecioCompra()+";"+lote.getCantidadLote());
+                    escritor.write("ProductoPorLote;"+key+";"+lote.getNombre()+";"+lote.getCantidad()+";"+lote.getVendedor()+";"+lote.getPrecioCompra()+";"+lote.getCantidadLote());
                     escritor.newLine();
                 }
                 else if (p instanceof ProductoPereciblePorLote)
@@ -138,9 +140,9 @@ public class Tienda {
                 int codigo = Integer.parseInt(datos[1]);
                 String nombre= datos[2];
                 int cantidad = Integer.parseInt(datos[3]);
-                float precioVenta= Float.parseFloat(datos[4]);
-                String vendedor = datos[5];
-                float precioCompra = Float.parseFloat(datos[6]);
+                String vendedor = datos[4];
+                float precioCompra = Float.parseFloat(datos[5]);
+                
                 Producto p = new Producto(nombre, cantidad, vendedor, precioCompra,codigo);
                 i.agregarProducto(codigo,p);
             }
@@ -149,10 +151,10 @@ public class Tienda {
                 int codigo = Integer.parseInt(datos[1]);
                 String nombre= datos[2];
                 int cantidad = Integer.parseInt(datos[3]);
-                float precioVenta= Float.parseFloat(datos[4]);
-                String vendedor = datos[5];
-                float precioCompra = Float.parseFloat(datos[6]);
-                LocalDate FechaVencimiento = LocalDate.parse(datos[7]);
+                String vendedor = datos[4];
+                float precioCompra = Float.parseFloat(datos[5]);
+                
+                LocalDate FechaVencimiento = LocalDate.parse(datos[6]);
                 ProductoPerecible p = new ProductoPerecible(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,FechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
@@ -161,10 +163,10 @@ public class Tienda {
                 int codigo = Integer.parseInt(datos[1]);
                 String nombre= datos[2];
                 int cantidad = Integer.parseInt(datos[3]);
-                float precioVenta= Float.parseFloat(datos[4]);
-                String vendedor = datos[5];
-                float precioCompra = Float.parseFloat(datos[6]);
-                int cantidadLote = Integer.parseInt(datos[7]);
+                String vendedor = datos[4];
+                float precioCompra = Float.parseFloat(datos[5]);
+                
+                int cantidadLote = Integer.parseInt(datos[6]);
                 ProductoPorLote p = new ProductoPorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote);
                 i.agregarProducto(codigo,p);
             }
@@ -173,11 +175,11 @@ public class Tienda {
                 int codigo = Integer.parseInt(datos[1]);
                 String nombre= datos[2];
                 int cantidad = Integer.parseInt(datos[3]);
-                float precioVenta= Float.parseFloat(datos[4]);
-                String vendedor = datos[5];
-                float precioCompra = Float.parseFloat(datos[6]);
-                LocalDate fechaVencimiento = LocalDate.parse(datos[7]);
-                int cantidadLote = Integer.parseInt(datos[8]);
+                String vendedor = datos[4];
+                float precioCompra = Float.parseFloat(datos[5]);
+                
+                LocalDate fechaVencimiento = LocalDate.parse(datos[6]);
+                int cantidadLote = Integer.parseInt(datos[7]);
                 ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote,fechaVencimiento);
                 i.agregarProducto(codigo,p);
             }

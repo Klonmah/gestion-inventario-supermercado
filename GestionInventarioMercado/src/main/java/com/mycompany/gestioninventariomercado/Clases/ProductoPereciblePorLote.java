@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Clases;
 
 /**
  *
  * @author diazv
  */
+import com.mycompany.gestioninventariomercado.Clases.Producto;
 import java.time.LocalDate;
 
 public class ProductoPereciblePorLote extends Producto {

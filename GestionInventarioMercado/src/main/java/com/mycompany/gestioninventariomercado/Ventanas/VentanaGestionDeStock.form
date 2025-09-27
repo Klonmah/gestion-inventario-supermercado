@@ -32,7 +32,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="titulosecciones" min="-2" max="-2" attributes="0"/>
+                      <Component id="tituloSecciones" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
@@ -45,7 +45,7 @@
                                   <Component id="inputCodigo" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="textoCodigo1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textoAmodificar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="inputCantidad" min="-2" pref="88" max="-2" attributes="0"/>
                               </Group>
@@ -70,7 +70,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="titulosecciones" min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="tituloSecciones" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="inputCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textoCodigo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textoAmodificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -101,7 +101,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputCodigoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="titulosecciones">
+    <Component class="javax.swing.JLabel" name="tituloSecciones">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -111,10 +111,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="textoCodigo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Codigo Producto a modificar:"/>
+        <Property name="text" type="java.lang.String" value="Codigo del Producto a modificar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="textoCodigo1">
+    <Component class="javax.swing.JLabel" name="textoAmodificar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cantidad del Producto a modificar:"/>
       </Properties>
@@ -141,6 +141,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCerrarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="TextoError">
       <Properties>

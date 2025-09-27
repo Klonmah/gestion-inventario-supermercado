@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Ventanas;
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Desktop;
 import java.io.File;
@@ -32,7 +33,24 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         for(int i = 0; i < this.tienda.getListSecciones().size();i++){
             this.filtroSecciones.addItem(this.tienda.getListSecciones().get(i).getNombreSeccion());
         }
+        
     }
+    public void refrescarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
+        modelo.setRowCount(0); // limpia la tabla
+
+        String texto = tienda.toString();
+        String[] arrayTexto = texto.split("\n");
+        String seccionSeleccionada = (String) filtroSecciones.getSelectedItem();
+
+        for (String linea : arrayTexto) {
+            String[] fila = linea.split(",");
+            if (seccionSeleccionada.equals("Todas") || fila[0].equals(seccionSeleccionada)) {
+                modelo.addRow(fila);
+            }
+        }
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,6 +182,13 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaListarProductosVencidos ventanaVencidos = new VentanaListarProductosVencidos(this.tienda);
         ventanaVencidos.setVisible(true);
+
+        ventanaVencidos.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            refrescarTabla(); 
+        }
+});
         
     }//GEN-LAST:event_botonListarVencidosActionPerformed
 
@@ -223,6 +248,8 @@ public class VentanaListarProductos extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaLista;

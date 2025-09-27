@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Clases;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPerecible;
+import com.mycompany.gestioninventariomercado.Clases.Producto;
 import java.util.HashMap;
 import java.util.Map;
 import java.time.LocalDate;
@@ -107,15 +109,24 @@ public class Seccion {
             return "";
         }else{
             for (Integer key : this.productos.keySet()) {
-                if(this.productos.get(key) instanceof ProductoPerecible){
-                    texto+= this.getNombreSeccion() + ",";
-                    texto+= this.productos.get(key).toString();
-                    texto+= "1,";
-                    texto+= "\n";
+                Producto p = this.productos.get(key);
+                
+                if(p instanceof ProductoPerecible){
+                    ProductoPerecible perecible = (ProductoPerecible) p;
+                    if(LocalDate.now().isAfter(perecible.getFechaVencimiento())){
+                        texto+= this.getNombreSeccion() + ",";
+                        texto+= this.productos.get(key).toString();
+                        texto+= "1,";
+                        texto+= "\n";
+                    }
+                   
                 }else if(this.productos.get(key) instanceof ProductoPereciblePorLote){
-                    texto+= this.getNombreSeccion() + ",";
-                    texto+= this.productos.get(key).toString();
-                    texto+= "\n";
+                    ProductoPereciblePorLote perecible = (ProductoPereciblePorLote) p;
+                    if(LocalDate.now().isAfter(perecible.getFechaVencimiento())){
+                        texto+= this.getNombreSeccion() + ",";
+                        texto+= this.productos.get(key).toString();
+                        texto+= "\n";
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Ventanas;
 
 /**
  *
@@ -27,9 +27,9 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     private void initComponents() {
 
         inputCodigo = new javax.swing.JTextField();
-        titulosecciones = new javax.swing.JLabel();
+        tituloSecciones = new javax.swing.JLabel();
         textoCodigo = new javax.swing.JLabel();
-        textoCodigo1 = new javax.swing.JLabel();
+        textoAmodificar = new javax.swing.JLabel();
         botonAgregar = new javax.swing.JButton();
         inputCantidad = new javax.swing.JSpinner();
         botonEliminar = new javax.swing.JButton();
@@ -44,12 +44,12 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
             }
         });
 
-        titulosecciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        titulosecciones.setText("Gestión de Stock");
+        tituloSecciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tituloSecciones.setText("Gestión de Stock");
 
-        textoCodigo.setText("Codigo Producto a modificar:");
+        textoCodigo.setText("Codigo del Producto a modificar:");
 
-        textoCodigo1.setText("Cantidad del Producto a modificar:");
+        textoAmodificar.setText("Cantidad del Producto a modificar:");
 
         botonAgregar.setText("Agregar Producto");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +66,11 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         });
 
         botonCerrar.setText("Salir");
+        botonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrarActionPerformed(evt);
+            }
+        });
 
         TextoError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TextoError.setText(".");
@@ -82,7 +87,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(titulosecciones))
+                        .addComponent(tituloSecciones))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +98,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(textoCodigo1)
+                                    .addComponent(textoAmodificar)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -109,14 +114,14 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(titulosecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoCodigo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoCodigo1)
+                    .addComponent(textoAmodificar)
                     .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(TextoError)
@@ -143,6 +148,11 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:¿
     }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_botonCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,16 +194,10 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonCerrar;
     private javax.swing.JButton botonEliminar;
-    private javax.swing.JButton botonSalir;
-    private javax.swing.JButton botonSalir1;
-    private javax.swing.JButton botonSalir2;
-    private javax.swing.JButton botonSalir3;
-    private javax.swing.JButton botonSalir4;
-    private javax.swing.JButton botonSalir5;
     private javax.swing.JSpinner inputCantidad;
     private javax.swing.JTextField inputCodigo;
+    private javax.swing.JLabel textoAmodificar;
     private javax.swing.JLabel textoCodigo;
-    private javax.swing.JLabel textoCodigo1;
-    private javax.swing.JLabel titulosecciones;
+    private javax.swing.JLabel tituloSecciones;
     // End of variables declaration//GEN-END:variables
 }

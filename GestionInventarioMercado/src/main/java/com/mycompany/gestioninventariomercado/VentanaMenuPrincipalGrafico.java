@@ -4,6 +4,14 @@
  */
 package com.mycompany.gestioninventariomercado;
 
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaSecciones;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaListarProductos;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaBuscarProducto;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaAgregarProducto;
+
+
+import java.io.IOException;
 /**
  *
  * @author diazv
@@ -48,6 +56,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         jMenu13 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        BotonGuardar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuProductos = new javax.swing.JMenu();
         agregarEliminarProducto = new javax.swing.JMenuItem();
@@ -99,6 +108,13 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         jLabel1.setText("Eliga su Operación con las Opciones en la esquina superior izquierda");
 
         jLabel2.setText("SISTEMA PARA GESTIONAR UN SUPERMERCADO");
+
+        BotonGuardar.setText("Guardar Cambios");
+        BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonGuardarActionPerformed(evt);
+            }
+        });
 
         menuProductos.setText("Productos");
 
@@ -167,6 +183,10 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addComponent(jLabel1)))
                 .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BotonGuardar)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +195,9 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addComponent(BotonGuardar)
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -210,6 +232,15 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         VentanaListarProductos ventanaListar = new VentanaListarProductos(this.tienda);
         ventanaListar.setVisible(true);
     }//GEN-LAST:event_listarProductosActionPerformed
+
+    private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.tienda.guardarDatos("inventario.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BotonGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,6 +282,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonGuardar;
     private javax.swing.JMenuItem agregarEliminarProducto;
     private javax.swing.JMenuItem buscarModificarProducto;
     private javax.swing.JMenuItem confirmarSalida;

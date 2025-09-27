@@ -1,5 +1,6 @@
 package com.mycompany.gestioninventariomercado;
 
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import java.io.*;
 
 /**

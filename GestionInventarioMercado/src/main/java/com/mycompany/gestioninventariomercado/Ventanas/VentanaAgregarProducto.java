@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Ventanas;
 
+import com.mycompany.gestioninventariomercado.Clases.Producto;
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
+import com.mycompany.gestioninventariomercado.VentanaMenuPrincipalGrafico;
 import java.awt.Color;
 import java.util.HashSet;
 import javax.swing.table.DefaultTableModel;

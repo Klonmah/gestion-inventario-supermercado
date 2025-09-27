@@ -2,8 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Ventanas;
 
+import com.mycompany.gestioninventariomercado.Clases.Producto;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPerecible;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPereciblePorLote;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPorLote;
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
@@ -174,7 +179,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         return;
     }
 
-    // Obtenemos los valores de la tabla
+    
     String nuevaSeccion = modelo.getValueAt(0, 0).toString();
     String codigoStr = modelo.getValueAt(0, 1).toString();
     String nuevoNombre = modelo.getValueAt(0, 2).toString();
@@ -206,7 +211,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     }
     this.tienda.buscarSeccion(nuevaSeccion).cambiarCodigoProducto(buscado.getCodigo(), codigo);
 
-    // Validar sección
+    
     if (tienda.buscarSeccion(nuevaSeccion) == null) {
         textoError.setText("La sección indicada no existe.");
         textoError.setForeground(Color.red);
@@ -214,14 +219,13 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     }
 
     try {
-        // 1️⃣ Modificar atributos básicos
+        
         buscado.setNombreProducto(nuevoNombre);
         buscado.setCandidadProducto(cantidad);
         buscado.setVendedor(nuevoVendedor);
         buscado.setPrecioCompra(precio);
-        System.out.println(buscado.toString());
 
-        // 2️⃣ Modificar atributos según tipo de producto
+        
         if (buscado instanceof ProductoPereciblePorLote) {
             ProductoPereciblePorLote pLote = (ProductoPereciblePorLote) buscado;
             if (!fechaStr.isEmpty()) 
@@ -238,7 +242,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
                 pL.setCantidadLote(Integer.parseInt(cantidadLoteStr));
         }
 
-        // 3️⃣ Cambiar sección si es diferente
+        
         if (!this.tienda.getNombreSeccionDeProducto(buscado.getCodigo()).equals(nuevaSeccion)) {
             tienda.cambiarSeccionProducto(buscado.getCodigo(), nuevaSeccion);
         }

@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.gestioninventariomercado;
+package com.mycompany.gestioninventariomercado.Ventanas;
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Desktop;
 import java.io.File;
@@ -50,14 +51,14 @@ public class VentanaListarProductosVencidos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Seccion", "Codigo", "Nombre", "Cantidad", "Precio Venta", "Vendedor", "Precio Compra", "Fecha de Vencimiento", "Cantidad Por Lote"
+                "Seccion", "Codigo", "Nombre", "Cantidad", "Vendedor", "Precio Compra", "Fecha de Vencimiento", "Cantidad Por Lote"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
