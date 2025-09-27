@@ -3,7 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.gestioninventariomercado.Ventanas;
+import com.mycompany.gestioninventariomercado.Clases.Tienda;
+import com.mycompany.gestioninventariomercado.Clases.Producto;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPereciblePorLote;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPerecible;
+import com.mycompany.gestioninventariomercado.Clases.ProductoPorLote;
+import com.mycompany.gestioninventariomercado.Exepciones.VerificadorNumero;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionNumNegativo;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteNumerico;
 
+import java.awt.Color;
+import java.time.format.DateTimeFormatter;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author hugo
@@ -13,10 +24,56 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     /**
      * Creates new form VentanaGestionDeStock
      */
-    public VentanaGestionDeStock() {
+    private Tienda tienda;
+    private int codigoBuscado;
+    public VentanaGestionDeStock(Tienda tienda) {
         initComponents();
+        this.tienda = tienda;
+        
     }
+    private void actualizarTabla(int codigo) {
+        Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(codigo);
 
+        if (buscado == null) {
+            textoError.setText("El código de producto ingresado no existe.");
+            textoError.setForeground(Color.red);
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) this.TablaProducto.getModel();
+        modelo.setRowCount(0); // Limpiar tabla
+        String[] fila = new String[8];
+
+        // Columna 0: sección
+        fila[0] = this.tienda.getNombreSeccionDeProducto(buscado.getCodigo());
+
+        // Columnas 1-5: datos básicos del producto
+        fila[1] = String.valueOf(buscado.getCodigo());
+        fila[2] = buscado.getNombre();
+        fila[3] = String.valueOf(buscado.getCantidad());
+        fila[4] = buscado.getVendedor();
+        fila[5] = String.valueOf(buscado.getPrecioCompra());
+
+        // Columnas 6-7 según tipo de producto
+        if (buscado instanceof ProductoPereciblePorLote) {
+            ProductoPereciblePorLote p = (ProductoPereciblePorLote) buscado;
+            fila[6] = p.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            fila[7] = String.valueOf(p.getCantidadLote());
+        } else if (buscado instanceof ProductoPerecible) {
+            ProductoPerecible p = (ProductoPerecible) buscado;
+            fila[6] = p.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            fila[7] = "";
+        } else if (buscado instanceof ProductoPorLote) {
+            ProductoPorLote p = (ProductoPorLote) buscado;
+            fila[6] = "";
+            fila[7] = String.valueOf(p.getCantidadLote());
+        } else {
+            fila[6] = "";
+            fila[7] = "";
+        }
+
+        modelo.addRow(fila);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,7 +91,10 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         inputCantidad = new javax.swing.JSpinner();
         botonEliminar = new javax.swing.JButton();
         botonCerrar = new javax.swing.JButton();
-        TextoError = new javax.swing.JLabel();
+        textoError = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaProducto = new javax.swing.JTable();
+        BotonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,65 +132,104 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
             }
         });
 
-        TextoError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TextoError.setText(".");
+        textoError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoError.setText(".");
+
+        TablaProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Seccion", "Codigo", "Nombre", "Cantidad", "Vendedor", "PrecioCompra", "Fecha Caducidad", "Cantidad Por Lote"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(TablaProducto);
+
+        BotonBuscar.setText("Buscar");
+        BotonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botonCerrar)
-                .addGap(22, 22, 22))
+            .addComponent(jScrollPane3)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tituloSecciones))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(183, 183, 183)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
                                 .addComponent(textoAmodificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(textoCodigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(53, 53, 53)
+                                .addComponent(botonEliminar)
+                                .addGap(53, 53, 53)
+                                .addComponent(botonAgregar))
+                            .addComponent(textoError, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(botonEliminar)
-                        .addGap(68, 68, 68)
-                        .addComponent(botonAgregar))
+                        .addGap(316, 316, 316)
+                        .addComponent(tituloSecciones))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(TextoError, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addComponent(botonCerrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BotonBuscar)
+                            .addComponent(textoCodigo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(25, 25, 25)
                 .addComponent(tituloSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoCodigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addComponent(BotonBuscar)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoAmodificar)
                     .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(TextoError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textoError)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregar)
-                    .addComponent(botonEliminar))
-                .addGap(40, 40, 40)
+                    .addComponent(botonEliminar)
+                    .addComponent(botonAgregar))
+                .addGap(41, 41, 41)
                 .addComponent(botonCerrar)
-                .addGap(19, 19, 19))
+                .addGap(60, 60, 60))
         );
 
         pack();
@@ -141,17 +240,128 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     }//GEN-LAST:event_inputCodigoActionPerformed
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
-        // TODO add your handling code here:
+        this.textoError.setText("");
+        try {
+        Producto p = this.tienda.getProductoEnSeccionPorCodigo(
+                Integer.parseInt(this.inputCodigo.getText())
+        );
+
+        int cantidad = Integer.parseInt(this.inputCantidad.getValue().toString());
+        VerificadorNumero.verificar(cantidad);
+        VerificadorNumero.verificar(p.getCantidad()+cantidad);
+        
+        if (p instanceof ProductoPereciblePorLote) {
+            ProductoPereciblePorLote ppl = (ProductoPereciblePorLote) p;
+            if (ppl.estaVencido()) {
+                this.textoError.setText("Los productos vencidos no pueden modificar stock.");
+                this.textoError.setForeground(Color.red);
+                return;
+            } else {
+                ppl.aumentarStock(cantidad);
+            }
+        } else if (p instanceof ProductoPerecible) {
+            ProductoPerecible pp = (ProductoPerecible) p;
+            if (pp.estaVencido()) {
+                this.textoError.setText("Los productos vencidos no pueden modificar stock.");
+                this.textoError.setForeground(Color.red);
+                return;
+            } else {
+                pp.aumentarStock(cantidad);
+            }
+        } else if (p instanceof ProductoPorLote) {
+            ProductoPorLote pl = (ProductoPorLote) p;
+            pl.aumentarStock(cantidad);
+        } else {
+            p.aumentarStock(cantidad);
+        }
+
+        // ✅ Actualizar tabla después de modificar stock
+        actualizarTabla(p.getCodigo());
+
+    } catch (NumberFormatException e) {
+        this.textoError.setText("Ingrese solo números válidos en código y cantidad.");
+        this.textoError.setForeground(Color.red);
+    } catch (ExcepcionNumNegativo | ExcepcionLimiteNumerico e) {
+        textoError.setText(e.getMessage());
+        textoError.setForeground(Color.red);
+        return;
+    }
     }//GEN-LAST:event_botonAgregarActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        // TODO add your handling code here:¿
+        this.textoError.setText("");
+        try {
+        Producto p = this.tienda.getProductoEnSeccionPorCodigo(
+                Integer.parseInt(this.inputCodigo.getText())
+        );
+
+        if (p == null) {
+            this.textoError.setText("El producto con ese código no existe.");
+            this.textoError.setForeground(Color.red);
+            return;
+        }
+
+        int cantidad = Integer.parseInt(this.inputCantidad.getValue().toString());
+        VerificadorNumero.verificar(cantidad); 
+        VerificadorNumero.verificar(p.getCantidad() - cantidad); 
+
+        if (p instanceof ProductoPereciblePorLote) {
+            ProductoPereciblePorLote ppl = (ProductoPereciblePorLote) p;
+            if (ppl.estaVencido()) {
+                this.textoError.setText("Los productos vencidos no pueden modificar stock.");
+                this.textoError.setForeground(Color.red);
+                return;
+            } else {
+                ppl.reducirStock(cantidad); 
+            }
+        } else if (p instanceof ProductoPerecible) {
+            ProductoPerecible pp = (ProductoPerecible) p;
+            if (pp.estaVencido()) {
+                this.textoError.setText("Los productos vencidos no pueden modificar stock.");
+                this.textoError.setForeground(Color.red);
+                return;
+            } else {
+                pp.reducirStock(cantidad);
+            }
+        } else if (p instanceof ProductoPorLote) {
+            ProductoPorLote pl = (ProductoPorLote) p;
+            pl.reducirStock(cantidad);
+        } else {
+            p.reducirStock(cantidad);
+        }
+
+       
+        actualizarTabla(p.getCodigo());
+
+    } catch (NumberFormatException e) {
+        this.textoError.setText("Ingrese solo números válidos en código y cantidad.");
+        this.textoError.setForeground(Color.red);
+    } catch (ExcepcionNumNegativo | ExcepcionLimiteNumerico e) {
+        textoError.setText(e.getMessage());
+        textoError.setForeground(Color.red);
+    } catch (Exception e) {
+        textoError.setText("Error inesperado: " + e.getMessage());
+        textoError.setForeground(Color.red);
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonCerrarActionPerformed
+
+    private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
+    this.textoError.setText("");
+    try {
+        int codigo = Integer.parseInt(this.inputCodigo.getText());
+        this.codigoBuscado = codigo;
+        actualizarTabla(codigo);
+    } catch (NumberFormatException e) {
+        textoError.setText("Código inválido.");
+        textoError.setForeground(Color.red);
+    }
+    }//GEN-LAST:event_BotonBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,22 +391,26 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        Tienda tienda = new Tienda("");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaGestionDeStock().setVisible(true);
+                new VentanaGestionDeStock(tienda).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel TextoError;
+    private javax.swing.JButton BotonBuscar;
+    private javax.swing.JTable TablaProducto;
     private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonCerrar;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JSpinner inputCantidad;
     private javax.swing.JTextField inputCodigo;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel textoAmodificar;
     private javax.swing.JLabel textoCodigo;
+    private javax.swing.JLabel textoError;
     private javax.swing.JLabel tituloSecciones;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,20 +38,29 @@ public class ProductoPorLote extends Producto {
 
     /*Sobrescribir aumentarStock para incrementar por lote*/
     @Override
-    public void aumentarStock(int lotes) {
-        int cantidadTotal = lotes * cantidadLote; /* total de productos en los lotes*/
+    
+    public void aumentarStock(int numeroLotes) {
+        int cantidadTotal = numeroLotes * this.cantidadLote;
         super.aumentarStock(cantidadTotal);
     }
 
-    /*Sobreescribe Reducir stock para que funcione por lotes*/
-    @Override
-    public void reducirStock(int numeroLotes) {
-        int cantidadTotal = numeroLotes * cantidadLote;
-        if (cantidadTotal > getCantidad()) {
-            System.out.println("No se puede reducir stock: No hay suficientes productos para " + numeroLotes + " lotes");
-        } else {
-            super.reducirStock(cantidadTotal);
+    public boolean esPosibleReducir(int numeroLotes){
+        int cantidadTotal = numeroLotes * this.cantidadLote;
+        if(cantidadTotal > this.getCantidad()){
+            return false;
+        }else{
+            return true;
         }
+    }
+    
+    /*Sobreescritura del reducir stock para que funcione por lotes y por fecha de vencimiento*/
+    @Override
+    /*Recordar: Usar el esPosibleReducir antes del reducir stock*/
+    public void reducirStock(int numeroLotes) {
+        
+        int cantidadTotal = numeroLotes * this.cantidadLote;
+        super.reducirStock(cantidadTotal);
+        
     }
 
     @Override

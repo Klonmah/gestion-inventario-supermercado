@@ -190,10 +190,20 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu14">
+        <Menu class="javax.swing.JMenu" name="menuStock">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenu14"/>
+            <Property name="text" type="java.lang.String" value="Stock"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="GestionarStock">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gestionar Stock"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GestionarStockActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuSalir">
           <Properties>

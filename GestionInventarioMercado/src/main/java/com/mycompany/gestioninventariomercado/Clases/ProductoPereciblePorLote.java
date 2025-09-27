@@ -45,35 +45,39 @@ public class ProductoPereciblePorLote extends Producto {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    /* Días para que el producto llegue a su fecha de vencimiento*/
-    public int diasParaVencer() {
-        return LocalDate.now().until(fechaVencimiento).getDays();
+    public boolean estaVencido(){
+        if(LocalDate.now().isAfter(fechaVencimiento)){
+            return true;
+        }else{
+            return false;
+        }
     }
-
+    
     /*Sobreescritura del aumentar stock para que funcione por lotes y por fecha de vencimiento*/
     @Override
+    /*Recordar: Usar estaVencido antes de aumentar o reducir el stock*/
     public void aumentarStock(int numeroLotes) {
-        if (LocalDate.now().isAfter(fechaVencimiento)) {
-            System.out.println("No se puede aumentar stock: el producto '" + getNombre() + "' está vencido");
-        } else {
-            int cantidadTotal = numeroLotes * cantidadLote;
-            super.aumentarStock(cantidadTotal);
-        }
+        int cantidadTotal = numeroLotes * this.cantidadLote;
+        super.aumentarStock(cantidadTotal);
     }
 
+    public boolean esPosibleReducir(int numeroLotes){
+        int cantidadTotal = numeroLotes * this.cantidadLote;
+        if(cantidadTotal > this.getCantidad()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     /*Sobreescritura del reducir stock para que funcione por lotes y por fecha de vencimiento*/
     @Override
+    /*Recordar: Usar el esPosibleReducir antes del reducir stock*/
     public void reducirStock(int numeroLotes) {
-        if (LocalDate.now().isAfter(fechaVencimiento)) {
-            System.out.println("No se puede reducir stock: el producto '" + getNombre() + "' está vencido");
-        } else {
-            int cantidadTotal = numeroLotes * cantidadLote;
-            if (cantidadTotal > getCantidad()) {
-                System.out.println("No se puede reducir stock: no hay suficientes productos para " + numeroLotes + " lotes");
-            } else {
-                super.reducirStock(cantidadTotal);
-            }
-        }
+        
+        int cantidadTotal = numeroLotes * this.cantidadLote;
+        super.reducirStock(cantidadTotal);
+   
     }
 
     @Override

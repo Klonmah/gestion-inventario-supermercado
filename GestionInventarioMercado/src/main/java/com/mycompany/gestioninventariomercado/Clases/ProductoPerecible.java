@@ -48,30 +48,25 @@ public class ProductoPerecible extends Producto {
         this.fechaVencimiento = fechaVencimiento;
     }
     
-    
-    /* Método para saber cuántos días faltan para vencer*/
-    public int diasParaVencer() {
-        return LocalDate.now().until(fechaVencimiento).getDays();
+     public boolean estaVencido(){
+        if(LocalDate.now().isAfter(fechaVencimiento)){
+            return true;
+        }else{
+            return false;
+        }
     }
-    
+ 
+    /*Recordar usar el estaVencido para ambos*/
     /*Sobrescribir reducirStock para impedir reducir stock de productos vencidos*/
     @Override
     public void reducirStock(int cantidad) {
-        if (LocalDate.now().isAfter(fechaVencimiento)) {
-            System.out.println("No se puede reducir stock: el producto '" + getNombre() + "' está vencido");
-        } else {
-            super.reducirStock(cantidad);
-        }
+        super.reducirStock(cantidad);
     }
 
     /*Sobrescribir aumentarStock para impedir aumentar stock de productos vencidos*/
     @Override
     public void aumentarStock(int cantidad) {
-        if (LocalDate.now().isAfter(fechaVencimiento)) {
-            System.out.println("No se puede aumentar stock: el producto '" + getNombre() + "' está vencido");
-        } else {
-            super.aumentarStock(cantidad);
-        }
+        super.aumentarStock(cantidad); 
     }
     
     @Override

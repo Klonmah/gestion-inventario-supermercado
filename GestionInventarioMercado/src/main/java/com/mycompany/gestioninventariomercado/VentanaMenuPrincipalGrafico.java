@@ -10,6 +10,7 @@ import com.mycompany.gestioninventariomercado.Ventanas.VentanaListarProductos;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaBuscarProducto;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaAgregarProducto;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaEliminarProductos;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaGestionDeStock;
 
 import java.io.IOException;
 /**
@@ -69,7 +70,8 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         eliminarProducto = new javax.swing.JMenuItem();
         menuSecciones = new javax.swing.JMenu();
         editarSecciones = new javax.swing.JMenuItem();
-        jMenu14 = new javax.swing.JMenu();
+        menuStock = new javax.swing.JMenu();
+        GestionarStock = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenu();
         confirmarSalida = new javax.swing.JMenuItem();
 
@@ -178,8 +180,17 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
         jMenuBar1.add(menuSecciones);
 
-        jMenu14.setText("jMenu14");
-        jMenuBar1.add(jMenu14);
+        menuStock.setText("Stock");
+
+        GestionarStock.setText("Gestionar Stock");
+        GestionarStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GestionarStockActionPerformed(evt);
+            }
+        });
+        menuStock.add(GestionarStock);
+
+        jMenuBar1.add(menuStock);
 
         menuSalir.setText("Salir");
 
@@ -272,6 +283,12 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         ventanaEliminar.setVisible(true);
     }//GEN-LAST:event_eliminarProductoActionPerformed
 
+    private void GestionarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarStockActionPerformed
+        // TODO add your handling code here:
+        VentanaGestionDeStock ventanaStock = new VentanaGestionDeStock(this.tienda);
+        ventanaStock.setVisible(true);
+    }//GEN-LAST:event_GestionarStockActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -313,6 +330,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonGuardar;
+    private javax.swing.JMenuItem GestionarStock;
     private javax.swing.JMenuItem agregarEliminarProducto;
     private javax.swing.JMenuItem buscarModificarProducto;
     private javax.swing.JMenuItem confirmarSalida;
@@ -325,7 +343,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -348,5 +365,6 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenu menuProductos;
     private javax.swing.JMenu menuSalir;
     private javax.swing.JMenu menuSecciones;
+    private javax.swing.JMenu menuStock;
     // End of variables declaration//GEN-END:variables
 }
