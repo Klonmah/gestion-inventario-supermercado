@@ -13,17 +13,15 @@ public class Producto {
   
     private String nombreProducto;
     private int cantidadProducto;
-    private float precioVenta;
     private String vendedor;
     private float precioCompra;
     private int codigo;
     private String seccion;
     
     /*Constructor*/
-    public Producto(String nombreProducto, int cantidadProducto, float precioVenta,String vendedor, float precioCompra,int codigo,String seccion){
+    public Producto(String nombreProducto, int cantidadProducto,String vendedor, float precioCompra,int codigo,String seccion){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
-        this.precioVenta = precioVenta;
         this.vendedor = vendedor;
         this.precioCompra = precioCompra;
         this.codigo = codigo;
@@ -33,16 +31,14 @@ public class Producto {
     public Producto(String nombreProducto, int cantidadProducto, int precioVenta,String vendedor, int precioCompra, int codigo){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
-        this.precioVenta = (float)precioVenta;
         this.vendedor = vendedor;
         this.precioCompra = (float) precioCompra;    
         this.codigo = codigo;
         
     }
-    public Producto(String nombreProducto, int cantidadProducto, double precioVenta,String vendedor, double precioCompra, int codigo){
+    public Producto(String nombreProducto, int cantidadProducto,String vendedor, double precioCompra, int codigo){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
-        this.precioVenta = (float)precioVenta;
         this.vendedor = vendedor;
         this.precioCompra = (float) precioCompra;    
         this.codigo = codigo;
@@ -55,9 +51,7 @@ public class Producto {
     public void setCandidadProducto(int cantidadProducto){
         this.cantidadProducto = cantidadProducto;
     }
-    public void setPrecioVenta(float precioVenta){
-        this.precioVenta = precioVenta;
-    }
+  
     public void setVendedor(String vendedor){
         this.vendedor = vendedor;
     }
@@ -76,13 +70,6 @@ public class Producto {
     public void setPrecioCompra(double precioCompra){
         this.precioCompra = (float)precioCompra;
     }
-    /*Precio Venta*/
-    public void setPrecioVenta(int precioVenta){
-        this.precioVenta = (float)precioVenta;
-    }
-    public void setPrecioVenta(double precioVenta){
-        this.precioVenta = (float)precioVenta;
-    }
     
     /*Getters*/
     public String getNombre(){
@@ -90,9 +77,6 @@ public class Producto {
     }
     public int getCantidad(){
         return this.cantidadProducto;
-    }
-    public float getPrecioVenta(){
-        return this.precioVenta;
     }
     public String getVendedor(){
         return this.vendedor;
@@ -115,7 +99,7 @@ public class Producto {
     /*Funcion para Printear los datos del producto*/
 @Override
     public String toString() {
-        return this.codigo + "," + this.nombreProducto + "," + this.cantidadProducto + "," + this.precioVenta + "," + this.vendedor + "," + this.precioCompra;
+        return this.codigo + "," + this.nombreProducto + "," + this.cantidadProducto + "," + this.vendedor + "," + this.precioCompra;
     }
     
 }

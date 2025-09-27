@@ -14,10 +14,10 @@ public class ProductoPorLote extends Producto {
     private int cantidadLote; 
 
     /*Constructor*/
-    public ProductoPorLote(String nombreProducto, int cantidadProducto, float precioVenta,
+    public ProductoPorLote(String nombreProducto, int cantidadProducto,
                            String vendedor, float precioCompra, int codigo, String seccion,
                            int cantidadLote) {
-        super(nombreProducto, cantidadProducto, precioVenta, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
         this.cantidadLote = cantidadLote;
     }
 
@@ -50,6 +50,6 @@ public class ProductoPorLote extends Producto {
 
     @Override
     public String toString() {
-        return super.toString() + "," + cantidadLote;
+        return super.toString() + ","+ "No Perecible" + "," + this.cantidadLote;
     }
 }

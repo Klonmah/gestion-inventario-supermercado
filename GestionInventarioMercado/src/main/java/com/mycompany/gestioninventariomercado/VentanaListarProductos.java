@@ -57,14 +57,14 @@ public class VentanaListarProductos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Seccion", "Codigo", "Nombre", "Cantidad", "Precio Venta", "Vendedor", "Precio Compra", "Fecha de Vencimiento", "Cantidad Por Lote"
+                "Seccion", "Codigo", "Nombre", "Cantidad", "Vendedor", "Precio Compra", "Fecha de Vencimiento", "Cantidad Por Lote"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

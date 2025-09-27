@@ -17,18 +17,18 @@ public class ProductoPerecible extends Producto {
     private LocalDate fechaVencimiento;
 
     /*Constructor*/
-    public ProductoPerecible(String nombreProducto, int cantidadProducto, float precioVenta, String vendedor, float precioCompra, 
+    public ProductoPerecible(String nombreProducto, int cantidadProducto, String vendedor, float precioCompra, 
                             int codigo, String seccion, LocalDate fechaVencimiento) {
     
-        super(nombreProducto, cantidadProducto, precioVenta, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
         this.fechaVencimiento = fechaVencimiento;
     }
 
     /* Sobrecarga de constructor usando String para fecha*/
-    public ProductoPerecible(String nombreProducto, int cantidadProducto, float precioVenta,
+    public ProductoPerecible(String nombreProducto, int cantidadProducto,
                              String vendedor, float precioCompra, int codigo, String seccion,
                              String fechaVencimientoStr) {
-        super(nombreProducto, cantidadProducto, precioVenta, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
        /*Convierte String a LocalDate, asumiendo formato yyyy-MM-dd*/
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.fechaVencimiento = LocalDate.parse(fechaVencimientoStr, formatter);
@@ -69,6 +69,6 @@ public class ProductoPerecible extends Producto {
     
     @Override
     public String toString() {
-        return super.toString() + "," + fechaVencimiento;
+        return super.toString() + "," + this.fechaVencimiento + ", 1";
     }
 }

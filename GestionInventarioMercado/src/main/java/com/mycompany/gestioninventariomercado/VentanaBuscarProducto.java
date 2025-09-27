@@ -8,7 +8,9 @@ import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 /**
  *
  * @author diazv
@@ -19,6 +21,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
      * Creates new form BuscarProducto
      */
    private Tienda tienda;
+   private int codigoBuscado;
     public VentanaBuscarProducto(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
@@ -50,11 +53,11 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Seccion", "Codigo", "Tipo", "Nombre", "Cantidad", "PrecioVenta", "Vendedor", "PrecioCompra", "Fecha Caducidad"
+                "Seccion", "Codigo", "Nombre", "Cantidad", "Vendedor", "PrecioCompra", "Fecha Caducidad", "Cantidad Por lote"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,8 +145,8 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(textoError)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSalir)
                     .addComponent(botonModificar))
@@ -163,53 +166,146 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        // TODO add your handling code here:
-        Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(Integer.parseInt(this.inputCodigo.getText()));
-        String[] arrayText = new String[7];
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
-        for(int i = 0; i < arrayText.length;i++){
-            arrayText[i] = modelo.getValueAt(1,i).toString();
-            if(arrayText[i].isEmpty()){
-                textoError.setText("Ningun Espacio debe estar Vacio");
-                textoError.setForeground(Color.red);
-                return;
-            }
-            try{
-                this.tienda.cambiarSeccionProducto(buscado.getCodigo(),arrayText[0]);
-                this.tienda.buscarSeccion(arrayText[0]).cambiarCodigoProducto(buscado.getCodigo(),Integer.parseInt(arrayText[1]));
-                buscado.setNombreProducto(arrayText[2]);
-                buscado.setCandidadProducto(Integer.parseInt(arrayText[3]));
-                buscado.setPrecioVenta(Float.parseFloat(arrayText[4]));
-                buscado.setVendedor(arrayText[5]);
-                buscado.setPrecioCompra(Float.parseFloat(arrayText[6]));
-            }catch (NumberFormatException e) {
-                this.textoError.setText("Ha ingresado un valor erroneo en una casilla");
-                textoError.setForeground(Color.red);
-                return;
-            }
-            this.dispose();
-                    
-                   
+    DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
+
+    if (modelo.getRowCount() == 0) {
+        textoError.setText("No hay producto para modificar.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+
+    // Obtenemos los valores de la tabla
+    String nuevaSeccion = modelo.getValueAt(0, 0).toString();
+    String codigoStr = modelo.getValueAt(0, 1).toString();
+    String nuevoNombre = modelo.getValueAt(0, 2).toString();
+    String cantidadStr = modelo.getValueAt(0, 3).toString();
+    String nuevoVendedor = modelo.getValueAt(0, 4).toString();
+    String precioStr = modelo.getValueAt(0, 5).toString();
+    String fechaStr = modelo.getValueAt(0, 6).toString();
+    String cantidadLoteStr = modelo.getValueAt(0, 7).toString();
+
+    int codigo;
+    int cantidad;
+    float precio;
+
+    try {
+        codigo = Integer.parseInt(codigoStr);
+        cantidad = Integer.parseInt(cantidadStr);
+        precio = Float.parseFloat(precioStr);
+    } catch (NumberFormatException e) {
+        textoError.setText("Código, cantidad o precio inválidos.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+
+    Producto buscado = tienda.getProductoEnSeccionPorCodigo(this.codigoBuscado);
+    if (buscado == null) {
+        textoError.setText("Producto no encontrado.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+    this.tienda.buscarSeccion(nuevaSeccion).cambiarCodigoProducto(buscado.getCodigo(), codigo);
+
+    // Validar sección
+    if (tienda.buscarSeccion(nuevaSeccion) == null) {
+        textoError.setText("La sección indicada no existe.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+
+    try {
+        // 1️⃣ Modificar atributos básicos
+        buscado.setNombreProducto(nuevoNombre);
+        buscado.setCandidadProducto(cantidad);
+        buscado.setVendedor(nuevoVendedor);
+        buscado.setPrecioCompra(precio);
+        System.out.println(buscado.toString());
+
+        // 2️⃣ Modificar atributos según tipo de producto
+        if (buscado instanceof ProductoPereciblePorLote) {
+            ProductoPereciblePorLote pLote = (ProductoPereciblePorLote) buscado;
+            if (!fechaStr.isEmpty()) 
+                pLote.setFechaVencimiento(LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            if (!cantidadLoteStr.isEmpty())
+                pLote.setCantidadLote(Integer.parseInt(cantidadLoteStr));
+        } else if (buscado instanceof ProductoPerecible) {
+            ProductoPerecible p = (ProductoPerecible) buscado;
+            if (!fechaStr.isEmpty())
+                p.setFechaVencimiento(LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } else if (buscado instanceof ProductoPorLote) {
+            ProductoPorLote pL = (ProductoPorLote) buscado;
+            if (!cantidadLoteStr.isEmpty())
+                pL.setCantidadLote(Integer.parseInt(cantidadLoteStr));
         }
-       
-            
-            
+
+        // 3️⃣ Cambiar sección si es diferente
+        if (!this.tienda.getNombreSeccionDeProducto(buscado.getCodigo()).equals(nuevaSeccion)) {
+            tienda.cambiarSeccionProducto(buscado.getCodigo(), nuevaSeccion);
+        }
         
+
+        textoError.setText("Producto modificado correctamente.");
+        textoError.setForeground(new Color(0, 128, 0));
+
+    } catch (NumberFormatException | DateTimeParseException e) {
+        textoError.setText("Error: datos inválidos.");
+        textoError.setForeground(Color.red);
+    }
     }//GEN-LAST:event_botonModificarActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        // TODO add your handling code here:
-        Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(Integer.parseInt(this.inputCodigo.getText()));
-        if(buscado == null){
-            textoError.setText("El codigo de producto ingresado no existe.");
-            textoError.setForeground(Color.red);
-        }else{
-            String[] arrayTexto = buscado.toString().split(",");
-            DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
-            for(int i = 0; i < arrayTexto.length;i++){
-                modelo.addRow(arrayTexto);
-            }
-        }
+                                         
+    Producto buscado;
+    try {
+        buscado = this.tienda.getProductoEnSeccionPorCodigo(
+            Integer.parseInt(this.inputCodigo.getText())
+        );
+    } catch (NumberFormatException e) {
+        textoError.setText("Código inválido.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+
+    if (buscado == null) {
+        textoError.setText("El código de producto ingresado no existe.");
+        textoError.setForeground(Color.red);
+        return;
+    }
+
+    DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
+    modelo.setRowCount(0); // Limpiar la tabla
+
+    String[] fila = new String[8];
+
+    // Columna 0: seccion
+    fila[0] = this.tienda.getNombreSeccionDeProducto(buscado.getCodigo());
+    // Columnas 1-5: datos básicos del producto
+    fila[1] = String.valueOf(buscado.getCodigo());
+    fila[2] = buscado.getNombre();
+    fila[3] = String.valueOf(buscado.getCantidad());
+    fila[4] = buscado.getVendedor();
+    fila[5] = String.valueOf(buscado.getPrecioCompra());
+
+    // Columnas 6-7 según tipo de producto
+    if (buscado instanceof ProductoPereciblePorLote) {
+        ProductoPereciblePorLote p = (ProductoPereciblePorLote) buscado;
+        fila[6] = p.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        fila[7] = String.valueOf(p.getCantidadLote());
+    } else if (buscado instanceof ProductoPerecible) {
+        ProductoPerecible p = (ProductoPerecible) buscado;
+        fila[6] = p.getFechaVencimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        fila[7] = "";
+    } else if (buscado instanceof ProductoPorLote) {
+        ProductoPorLote p = (ProductoPorLote) buscado;
+        fila[6] = "";
+        fila[7] = String.valueOf(p.getCantidadLote());
+    } else { // Producto normal
+        fila[6] = "";
+        fila[7] = "";
+    }
+
+    modelo.addRow(fila);
+    this.codigoBuscado = Integer.parseInt(this.inputCodigo.getText());
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**

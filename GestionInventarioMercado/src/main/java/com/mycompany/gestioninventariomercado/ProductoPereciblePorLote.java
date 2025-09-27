@@ -15,9 +15,9 @@ public class ProductoPereciblePorLote extends Producto {
     private LocalDate fechaVencimiento; 
 
     
-    public ProductoPereciblePorLote(String nombreProducto, int cantidadProducto, float precioVenta,String vendedor, float precioCompra, 
+    public ProductoPereciblePorLote(String nombreProducto, int cantidadProducto,String vendedor, float precioCompra, 
                                     int codigo, String seccion, int cantidadLote, LocalDate fechaVencimiento) {
-        super(nombreProducto, cantidadProducto, precioVenta, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
         this.cantidadLote = cantidadLote;
         this.fechaVencimiento = fechaVencimiento;
     }
@@ -72,6 +72,6 @@ public class ProductoPereciblePorLote extends Producto {
 
     @Override
     public String toString() {
-        return super.toString() + "," + cantidadLote + "," + fechaVencimiento;
+        return super.toString() + "," + this.fechaVencimiento+ "," + this.cantidadLote;
     }
 }

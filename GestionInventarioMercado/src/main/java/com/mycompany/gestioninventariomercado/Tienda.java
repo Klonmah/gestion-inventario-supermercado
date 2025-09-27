@@ -91,24 +91,24 @@ public class Tienda {
                 if (p instanceof ProductoPerecible)
                 {
                     ProductoPerecible per = (ProductoPerecible) p;
-                    escritor.write("ProductoPerecible;"+key+";"+per.getNombre()+";"+per.getCantidad()+";"+per.getPrecioVenta()+";"+per.getVendedor()+";"+per.getPrecioCompra()+";"+per.getFechaVencimiento());
+                    escritor.write("ProductoPerecible;"+key+";"+per.getNombre()+";"+per.getCantidad()+";"+per.getVendedor()+";"+per.getPrecioCompra()+";"+per.getFechaVencimiento());
                     escritor.newLine();
                 }
                 else if (p instanceof ProductoPorLote)
                 {
                     ProductoPorLote lote = (ProductoPorLote) p;
-                    escritor.write("ProductoPorLote;"+key+";"+lote.getNombre()+";"+lote.getCantidad()+";"+lote.getPrecioVenta()+";"+lote.getVendedor()+";"+lote.getPrecioCompra()+";"+lote.getCantidadLote());
+                    escritor.write("ProductoPorLote;"+key+";"+lote.getNombre()+";"+lote.getCantidad()+";"+";"+lote.getVendedor()+";"+lote.getPrecioCompra()+";"+lote.getCantidadLote());
                     escritor.newLine();
                 }
                 else if (p instanceof ProductoPereciblePorLote)
                 {
                     ProductoPereciblePorLote perlote = (ProductoPereciblePorLote) p;
-                    escritor.write("ProductoPereciblePorLote;"+key+";"+perlote.getNombre()+";"+perlote.getCantidad()+";"+perlote.getPrecioVenta()+";"+perlote.getVendedor()+";"+perlote.getPrecioCompra()+";"+perlote.getFechaVencimiento()+";"+perlote.getCantidadLote());
+                    escritor.write("ProductoPereciblePorLote;"+key+";"+perlote.getNombre()+";"+perlote.getCantidad()+";"+perlote.getVendedor()+";"+perlote.getPrecioCompra()+";"+perlote.getFechaVencimiento()+";"+perlote.getCantidadLote());
                     escritor.newLine();
                 }
                 else
                 {
-                    escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getPrecioVenta()+";"+p.getVendedor()+";"+p.getPrecioCompra());
+                    escritor.write("Producto;"+key+";"+p.getNombre()+";"+p.getCantidad()+";"+p.getVendedor()+";"+p.getPrecioCompra());
                     escritor.newLine();
                 }
             }
@@ -141,7 +141,7 @@ public class Tienda {
                 float precioVenta= Float.parseFloat(datos[4]);
                 String vendedor = datos[5];
                 float precioCompra = Float.parseFloat(datos[6]);
-                Producto p = new Producto(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo);
+                Producto p = new Producto(nombre, cantidad, vendedor, precioCompra,codigo);
                 i.agregarProducto(codigo,p);
             }
             else if (datos[0].equals("ProductoPerecible") && i!= null)
@@ -153,7 +153,7 @@ public class Tienda {
                 String vendedor = datos[5];
                 float precioCompra = Float.parseFloat(datos[6]);
                 LocalDate FechaVencimiento = LocalDate.parse(datos[7]);
-                ProductoPerecible p = new ProductoPerecible(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,FechaVencimiento);
+                ProductoPerecible p = new ProductoPerecible(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,FechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
             else if (datos[0].equals("ProductoPorLote") && i!= null)
@@ -165,7 +165,7 @@ public class Tienda {
                 String vendedor = datos[5];
                 float precioCompra = Float.parseFloat(datos[6]);
                 int cantidadLote = Integer.parseInt(datos[7]);
-                ProductoPorLote p = new ProductoPorLote(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,cantidadLote);
+                ProductoPorLote p = new ProductoPorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote);
                 i.agregarProducto(codigo,p);
             }
             else if (datos[0].equals("ProductoPereciblePorLote") && i!= null)
@@ -178,7 +178,7 @@ public class Tienda {
                 float precioCompra = Float.parseFloat(datos[6]);
                 LocalDate fechaVencimiento = LocalDate.parse(datos[7]);
                 int cantidadLote = Integer.parseInt(datos[8]);
-                ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, precioVenta, vendedor, precioCompra,codigo,seccionActual,cantidadLote,fechaVencimiento);
+                ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote,fechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
         }
@@ -194,6 +194,17 @@ public class Tienda {
         }
         return null; 
     }
+    
+    public String getNombreSeccionDeProducto(int codigo){
+        for (Seccion sec : secciones) {
+            if(sec.buscarProducto(codigo) != null){
+                return sec.getNombreSeccion();
+                
+            }
+        }
+        return "";
+    }
+    
     public boolean eliminarProductoPorCodigo(int codigo){
         for (Seccion sec : secciones) {
             if(sec.getProductoCodigo(codigo) != null){

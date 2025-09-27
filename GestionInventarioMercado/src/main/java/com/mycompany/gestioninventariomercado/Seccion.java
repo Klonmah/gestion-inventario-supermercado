@@ -56,10 +56,10 @@ public class Seccion {
     }
     public boolean eliminarProducto(int codigoProducto){
         if(this.productos.containsKey(codigoProducto)){
-            return false;
-        }else{
             this.productos.remove(codigoProducto);
             return true;
+        }else{
+            return false;
         }
     }
     public Producto buscarProducto(int codigoProducto){
@@ -70,10 +70,11 @@ public class Seccion {
         }
     }
     public boolean cambiarCodigoProducto(int codigoProducto, int codigoNuevo){
+        Producto producto = this.getProductoCodigo(codigoProducto);
         if(this.productos.containsKey(codigoProducto)){
-            this.productos.get(codigoProducto).setCodigo(codigoNuevo);
-            this.productos.put(codigoNuevo, this.productos.get(codigoProducto));
+            producto.setCodigo(codigoNuevo);
             this.productos.remove(codigoProducto);
+            this.productos.put(codigoNuevo, producto);
             return true;
         }else{
             return false;
@@ -139,13 +140,14 @@ public class Seccion {
                     texto+= this.getNombreSeccion() + ",";
                     texto+= this.productos.get(key).toString();
                     texto+= "\n";
-                }
+                }else{
                 
-                texto+= this.getNombreSeccion() + ",";
-                texto+= this.productos.get(key).toString();
-                texto += ",No Perecible,";
-                texto += "1";
-                texto+= "\n";
+                    texto+= this.getNombreSeccion() + ",";
+                    texto+= this.productos.get(key).toString();
+                    texto += ",No Perecible,";
+                    texto += "1";
+                    texto+= "\n";
+                }
             }
         }
         return texto;
