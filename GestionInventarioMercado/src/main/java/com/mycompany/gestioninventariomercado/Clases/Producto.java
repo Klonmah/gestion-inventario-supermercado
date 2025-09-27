@@ -47,7 +47,7 @@ public class Producto {
     public void setNombreProducto(String nombreProducto){
         this.nombreProducto = nombreProducto;
     }
-    public void setCandidadProducto(int cantidadProducto){
+    public void setCantidadProducto(int cantidadProducto){
         this.cantidadProducto = cantidadProducto;
     }
   
@@ -63,12 +63,11 @@ public class Producto {
     
     /*sobrecarga de metodos*/
     /*Precio Compra*/
-    public void setPrecioCompra(int precioCompra){
-        this.precioCompra = (float)precioCompra;
-    }
     public void setPrecioCompra(double precioCompra){
         this.precioCompra = (float)precioCompra;
     }
+    
+    
     
     /*Getters*/
     public String getNombre(){

@@ -16,6 +16,12 @@ import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteNumerico;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionNumNegativo;
+import com.mycompany.gestioninventariomercado.Exepciones.VerificadorNumero;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteDecimales;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteString;
+import com.mycompany.gestioninventariomercado.Exepciones.VerificadorString;
 /**
  *
  * @author diazv
@@ -128,11 +134,11 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(textoError, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(textoError, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -200,7 +206,22 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         textoError.setText("Código, cantidad o precio inválidos.");
         textoError.setForeground(Color.red);
         return;
+    } 
+    
+    try{
+        VerificadorNumero.verificar(codigo);
+        VerificadorNumero.verificar(cantidad);
+        VerificadorNumero.verificar(precio);
+        VerificadorString.verificar(nuevoNombre);
+        VerificadorString.verificar(nuevoVendedor);
+        
+        
     }
+    catch (ExcepcionNumNegativo | ExcepcionLimiteNumerico | ExcepcionLimiteDecimales | ExcepcionLimiteString e) {
+        textoError.setText(e.getMessage());
+        textoError.setForeground(Color.red);
+        return;
+    } 
 
     Producto buscado = tienda.getProductoEnSeccionPorCodigo(this.codigoBuscado);
     if (buscado == null) {
@@ -220,7 +241,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     try {
         
         buscado.setNombreProducto(nuevoNombre);
-        buscado.setCandidadProducto(cantidad);
+        buscado.setCantidadProducto(cantidad);
         buscado.setVendedor(nuevoVendedor);
         buscado.setPrecioCompra(precio);
 
@@ -274,15 +295,16 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         textoError.setForeground(Color.red);
         return;
     }
+    
+       DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
+modelo.setRowCount(0); // Limpiar la tabla
+String[] fila = new String[8];
 
-    DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
-    modelo.setRowCount(0); // Limpiar la tabla
-
-    String[] fila = new String[8];
-
+try {
     // Columna 0: seccion
     fila[0] = this.tienda.getNombreSeccionDeProducto(buscado.getCodigo());
     // Columnas 1-5: datos básicos del producto
+    
     fila[1] = String.valueOf(buscado.getCodigo());
     fila[2] = buscado.getNombre();
     fila[3] = String.valueOf(buscado.getCantidad());
@@ -308,7 +330,19 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     }
 
     modelo.addRow(fila);
+
+    // Parseo del código ingresado
     this.codigoBuscado = Integer.parseInt(this.inputCodigo.getText());
+
+} catch (NumberFormatException e) {
+    // Si el código o cantidad vienen con letras
+    this.textoError.setText("Formato de número incorrecto (solo se permiten números)");
+    this.textoError.setForeground(Color.red);
+} catch (java.time.format.DateTimeParseException e) {
+    // Si la fecha está mal escrita
+    this.textoError.setText("Formato de fecha incorrecto, use dd/MM/yyyy");
+    this.textoError.setForeground(Color.red);
+}
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**

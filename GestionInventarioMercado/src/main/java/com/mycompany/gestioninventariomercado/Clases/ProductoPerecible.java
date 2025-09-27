@@ -47,7 +47,8 @@ public class ProductoPerecible extends Producto {
     public void setFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-
+    
+    
     /* Método para saber cuántos días faltan para vencer*/
     public int diasParaVencer() {
         return LocalDate.now().until(fechaVencimiento).getDays();

@@ -8,6 +8,8 @@ package com.mycompany.gestioninventariomercado.Exepciones;
  *
  * @author diazv
  */
-public class ExepcionLimiteString extends Exception{
-    
+public class ExcepcionLimiteNumerico extends Exception {
+    public ExcepcionLimiteNumerico(){
+        super("El Valor de codigo, precio y cantidad no pueden ser mayores a 10 millones");
+    }
 }

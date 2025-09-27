@@ -13,9 +13,12 @@ import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
-
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteNumerico;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionNumNegativo;
+import com.mycompany.gestioninventariomercado.Exepciones.VerificadorNumero;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteDecimales;
+import com.mycompany.gestioninventariomercado.Exepciones.VerificadorString;
+import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteString;
 
 
 /**
@@ -111,7 +114,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
             }
         });
 
-        esLote.setText("El Producto Viene en un lote O packete?");
+        esLote.setText("El Producto Viene en un lote O paquete?");
         esLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esLoteActionPerformed(evt);
@@ -130,7 +133,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Vendedor:");
 
-        textoPrecioCompra.setText("PrecioCompra:");
+        textoPrecioCompra.setText("Precio de Compra:");
 
         inputCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputCantidad.setToolTipText("");
@@ -190,7 +193,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
 
         textoNuevaSeccion.setText("Nombre Nueva Seccion:");
 
-        textoCantidadPorLote.setText("Cuantos Productos vienen en el packete o lote?");
+        textoCantidadPorLote.setText("Cuantos Productos vienen en el paquete o lote?");
 
         textoVencimiento.setText("Fecha de Vencimiento (Formato dd/mm/yyyy):");
 
@@ -198,12 +201,6 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(botonCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonAceptar)
-                .addGap(121, 121, 121))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -221,9 +218,6 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                                 .addGap(122, 122, 122)
                                 .addComponent(esPerecible, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(TextoError, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(esLote))
                     .addGroup(layout.createSequentialGroup()
@@ -236,25 +230,6 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                                 .addComponent(labelLote, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textoCodigo)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inputVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(inputPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(102, 102, 102)
-                                        .addComponent(textoPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(textoVencimiento)
@@ -271,11 +246,40 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                                     .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(15, 15, 15)
-                                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textoCodigo)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textoCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(102, 102, 102))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textoPrecioCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                    .addComponent(inputPrecioCompra)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(415, 415, 415)
                         .addComponent(labelCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TextoError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botonCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonAceptar)))
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,10 +298,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                                 .addComponent(TextoSeccion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(inputSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textoPrecioCompra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textoPrecioCompra))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,7 +311,8 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(inputVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(textoNuevaSeccion)
@@ -356,7 +358,7 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
             TextoError.setForeground(Color.red);
             return;
         }
-        Producto nuevo = null; // referencia general
+        Producto nuevo; 
 
         if (esPerecible.isSelected() && esLote.isSelected()) {
             nuevo = new ProductoPereciblePorLote();
@@ -367,19 +369,33 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         } else {
             nuevo = new Producto();
         }
-
-       
+        
+        
         try{
-            nuevo.setNombreProducto(inputNombre.getText());
-            nuevo.setCandidadProducto(Integer.parseInt(inputCantidad.getText()));
-            nuevo.setVendedor(inputVendedor.getText());
-            nuevo.setPrecioCompra(Float.parseFloat(inputPrecioCompra.getText()));
-            nuevo.setCodigo(Integer.parseInt(inputCodigo.getText()));
+            int codigo = Integer.parseInt(inputCodigo.getText());
+            int cantidad = Integer.parseInt(inputCantidad.getText());
+            float precio = Float.parseFloat(inputPrecioCompra.getText());
+            String nombre = inputNombre.getText();
+            String vendedor = inputVendedor.getText();
+            
+            VerificadorNumero.verificar(codigo);
+            VerificadorNumero.verificar(cantidad);
+            VerificadorNumero.verificar(precio);
+            
+            VerificadorString.verificar(nombre);
+            VerificadorString.verificar(vendedor);
+            
+            nuevo.setNombreProducto(nombre);
+            nuevo.setCantidadProducto(cantidad);
+            nuevo.setVendedor(vendedor);
+            nuevo.setPrecioCompra(precio);
+            nuevo.setCodigo(codigo);
             
             if (nuevo instanceof ProductoPereciblePorLote) {
                 ProductoPereciblePorLote p = (ProductoPereciblePorLote) nuevo;
-                // aquí asignas lo específico de ProductoPereciblePorLote
-                p.setCantidadLote(Integer.parseInt(inputCantidadPorLote.getText()));
+                int cantidadLote = Integer.parseInt(inputCantidadPorLote.getText());
+                VerificadorNumero.verificar(cantidadLote);
+                p.setCantidadLote(cantidadLote);
                 p.setFechaVencimiento(LocalDate.parse(inputFechaVencimiento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             } else if (nuevo instanceof ProductoPerecible) {
                 ProductoPerecible p = (ProductoPerecible) nuevo;
@@ -387,8 +403,9 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
                 p.setFechaVencimiento(LocalDate.parse(inputFechaVencimiento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             } else if (nuevo instanceof ProductoPorLote) {
                 ProductoPorLote p = (ProductoPorLote) nuevo;
-                
-                p.setCantidadLote(Integer.parseInt(inputCantidadPorLote.getText()));
+                int cantidadLote = Integer.parseInt(inputCantidadPorLote.getText());
+                VerificadorNumero.verificar(cantidadLote);
+                p.setCantidadLote(cantidadLote);
             }
             
             
@@ -406,11 +423,14 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
             }
         }catch (NumberFormatException e) {
             this.TextoError.setText("Ha ingresado un valor erroneo en una casilla");
-            TextoError.setForeground(Color.red);
+            this.TextoError.setForeground(Color.red);
         }catch (java.time.format.DateTimeParseException e) {
-            TextoError.setText("Formato de fecha incorrecto, use dd/MM/yyyy");
-            TextoError.setForeground(Color.red);
-        }
+            this.TextoError.setText("Formato de fecha incorrecto, use dd/MM/yyyy");
+            this.TextoError.setForeground(Color.red);
+        }catch (ExcepcionNumNegativo | ExcepcionLimiteNumerico | ExcepcionLimiteDecimales|ExcepcionLimiteString e) {
+            this.TextoError.setText(e.getMessage());
+            this.TextoError.setForeground(Color.red);
+        } 
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void esPerecibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esPerecibleActionPerformed

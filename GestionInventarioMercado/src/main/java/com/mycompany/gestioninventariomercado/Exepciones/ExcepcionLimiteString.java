@@ -8,8 +8,8 @@ package com.mycompany.gestioninventariomercado.Exepciones;
  *
  * @author diazv
  */
-public class ExepcionLimiteProductos extends Exception {
-    public ExepcionLimiteProductos(){
-        super("El Stock de Cada Producto no puede superar las 1000 unidades.");
+public class ExcepcionLimiteString extends Exception{
+    public ExcepcionLimiteString(){
+        super("Nombre de producto, Nombre de Seccion y Vendedor no pueden tener más de 30 caracteres");
     }
 }

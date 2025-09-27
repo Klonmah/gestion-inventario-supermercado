@@ -8,8 +8,8 @@ package com.mycompany.gestioninventariomercado.Exepciones;
  *
  * @author diazv
  */
-public class ExepcionNumNegativo extends Exception {
-    public ExepcionNumNegativo(){
-        super("Ha ingresado un numero Negativo en una de las casillas");
+public class ExcepcionLimiteDecimales extends Exception {
+    public ExcepcionLimiteDecimales() {
+        super("El Precio no puede tener más de 2 decimales");
     }
 }
