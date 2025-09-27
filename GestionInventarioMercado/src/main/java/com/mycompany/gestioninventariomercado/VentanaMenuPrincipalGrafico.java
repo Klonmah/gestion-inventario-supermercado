@@ -205,9 +205,8 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
     private void agregarEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEliminarProductoActionPerformed
         // TODO add your handling code here:
-        VentanaAgregarProducto ventanaAgregar = new VentanaAgregarProducto(this.tienda,this);
+        VentanaAgregarProducto ventanaAgregar = new VentanaAgregarProducto(this.tienda);
         ventanaAgregar.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_agregarEliminarProductoActionPerformed
 
     private void confirmarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSalidaActionPerformed

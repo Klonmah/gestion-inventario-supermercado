@@ -4,12 +4,9 @@
  */
 package com.mycompany.gestioninventariomercado.Clases;
 
-import com.mycompany.gestioninventariomercado.Clases.ProductoPerecible;
-import com.mycompany.gestioninventariomercado.Clases.Producto;
 import java.util.ArrayList;
 import java.io.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -155,7 +152,7 @@ public class Tienda {
                 float precioCompra = Float.parseFloat(datos[5]);
                 
                 LocalDate FechaVencimiento = LocalDate.parse(datos[6]);
-                ProductoPerecible p = new ProductoPerecible(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,FechaVencimiento);
+                ProductoPerecible p = new ProductoPerecible(nombre, cantidad, vendedor, precioCompra,codigo,FechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
             else if (datos[0].equals("ProductoPorLote") && i!= null)
@@ -167,7 +164,7 @@ public class Tienda {
                 float precioCompra = Float.parseFloat(datos[5]);
                 
                 int cantidadLote = Integer.parseInt(datos[6]);
-                ProductoPorLote p = new ProductoPorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote);
+                ProductoPorLote p = new ProductoPorLote(nombre, cantidad, vendedor, precioCompra,codigo,cantidadLote);
                 i.agregarProducto(codigo,p);
             }
             else if (datos[0].equals("ProductoPereciblePorLote") && i!= null)
@@ -180,7 +177,7 @@ public class Tienda {
                 
                 LocalDate fechaVencimiento = LocalDate.parse(datos[6]);
                 int cantidadLote = Integer.parseInt(datos[7]);
-                ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, vendedor, precioCompra,codigo,seccionActual,cantidadLote,fechaVencimiento);
+                ProductoPereciblePorLote p = new ProductoPereciblePorLote(nombre, cantidad, vendedor, precioCompra,codigo,cantidadLote,fechaVencimiento);
                 i.agregarProducto(codigo,p);
             }
         }

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.gestioninventariomercado.Clases;
-import com.mycompany.gestioninventariomercado.Clases.Producto;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 /**
@@ -19,21 +19,26 @@ public class ProductoPerecible extends Producto {
 
     /*Constructor*/
     public ProductoPerecible(String nombreProducto, int cantidadProducto, String vendedor, float precioCompra, 
-                            int codigo, String seccion, LocalDate fechaVencimiento) {
+                            int codigo, LocalDate fechaVencimiento) {
     
-        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo);
         this.fechaVencimiento = fechaVencimiento;
     }
 
     /* Sobrecarga de constructor usando String para fecha*/
     public ProductoPerecible(String nombreProducto, int cantidadProducto,
-                             String vendedor, float precioCompra, int codigo, String seccion,
+                             String vendedor, float precioCompra, int codigo,
                              String fechaVencimientoStr) {
-        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo);
        /*Convierte String a LocalDate, asumiendo formato yyyy-MM-dd*/
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.fechaVencimiento = LocalDate.parse(fechaVencimientoStr, formatter);
     }
+    public  ProductoPerecible(){
+        super("",0,"",0,0);
+        this.fechaVencimiento = null;
+    }
+    
 
     public LocalDate getFechaVencimiento() {
         return fechaVencimiento;

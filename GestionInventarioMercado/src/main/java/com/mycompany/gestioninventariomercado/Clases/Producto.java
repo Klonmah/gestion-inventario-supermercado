@@ -16,7 +16,7 @@ public class Producto {
     private String vendedor;
     private float precioCompra;
     private int codigo;
-    private String seccion;
+    
     
     /*Constructor*/
     public Producto(String nombreProducto, int cantidadProducto,String vendedor, float precioCompra,int codigo,String seccion){
@@ -25,23 +25,22 @@ public class Producto {
         this.vendedor = vendedor;
         this.precioCompra = precioCompra;
         this.codigo = codigo;
-        this.seccion = seccion;
+        ;
     }
     /*Sobrecarga de Constructor*/
-    public Producto(String nombreProducto, int cantidadProducto, int precioVenta,String vendedor, int precioCompra, int codigo){
-        this.nombreProducto = nombreProducto;
-        this.cantidadProducto = cantidadProducto;
-        this.vendedor = vendedor;
-        this.precioCompra = (float) precioCompra;    
-        this.codigo = codigo;
-        
-    }
     public Producto(String nombreProducto, int cantidadProducto,String vendedor, double precioCompra, int codigo){
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
         this.vendedor = vendedor;
         this.precioCompra = (float) precioCompra;    
         this.codigo = codigo;
+    }
+    public Producto(){
+        this.nombreProducto = "";
+        this.cantidadProducto = 0;
+        this.vendedor = "";
+        this.precioCompra = 0;
+        this.codigo = 0;
     }
     
     /*Setters*/

@@ -4,7 +4,7 @@
  */
 package com.mycompany.gestioninventariomercado.Clases;
 
-import com.mycompany.gestioninventariomercado.Clases.Producto;
+
 
 /**
  *
@@ -17,10 +17,14 @@ public class ProductoPorLote extends Producto {
 
     /*Constructor*/
     public ProductoPorLote(String nombreProducto, int cantidadProducto,
-                           String vendedor, float precioCompra, int codigo, String seccion,
+                           String vendedor, float precioCompra, int codigo,
                            int cantidadLote) {
-        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo);
         this.cantidadLote = cantidadLote;
+    }
+    public ProductoPorLote(){
+        super("",0,"",0,0);
+        this.cantidadLote = 0;
     }
 
     /*Getter*/

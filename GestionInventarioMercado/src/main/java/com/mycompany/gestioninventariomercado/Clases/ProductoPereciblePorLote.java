@@ -8,7 +8,7 @@ package com.mycompany.gestioninventariomercado.Clases;
  *
  * @author diazv
  */
-import com.mycompany.gestioninventariomercado.Clases.Producto;
+
 import java.time.LocalDate;
 
 public class ProductoPereciblePorLote extends Producto {
@@ -17,12 +17,17 @@ public class ProductoPereciblePorLote extends Producto {
 
     
     public ProductoPereciblePorLote(String nombreProducto, int cantidadProducto,String vendedor, float precioCompra, 
-                                    int codigo, String seccion, int cantidadLote, LocalDate fechaVencimiento) {
-        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo, seccion);
+                                    int codigo, int cantidadLote, LocalDate fechaVencimiento) {
+        super(nombreProducto, cantidadProducto, vendedor, precioCompra, codigo);
         this.cantidadLote = cantidadLote;
         this.fechaVencimiento = fechaVencimiento;
     }
-
+    
+    public ProductoPereciblePorLote(){
+        super("",0,"",0,0);
+        this.cantidadLote = 0;
+        this.fechaVencimiento = null;
+    }
     /*Getters*/
     public int getCantidadLote() {
         return cantidadLote;
