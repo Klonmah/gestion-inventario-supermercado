@@ -63,9 +63,10 @@ public class Tienda {
     }
     
     public void eliminarSeccionPorNombre(String nombre){
-        for(Seccion i: secciones){
-            if(i.getNombreSeccion().equals(nombre)){
+        for(int i = 0 ; i < secciones.size() ; i++ ){
+            if(secciones.get(i).getNombreSeccion().equals(nombre)){
                 this.secciones.remove(i);
+                break;
             }
         }
     }
