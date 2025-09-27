@@ -44,7 +44,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
         botonEliminar = new javax.swing.JButton();
         nombreSeccionaBorrar = new javax.swing.JTextField();
         botonSalir = new javax.swing.JButton();
-        salirGuardar = new javax.swing.JButton();
         modificarSecciones = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -167,13 +166,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
             }
         });
 
-        salirGuardar.setText("Finalizar y guardar");
-        salirGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirGuardarActionPerformed(evt);
-            }
-        });
-
         modificarSecciones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setText("Cambiar nombre de Seccion");
@@ -216,7 +208,7 @@ public class VentanaSecciones extends javax.swing.JFrame {
                         .addComponent(jLabel8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarSeccionesLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(modificarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
@@ -254,15 +246,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(salirGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(titulosecciones)
-                        .addGap(0, 163, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(agregarSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,8 +256,16 @@ public class VentanaSecciones extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(modificarSecciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(eliminarSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(eliminarSecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(titulosecciones)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(148, 148, 148)
@@ -294,9 +285,7 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(textoError1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salirGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -324,6 +313,7 @@ public class VentanaSecciones extends javax.swing.JFrame {
         }else
         {
             textoError1.setText("Seccion agregada");
+            textoError1.setForeground(Color.black);
             Seccion seccionnueva = new Seccion(nombreSeccionAgregar.getText());
             this.tienda.agregarSeccion(seccionnueva);
         }
@@ -344,6 +334,7 @@ public class VentanaSecciones extends javax.swing.JFrame {
         if (this.tienda.existeSeccion(nombreSeccionaBorrar.getText()) )
         {
             textoError1.setText("Seccion borrada");
+            textoError1.setForeground(Color.black);
             this.tienda.eliminarSeccionPorNombre(nombreSeccionaBorrar.getText());
         }else
         {
@@ -361,33 +352,32 @@ public class VentanaSecciones extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void salirGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirGuardarActionPerformed
-        // TODO add your handling code here:
-        
-        // NO COMPLETADO (I NEED HELP JERE)
-    }//GEN-LAST:event_salirGuardarActionPerformed
-
     private void botonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRenombrarActionPerformed
-        // TODO add your handling code here:        
-        if (nombreSeccionRenombreFinal.getText().isEmpty())
+        // TODO add your handling code here:
+        try{
+            if (nombreSeccionRenombreFinal.getText() == null || nombreSeccionRenombreFinal.getText().isEmpty())
+            {
+                textoError1.setText("Ingrese un nombre");
+                textoError1.setForeground(Color.red);
+                return;
+            }
+            if (this.tienda.existeSeccion(nombreSeccionArenombrar.getText()) )
+            {
+                textoError1.setText("Seccion editada");
+                textoError1.setForeground(Color.black);
+                this.tienda.getSeccion(nombreSeccionArenombrar.getText()).setNombreSeccion(nombreSeccionRenombreFinal.getText());
+            }else
+            {
+                textoError1.setText("Seccion no encontrada");
+                textoError1.setForeground(Color.red);
+            }
+        }catch ( NullPointerException e)
         {
-            textoError1.setText("Ingrese un nombre");
+            textoError1.setText("Error interno: referencia nula");
             textoError1.setForeground(Color.red);
-            return;
-        }
-        if (this.tienda.existeSeccion(nombreSeccionArenombrar.getText()) )
+        }catch ( Exception e)
         {
-            textoError1.setText("Seccion editada");
-            Seccion seccionrenombrada = this.tienda.getSeccion(nombreSeccionArenombrar.getText());
-            
-            this.tienda.eliminarSeccionPorNombre(nombreSeccionArenombrar.getText());
-            
-            seccionrenombrada.setNombreSeccion(nombreSeccionRenombreFinal.getText());
-            
-            this.tienda.agregarSeccion(seccionrenombrada);
-        }else
-        {
-            textoError1.setText("Seccion no encontrada");
+            textoError1.setText("Ocurrió un error inesperado: " + e.getMessage());
             textoError1.setForeground(Color.red);
         }
     }//GEN-LAST:event_botonRenombrarActionPerformed
@@ -455,7 +445,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
     private javax.swing.JTextField nombreSeccionArenombrar;
     private javax.swing.JTextField nombreSeccionRenombreFinal;
     private javax.swing.JTextField nombreSeccionaBorrar;
-    private javax.swing.JButton salirGuardar;
     private javax.swing.JLabel textoError;
     private javax.swing.JLabel textoError1;
     private javax.swing.JLabel titulosecciones;
