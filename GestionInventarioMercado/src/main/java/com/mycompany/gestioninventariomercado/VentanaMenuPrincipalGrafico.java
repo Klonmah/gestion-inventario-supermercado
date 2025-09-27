@@ -9,7 +9,7 @@ import com.mycompany.gestioninventariomercado.Ventanas.VentanaSecciones;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaListarProductos;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaBuscarProducto;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaAgregarProducto;
-
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaEliminarProductos;
 
 import java.io.IOException;
 /**
@@ -54,6 +54,10 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         jMenuBar6 = new javax.swing.JMenuBar();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
+        jMenuBar7 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         BotonGuardar = new javax.swing.JButton();
@@ -62,8 +66,10 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         agregarEliminarProducto = new javax.swing.JMenuItem();
         listarProductos = new javax.swing.JMenuItem();
         buscarModificarProducto = new javax.swing.JMenuItem();
+        eliminarProducto = new javax.swing.JMenuItem();
         menuSecciones = new javax.swing.JMenu();
         editarSecciones = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenu();
         confirmarSalida = new javax.swing.JMenuItem();
 
@@ -103,6 +109,14 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         jMenu13.setText("Edit");
         jMenuBar6.add(jMenu13);
 
+        jMenu1.setText("File");
+        jMenuBar7.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar7.add(jMenu2);
+
+        jMenu3.setText("jMenu3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Eliga su Operación con las Opciones en la esquina superior izquierda");
@@ -118,7 +132,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
         menuProductos.setText("Productos");
 
-        agregarEliminarProducto.setText("Agregar/Eliminar Producto");
+        agregarEliminarProducto.setText("Agregar Producto");
         agregarEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarEliminarProductoActionPerformed(evt);
@@ -142,6 +156,14 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         });
         menuProductos.add(buscarModificarProducto);
 
+        eliminarProducto.setText("Eliminar Producto");
+        eliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarProductoActionPerformed(evt);
+            }
+        });
+        menuProductos.add(eliminarProducto);
+
         jMenuBar1.add(menuProductos);
 
         menuSecciones.setText("Secciones");
@@ -155,6 +177,9 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         menuSecciones.add(editarSecciones);
 
         jMenuBar1.add(menuSecciones);
+
+        jMenu14.setText("jMenu14");
+        jMenuBar1.add(jMenu14);
 
         menuSalir.setText("Salir");
 
@@ -241,6 +266,12 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonGuardarActionPerformed
 
+    private void eliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProductoActionPerformed
+        // TODO add your handling code here:
+        VentanaEliminarProductos ventanaEliminar = new VentanaEliminarProductos(this.tienda);
+        ventanaEliminar.setVisible(true);
+    }//GEN-LAST:event_eliminarProductoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,12 +317,17 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenuItem buscarModificarProducto;
     private javax.swing.JMenuItem confirmarSalida;
     private javax.swing.JMenuItem editarSecciones;
+    private javax.swing.JMenuItem eliminarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -304,6 +340,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem9;
