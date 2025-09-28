@@ -252,6 +252,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         
         if (p instanceof ProductoPereciblePorLote) {
             ProductoPereciblePorLote ppl = (ProductoPereciblePorLote) p;
+            VerificadorNumero.verificar(ppl.getCantidad() + (cantidad*ppl.getCantidadLote()));
             if (ppl.estaVencido()) {
                 this.textoError.setText("Los productos vencidos no pueden modificar stock.");
                 this.textoError.setForeground(Color.red);
@@ -270,6 +271,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
             }
         } else if (p instanceof ProductoPorLote) {
             ProductoPorLote pl = (ProductoPorLote) p;
+            VerificadorNumero.verificar(pl.getCantidad() + (cantidad*pl.getCantidadLote()));
             pl.aumentarStock(cantidad);
         } else {
             p.aumentarStock(cantidad);
@@ -307,6 +309,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
 
         if (p instanceof ProductoPereciblePorLote) {
             ProductoPereciblePorLote ppl = (ProductoPereciblePorLote) p;
+            VerificadorNumero.verificar(ppl.getCantidad() - (cantidad*ppl.getCantidadLote()));
             if (ppl.estaVencido()) {
                 this.textoError.setText("Los productos vencidos no pueden modificar stock.");
                 this.textoError.setForeground(Color.red);
@@ -325,6 +328,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
             }
         } else if (p instanceof ProductoPorLote) {
             ProductoPorLote pl = (ProductoPorLote) p;
+            VerificadorNumero.verificar(pl.getCantidad() - (cantidad*pl.getCantidadLote()));
             pl.reducirStock(cantidad);
         } else {
             p.reducirStock(cantidad);

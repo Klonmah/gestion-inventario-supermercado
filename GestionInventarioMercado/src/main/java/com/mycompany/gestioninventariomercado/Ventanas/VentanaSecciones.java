@@ -21,8 +21,24 @@ public class VentanaSecciones extends javax.swing.JFrame {
     public VentanaSecciones(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
+        
+        this.actualizarCombobox();
     }
+    
+   private void actualizarCombobox() {
+        nombreSeccionaBorrar.removeAllItems();
+        nombreSeccionArenombrar.removeAllItems();
 
+        
+        java.util.List<Seccion> secciones = this.tienda.getListSecciones();
+
+        
+        for (int i = 0; i < secciones.size(); i++) {
+            String nombre = secciones.get(i).getNombreSeccion();
+            nombreSeccionaBorrar.addItem(nombre);
+            nombreSeccionArenombrar.addItem(nombre);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,15 +58,15 @@ public class VentanaSecciones extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         botonEliminar = new javax.swing.JButton();
-        nombreSeccionaBorrar = new javax.swing.JTextField();
+        nombreSeccionaBorrar = new javax.swing.JComboBox<>();
         botonSalir = new javax.swing.JButton();
         modificarSecciones = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         botonRenombrar = new javax.swing.JButton();
-        nombreSeccionArenombrar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         nombreSeccionRenombreFinal = new javax.swing.JTextField();
+        nombreSeccionArenombrar = new javax.swing.JComboBox<>();
         textoError = new javax.swing.JLabel();
         textoError1 = new javax.swing.JLabel();
 
@@ -122,12 +138,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
             }
         });
 
-        nombreSeccionaBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreSeccionaBorrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout eliminarSeccionesLayout = new javax.swing.GroupLayout(eliminarSecciones);
         eliminarSecciones.setLayout(eliminarSeccionesLayout);
         eliminarSeccionesLayout.setHorizontalGroup(
@@ -137,12 +147,10 @@ public class VentanaSecciones extends javax.swing.JFrame {
                 .addGroup(eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(eliminarSeccionesLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(nombreSeccionaBorrar))
-                            .addComponent(jLabel7))))
+                        .addComponent(nombreSeccionaBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(eliminarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         eliminarSeccionesLayout.setVerticalGroup(
@@ -179,12 +187,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
             }
         });
 
-        nombreSeccionArenombrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreSeccionArenombrarActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Renombrar a:");
 
         nombreSeccionRenombreFinal.addActionListener(new java.awt.event.ActionListener() {
@@ -200,12 +202,13 @@ public class VentanaSecciones extends javax.swing.JFrame {
             .addGroup(modificarSeccionesLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(modificarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreSeccionArenombrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonRenombrar)
                     .addComponent(nombreSeccionRenombreFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(modificarSeccionesLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel8)))
+                        .addGroup(modificarSeccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreSeccionArenombrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarSeccionesLayout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
@@ -312,10 +315,11 @@ public class VentanaSecciones extends javax.swing.JFrame {
             return;
         }else
         {
-            textoError1.setText("Seccion agregada");
-            textoError1.setForeground(Color.black);
             Seccion seccionnueva = new Seccion(nombreSeccionAgregar.getText());
             this.tienda.agregarSeccion(seccionnueva);
+            this.actualizarCombobox();
+            textoError1.setText("Seccion agregada");
+            textoError1.setForeground(Color.black);
         }
     }//GEN-LAST:event_botonAgregarActionPerformed
 
@@ -325,27 +329,26 @@ public class VentanaSecciones extends javax.swing.JFrame {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
-        if (nombreSeccionaBorrar.getText().isEmpty())
+        String aBorrar = this.nombreSeccionaBorrar.getSelectedItem().toString();
+        if (aBorrar.isEmpty())
         {
             textoError1.setText("Ingrese un nombre");
             textoError1.setForeground(Color.red);
             return;
         }
-        if (this.tienda.existeSeccion(nombreSeccionaBorrar.getText()) )
+        if (this.tienda.existeSeccion(aBorrar) )
         {
+            this.tienda.eliminarSeccionPorNombre(aBorrar);
+            this.actualizarCombobox();
             textoError1.setText("Seccion borrada");
             textoError1.setForeground(Color.black);
-            this.tienda.eliminarSeccionPorNombre(nombreSeccionaBorrar.getText());
+            ;
         }else
         {
             textoError1.setText("Seccion no encontrada");
             textoError1.setForeground(Color.red);
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
-
-    private void nombreSeccionaBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionaBorrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreSeccionaBorrarActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
@@ -355,17 +358,20 @@ public class VentanaSecciones extends javax.swing.JFrame {
     private void botonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRenombrarActionPerformed
         // TODO add your handling code here:
         try{
+            String aRenombrar = nombreSeccionArenombrar.getSelectedItem().toString();
             if (nombreSeccionRenombreFinal.getText() == null || nombreSeccionRenombreFinal.getText().isEmpty())
             {
                 textoError1.setText("Ingrese un nombre");
                 textoError1.setForeground(Color.red);
                 return;
             }
-            if (this.tienda.existeSeccion(nombreSeccionArenombrar.getText()) )
+            if (this.tienda.existeSeccion(aRenombrar) )
             {
+                this.tienda.getSeccion(aRenombrar).setNombreSeccion(nombreSeccionRenombreFinal.getText());
+                this.actualizarCombobox();
                 textoError1.setText("Seccion editada");
                 textoError1.setForeground(Color.black);
-                this.tienda.getSeccion(nombreSeccionArenombrar.getText()).setNombreSeccion(nombreSeccionRenombreFinal.getText());
+                
             }else
             {
                 textoError1.setText("Seccion no encontrada");
@@ -381,10 +387,6 @@ public class VentanaSecciones extends javax.swing.JFrame {
             textoError1.setForeground(Color.red);
         }
     }//GEN-LAST:event_botonRenombrarActionPerformed
-
-    private void nombreSeccionArenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionArenombrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreSeccionArenombrarActionPerformed
 
     private void nombreSeccionRenombreFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreSeccionRenombreFinalActionPerformed
         // TODO add your handling code here:
@@ -442,9 +444,9 @@ public class VentanaSecciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel modificarSecciones;
     private javax.swing.JTextField nombreSeccionAgregar;
-    private javax.swing.JTextField nombreSeccionArenombrar;
+    private javax.swing.JComboBox<String> nombreSeccionArenombrar;
     private javax.swing.JTextField nombreSeccionRenombreFinal;
-    private javax.swing.JTextField nombreSeccionaBorrar;
+    private javax.swing.JComboBox<String> nombreSeccionaBorrar;
     private javax.swing.JLabel textoError;
     private javax.swing.JLabel textoError1;
     private javax.swing.JLabel titulosecciones;
