@@ -117,6 +117,68 @@ public class Tienda {
         escritor.close();
     }
     
+    public void escribirCosasEnComun(BufferedWriter escritor, Producto p, int key) throws IOException{
+        File archivo = new File("reporte.txt");
+        escritor.write(p.getNombre()+" ("+key+")");
+        escritor.newLine();
+        escritor.newLine();
+        escritor.write("Stock Disponible: "+p.getCantidad());
+        escritor.newLine();
+        escritor.write("Proveedor: "+p.getVendedor());
+        escritor.newLine();
+        escritor.write("Precio Compra: "+p.getPrecioCompra());
+        escritor.newLine();
+    }
+    
+    public void generarReporte() throws IOException{
+        File archivo = new File("reporte.txt");
+        BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
+        for (Seccion sec : secciones){
+            escritor.write("--------------------------------------------");
+            escritor.newLine();
+            escritor.write("Seccion: "+sec.getNombreSeccion());
+            escritor.newLine();
+            escritor.newLine();
+            escritor.newLine();
+            for (Integer key : sec.getProductos().keySet()) {
+                Producto p = sec.getProductoCodigo(key);
+                if (p instanceof ProductoPerecible)
+                {
+                    ProductoPerecible per = (ProductoPerecible) p;
+                    escribirCosasEnComun(escritor, p, key);
+                    escritor.write("Fecha de Vencimiento: "+per.getFechaVencimiento());
+                    escritor.newLine();
+                    escritor.newLine();
+                }
+                else if (p instanceof ProductoPorLote)
+                {
+                    ProductoPorLote lote = (ProductoPorLote) p;
+                    escribirCosasEnComun(escritor, p, key);
+                    escritor.write("Cantidad Por Lote: "+lote.getCantidadLote());
+                    escritor.newLine();
+                }
+                else if (p instanceof ProductoPereciblePorLote)
+                {
+                    ProductoPereciblePorLote perlote = (ProductoPereciblePorLote) p;
+                    escribirCosasEnComun(escritor, p, key);
+                    escritor.write("Fecha de Vencimiento: "+perlote.getFechaVencimiento());
+                    escritor.newLine();
+                    escritor.write("Cantidad Por Lote: "+perlote.getCantidadLote());
+                    escritor.newLine();
+                    escritor.newLine();
+                }
+                else
+                {
+                    escribirCosasEnComun(escritor, p, key);
+                    escritor.newLine();
+                }
+            }
+            escritor.newLine();
+            
+        }
+        escritor.close();
+    }
+    
     public void cargarDatos(String archivo) throws IOException
     {
         BufferedReader lector = new BufferedReader(new FileReader(archivo));

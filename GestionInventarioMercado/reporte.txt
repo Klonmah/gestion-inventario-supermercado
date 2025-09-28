@@ -1,0 +1,68 @@
+--------------------------------------------
+Seccion: Lacteos
+
+
+Leche Leche (16)
+
+Stock Disponible: 20
+Proveedor: Colun
+Precio Compra: 23.0
+Fecha de Vencimiento: 2025-10-12
+Cantidad Por Lote: 6
+
+Lechita Mumu (11)
+
+Stock Disponible: 3
+Proveedor: Soprole
+Precio Compra: 2.5
+Fecha de Vencimiento: 2026-07-20
+Cantidad Por Lote: 6
+
+Yogurt Gurt-Sahur (12)
+
+Stock Disponible: 3
+Proveedor: Colun
+Precio Compra: 2.5
+Fecha de Vencimiento: 2025-07-20
+
+
+--------------------------------------------
+Seccion: Electronicos
+
+
+Celular MOCO (21)
+
+Stock Disponible: 10
+Proveedor: Samsung
+Precio Compra: 400.0
+
+Consola While (22)
+
+Stock Disponible: 10
+Proveedor: Sony
+Precio Compra: 699.0
+Cantidad Por Lote: 10
+
+--------------------------------------------
+Seccion: Juguetes
+
+
+Aguaneitor (32)
+
+Stock Disponible: 49
+Proveedor: Hasbro
+Precio Compra: 50.9
+
+Peluche Jolonai (33)
+
+Stock Disponible: 9
+Proveedor: Don Cereza
+Precio Compra: 49.99
+
+Hugomon TCG (31)
+
+Stock Disponible: 200
+Proveedor: PokeCo
+Precio Compra: 5.9
+
+

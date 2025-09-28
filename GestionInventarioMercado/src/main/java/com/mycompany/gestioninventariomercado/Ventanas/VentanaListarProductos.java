@@ -167,8 +167,8 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            tienda.guardarDatos("inventario.txt");
-            File archivo = new File("inventario.txt");
+            tienda.generarReporte();
+            File archivo = new File("reporte.txt");
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(archivo);
             }
