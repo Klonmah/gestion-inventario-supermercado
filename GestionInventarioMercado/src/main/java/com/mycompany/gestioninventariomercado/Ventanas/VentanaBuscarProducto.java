@@ -204,6 +204,7 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     int codigo;
     int cantidad;
     float precio;
+    
 
     try {
         codigo = Integer.parseInt(codigoStr);
@@ -215,12 +216,18 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         return;
     } 
     
+    
     try{
         VerificadorNumero.verificar(codigo);
         VerificadorNumero.verificar(cantidad);
         VerificadorNumero.verificar(precio);
         VerificadorString.verificar(nuevoNombre);
         VerificadorString.verificar(nuevoVendedor);
+        if (this.tienda.getProductoEnSeccionPorCodigo(codigo) != null) {
+            textoError.setText("El código ingresado ya existe en la tienda.");
+            textoError.setForeground(Color.red);
+        return;
+    }
         
         
     }
@@ -229,8 +236,9 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         textoError.setForeground(Color.red);
         return;
     } 
-
+    
     Producto buscado = tienda.getProductoEnSeccionPorCodigo(this.codigoBuscado);
+    
     if (buscado == null) {
         textoError.setText("Producto no encontrado.");
         textoError.setForeground(Color.red);
