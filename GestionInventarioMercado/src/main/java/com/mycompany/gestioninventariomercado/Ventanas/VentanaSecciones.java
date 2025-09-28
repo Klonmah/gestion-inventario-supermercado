@@ -329,23 +329,29 @@ public class VentanaSecciones extends javax.swing.JFrame {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
-        String aBorrar = this.nombreSeccionaBorrar.getSelectedItem().toString();
-        if (aBorrar.isEmpty())
-        {
-            textoError1.setText("Ingrese un nombre");
-            textoError1.setForeground(Color.red);
-            return;
-        }
-        if (this.tienda.existeSeccion(aBorrar) )
-        {
-            this.tienda.eliminarSeccionPorNombre(aBorrar);
-            this.actualizarCombobox();
-            textoError1.setText("Seccion borrada");
-            textoError1.setForeground(Color.black);
-            ;
-        }else
-        {
-            textoError1.setText("Seccion no encontrada");
+        try {
+            Object seleccionado = this.nombreSeccionaBorrar.getSelectedItem();
+
+            if (seleccionado == null) {
+                textoError1.setText("No hay secciones disponibles para eliminar");
+                textoError1.setForeground(Color.red);
+                return;
+            }
+
+            String aBorrar = seleccionado.toString();
+
+            if (this.tienda.existeSeccion(aBorrar)) {
+                this.tienda.eliminarSeccionPorNombre(aBorrar);
+                this.actualizarCombobox();
+                textoError1.setText("Sección borrada");
+                textoError1.setForeground(Color.black);
+            } else {
+                textoError1.setText("Sección no encontrada");
+                textoError1.setForeground(Color.red);
+            }
+
+        } catch (Exception e) {
+            textoError1.setText("Error inesperado: " + e.getMessage());
             textoError1.setForeground(Color.red);
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
