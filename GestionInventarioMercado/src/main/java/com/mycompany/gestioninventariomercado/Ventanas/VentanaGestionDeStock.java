@@ -16,21 +16,42 @@ import java.awt.Color;
 import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 /**
- *
+ * Ventana de gestión de stock que permite:
+ * <ul>
+ *     <li>Buscar un producto por código</li>
+ *     <li>Visualizar su información en una tabla</li>
+ *     <li>Aumentar o reducir su stock</li>
+ *     <li>Validar que las operaciones sean correctas (sin negativos, sin superar límites, etc.)</li>
+ * </ul>
+ * 
+ * Funciona para productos normales, por lote, perecibles y perecibles por lote.
+ * 
  * @author hugo
  */
 public class VentanaGestionDeStock extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaGestionDeStock
-     */
+    /** Tienda sobre la cual se gestiona el stock */
     private Tienda tienda;
+
+    /** Código del producto actualmente buscado */
     private int codigoBuscado;
+
+    /**
+     * Constructor de la ventana de gestión de stock.
+     *
+     * @param tienda Tienda que contiene los productos a modificar.
+     */
     public VentanaGestionDeStock(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
-        
     }
+
+    /**
+     * Actualiza la tabla mostrando la información del producto
+     * correspondiente al código ingresado.
+     *
+     * @param codigo Código del producto a mostrar.
+     */
     private void actualizarTabla(int codigo) {
         Producto buscado = this.tienda.getProductoEnSeccionPorCodigo(codigo);
 
@@ -111,14 +132,14 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
 
         textoAmodificar.setText("Cantidad del Producto a modificar:");
 
-        botonAgregar.setText("Agregar Producto");
+        botonAgregar.setText("Agregar a Producto");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarActionPerformed(evt);
             }
         });
 
-        botonEliminar.setText("Eliminar Producto");
+        botonEliminar.setText("Eliminar de Producto");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);
@@ -181,8 +202,7 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
                                 .addGap(89, 89, 89)
                                 .addComponent(textoAmodificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(75, 75, 75))
+                                .addComponent(inputCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(53, 53, 53)
                                 .addComponent(botonEliminar)
@@ -239,6 +259,19 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputCodigoActionPerformed
 
+    /**
+     * Acción al presionar el botón "Agregar Producto".
+     * <p>
+     * Aumenta el stock de un producto en base al código ingresado y la cantidad
+     * especificada. Valida que:
+     * <ul>
+     *     <li>El producto exista</li>
+     *     <li>La cantidad sea válida (no negativa ni fuera de límites)</li>
+     *     <li>El producto no esté vencido en caso de perecibles</li>
+     * </ul>
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         this.textoError.setText("");
         try {
@@ -289,7 +322,18 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
         return;
     }
     }//GEN-LAST:event_botonAgregarActionPerformed
-
+     /**
+     * Acción al presionar el botón "Eliminar Producto".
+     * <p>
+     * Reduce el stock de un producto según la cantidad ingresada, validando:
+     * <ul>
+     *     <li>Que el producto exista</li>
+     *     <li>Que la cantidad no deje el stock en negativo</li>
+     *     <li>Que no se manipulen productos vencidos</li>
+     * </ul>
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         this.textoError.setText("");
         try {
@@ -350,11 +394,24 @@ public class VentanaGestionDeStock extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+    /**
+     * Acción al presionar el botón "Salir".
+     * Cierra la ventana actual.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonCerrarActionPerformed
 
+    /**
+     * Acción al presionar el botón "Buscar".
+     * <p>
+     * Busca un producto por código y lo muestra en la tabla.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
     this.textoError.setText("");
     try {

@@ -21,27 +21,43 @@ import com.mycompany.gestioninventariomercado.Exepciones.VerificadorString;
 import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteString;
 
 
+
 /**
- *
- * @author diazv
+ * Ventana gráfica para agregar productos a la tienda.
+ * Permite al usuario ingresar productos nuevos, incluyendo:
+ * <ul>
+ *     <li>Productos normales</li>
+ *     <li>Productos perecibles</li>
+ *     <li>Productos por lote</li>
+ *     <li>Productos perecibles por lote</li>
+ * </ul>
+ * También permite asignar el producto a una sección existente o crear una nueva sección.
+ * 
+ * Autor: diazv
  */
 public class VentanaAgregarProducto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AgregarItem
-     */
+    /** Referencia a la tienda donde se agregarán los productos */
     private Tienda tienda;
-    
-    
+
+    /**
+     * Constructor de la ventana.
+     * Inicializa los componentes de la interfaz gráfica y llena
+     * el combobox de secciones con las secciones existentes de la tienda.
+     * 
+     * @param tienda La tienda donde se agregarán los productos
+     */
     public VentanaAgregarProducto(Tienda tienda) {
         this.tienda = tienda;
-        
         initComponents();
+
+        // Se agrega opción para crear nueva sección
         this.inputSeccion.addItem("Nueva Seccion");
-        for(int i = 0; i < this.tienda.getListSecciones().size();i++){
-            this.inputSeccion.addItem(this.tienda.getListSecciones().get(i).getNombreSeccion());
+        for (Seccion sec : this.tienda.getListSecciones()) {
+            this.inputSeccion.addItem(sec.getNombreSeccion());
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -347,11 +363,25 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción realizada al presionar el botón "Cancelar".
+     * Cierra la ventana sin realizar ninguna acción.
+     * 
+     * @param evt Evento de acción del botón
+     */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
+    /**
+     * Acción realizada al presionar el botón "Agregar".
+     * Valida los datos ingresados, crea el producto correspondiente
+     * y lo agrega a la sección seleccionada de la tienda.
+     * Muestra mensajes de error si los datos son inválidos.
+     * 
+     * @param evt Evento de acción del botón
+     */
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
         if(inputCodigo.getText().isEmpty() ){
@@ -434,6 +464,12 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_botonAceptarActionPerformed
 
+    /**
+     * Habilita o deshabilita el campo de fecha de vencimiento según
+     * si el producto es perecible.
+     * 
+     * @param evt Evento del checkbox
+     */
     private void esPerecibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esPerecibleActionPerformed
         // TODO add your handling code here:
         if (esPerecible.isSelected()) {
@@ -444,6 +480,12 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_esPerecibleActionPerformed
 
+    /**
+     * Habilita o deshabilita el campo de cantidad por lote según
+     * si el producto viene en lote.
+     * 
+     * @param evt Evento del checkbox
+     */
     private void esLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esLoteActionPerformed
         // TODO add your handling code here:
         if (esLote.isSelected()) {
@@ -478,6 +520,12 @@ public class VentanaAgregarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputCantidadPorLoteActionPerformed
 
+     /**
+     * Permite ingresar el nombre de una nueva sección si se selecciona "Nueva Sección".
+     * 
+     * @param evt Evento del combobox de secciones
+     */
+    
     private void inputSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSeccionActionPerformed
         // TODO add your handling code here:
         String seleccionado = (String)this.inputSeccion.getSelectedItem();

@@ -66,3 +66,16 @@ Proveedor: PokeCo
 Precio Compra: 5.9
 
 
+--------------------------------------------
+Seccion: asdsadsa
+
+
+sdadsa (1312)
+
+Stock Disponible: 1231
+Proveedor: sdasd
+Precio Compra: 123.0
+Fecha de Vencimiento: 2012-01-12
+Cantidad Por Lote: 5
+
+

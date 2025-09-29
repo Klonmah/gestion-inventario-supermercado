@@ -13,16 +13,24 @@ import java.awt.Color;
 import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 /**
+ * Ventana de interfaz gráfica que permite al usuario buscar y eliminar productos
+ * de una tienda. El producto se busca por su código, se muestra en una tabla
+ * con sus datos y puede ser eliminado de la sección correspondiente.
+ *
+ * <p>Soporta productos normales, perecibles, por lote y perecibles por lote.</p>
  *
  * @author diazv
  */
 public class VentanaEliminarProductos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaEliminarProductos
-     */
     private Tienda tienda;
     private int codigoBuscado;
+
+    /**
+     * Crea una nueva ventana para eliminar productos de una tienda.
+     *
+     * @param tienda instancia de la tienda sobre la cual se realizan las operaciones
+     */
     public VentanaEliminarProductos(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
@@ -177,6 +185,18 @@ public class VentanaEliminarProductos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+     /**
+     * Acción del botón "Eliminar". Elimina el producto actualmente buscado y mostrado
+     * en la tabla, siempre que exista en la tienda.
+     *
+     * <ul>
+     *   <li>Si no se ha buscado un producto previamente, muestra error.</li>
+     *   <li>Si el producto ya no existe, muestra error.</li>
+     *   <li>Si la eliminación es exitosa, limpia la tabla y muestra mensaje de éxito.</li>
+     * </ul>
+     *
+     * @param evt evento de acción disparado al presionar el botón
+     */
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
         // Si no hay producto buscado, no tiene sentido eliminar
@@ -219,6 +239,19 @@ public class VentanaEliminarProductos extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+    
+    /**
+     * Acción del botón "Buscar". Busca un producto por su código y lo muestra
+     * en la tabla con todos sus datos.
+     *
+     * <ul>
+     *   <li>Si el código es inválido, muestra error.</li>
+     *   <li>Si el producto no existe, muestra error.</li>
+     *   <li>Si se encuentra, carga la información del producto en la tabla.</li>
+     * </ul>
+     *
+     * @param evt evento de acción disparado al presionar el botón
+     */
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         Producto buscado;

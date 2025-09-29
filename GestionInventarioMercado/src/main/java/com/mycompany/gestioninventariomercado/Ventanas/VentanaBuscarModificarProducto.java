@@ -10,8 +10,6 @@ import com.mycompany.gestioninventariomercado.Clases.ProductoPereciblePorLote;
 import com.mycompany.gestioninventariomercado.Clases.ProductoPorLote;
 import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import java.awt.Color;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,21 +21,35 @@ import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteDecimale
 import com.mycompany.gestioninventariomercado.Exepciones.ExcepcionLimiteString;
 import com.mycompany.gestioninventariomercado.Exepciones.VerificadorString;
 /**
- *
+ * Ventana gráfica que permite al usuario buscar un producto en la tienda a partir de su código
+ * y modificar sus datos (nombre, cantidad, vendedor, precio, fecha de caducidad, etc.).
+ * 
+ * Se implementa utilizando Swing y una {@link javax.swing.JTable} para mostrar y editar los datos del producto.
+ * 
  * @author diazv
  */
-public class VentanaBuscarProducto extends javax.swing.JFrame {
+public class VentanaBuscarModificarProducto extends javax.swing.JFrame {
 
     /**
-     * Creates new form BuscarProducto
+     * Referencia a la tienda donde se almacenan los productos.
      */
-   private Tienda tienda;
-   private int codigoBuscado;
-    public VentanaBuscarProducto(Tienda tienda) {
+    private Tienda tienda;
+
+    /**
+     * Código del producto que fue buscado.
+     * Se utiliza para validar si el producto modificado corresponde al mismo buscado inicialmente.
+     */
+    private int codigoBuscado;
+
+    /**
+     * Crea una nueva ventana para buscar y modificar productos de una tienda.
+     *
+     * @param tienda instancia de la tienda sobre la cual se realizarán las búsquedas y modificaciones
+     */
+    public VentanaBuscarModificarProducto(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,15 +185,33 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void inputCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputCodigoActionPerformed
 
+     /**
+     * Acción asociada al botón "Salir".
+     * Cierra la ventana actual.
+     *
+     * @param evt evento de acción generado al presionar el botón
+     */
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+     /**
+     * Acción asociada al botón "Confirmar Modificación".
+     * 
+     * Valida los datos ingresados en la tabla y actualiza los atributos del producto encontrado
+     * (nombre, cantidad, vendedor, precio, fecha de caducidad y/o cantidad por lote).
+     * 
+     * En caso de error de validación o formato, se muestra un mensaje en {@code textoError}.
+     *
+     * @param evt evento de acción generado al presionar el botón
+     */
+    
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
     DefaultTableModel modelo = (DefaultTableModel) this.tablaBuscado.getModel();
 
@@ -223,11 +253,14 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
         VerificadorNumero.verificar(precio);
         VerificadorString.verificar(nuevoNombre);
         VerificadorString.verificar(nuevoVendedor);
-        if (this.tienda.getProductoEnSeccionPorCodigo(codigo) != null) {
+        Producto existente = this.tienda.getProductoEnSeccionPorCodigo(codigo);
+
+    // Si existe y no es el mismo que el que estamos modificando → error
+        if (existente != null && existente.getCodigo() != this.codigoBuscado) {
             textoError.setText("El código ingresado ya existe en la tienda.");
             textoError.setForeground(Color.red);
-        return;
-    }
+            return;
+}
         
         
     }
@@ -292,6 +325,16 @@ public class VentanaBuscarProducto extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_botonModificarActionPerformed
 
+    /**
+     * Acción asociada al botón "Buscar".
+     * 
+     * Busca un producto en la tienda a partir del código ingresado en el campo {@code inputCodigo}.
+     * Si lo encuentra, se muestran sus datos en la tabla para que el usuario pueda modificarlos.
+     * 
+     * Si no existe o el formato es inválido, se muestra un mensaje en {@code textoError}.
+     *
+     * @param evt evento de acción generado al presionar el botón
+     */
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
                                          
     Producto buscado;
@@ -377,13 +420,13 @@ try {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarModificarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarModificarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarModificarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaBuscarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscarModificarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         Tienda tienda = new Tienda("");
@@ -391,7 +434,7 @@ try {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaBuscarProducto(tienda).setVisible(true);
+                new VentanaBuscarModificarProducto(tienda).setVisible(true);
             }
         });
     }

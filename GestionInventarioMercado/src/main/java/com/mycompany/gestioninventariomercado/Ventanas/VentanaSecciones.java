@@ -9,36 +9,54 @@ import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import java.awt.Color;
 
 /**
- *
+ * Ventana gráfica que permite administrar las secciones de una tienda.
+ * 
+ * <p>Desde esta interfaz el usuario puede:</p>
+ * <ul>
+ *   <li>Agregar nuevas secciones a la tienda.</li>
+ *   <li>Eliminar secciones existentes.</li>
+ *   <li>Renombrar secciones ya creadas.</li>
+ * </ul>
+ * 
+ * <p>La información se gestiona a través de la instancia de {@link Tienda} 
+ * recibida en el constructor.</p>
+ * 
  * @author diazv
  */
 public class VentanaSecciones extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaSecciones
-     */
     private Tienda tienda;
+
+    /**
+     * Crea una nueva ventana para administrar las secciones de la tienda.
+     * 
+     * <p>Al inicializar la ventana, se actualizan los {@code JComboBox} 
+     * con los nombres de las secciones actuales.</p>
+     *
+     * @param tienda instancia de la tienda que contiene las secciones
+     */
     public VentanaSecciones(Tienda tienda) {
         initComponents();
         this.tienda = tienda;
-        
         this.actualizarCombobox();
     }
-    
-   private void actualizarCombobox() {
+
+    /**
+     * Actualiza los {@code JComboBox} que muestran las secciones disponibles.
+     */
+    private void actualizarCombobox() {
         nombreSeccionaBorrar.removeAllItems();
         nombreSeccionArenombrar.removeAllItems();
 
-        
         java.util.List<Seccion> secciones = this.tienda.getListSecciones();
 
-        
         for (int i = 0; i < secciones.size(); i++) {
             String nombre = secciones.get(i).getNombreSeccion();
             nombreSeccionaBorrar.addItem(nombre);
             nombreSeccionArenombrar.addItem(nombre);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,6 +301,14 @@ public class VentanaSecciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Acción del botón "Agregar".
+     * 
+     * <p>Permite añadir una nueva sección a la tienda, validando que 
+     * el nombre no esté vacío ni duplicado.</p>
+     *
+     * @param evt evento disparado al presionar el botón
+     */
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         // TODO add your handling code here:
         if (nombreSeccionAgregar.getText().isEmpty())
@@ -310,6 +336,14 @@ public class VentanaSecciones extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreSeccionAgregarActionPerformed
 
+    /**
+     * Acción del botón "Eliminar".
+     * 
+     * <p>Permite eliminar la sección seleccionada en el {@code JComboBox}.
+     * Si no existen secciones o no se encuentra la seleccionada, se muestra un error.</p>
+     *
+     * @param evt evento disparado al presionar el botón
+     */
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
         try {
@@ -324,7 +358,7 @@ public class VentanaSecciones extends javax.swing.JFrame {
             String aBorrar = seleccionado.toString();
 
             if (this.tienda.existeSeccion(aBorrar)) {
-                this.tienda.eliminarSeccionPorNombre(aBorrar);
+                this.tienda.eliminarSeccion(aBorrar);
                 this.actualizarCombobox();
                 textoError1.setText("Sección borrada");
                 textoError1.setForeground(Color.black);
@@ -339,11 +373,26 @@ public class VentanaSecciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+     /**
+     * Acción del botón "Salir".
+     * 
+     * <p>Cierra la ventana actual.</p>
+     *
+     * @param evt evento disparado al presionar el botón
+     */
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    /**
+     * Acción del botón "Modificar".
+     * 
+     * <p>Permite renombrar la sección seleccionada en el {@code JComboBox}.
+     * Valida que el nuevo nombre no sea nulo ni vacío.</p>
+     *
+     * @param evt evento disparado al presionar el botón
+     */
     private void botonRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRenombrarActionPerformed
         // TODO add your handling code here:
         try{

@@ -8,36 +8,65 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Desktop;
 import java.io.File;
 /**
+ * Ventana que permite listar todos los productos de la {@link Tienda}.
+ * <p>
+ * Funcionalidades principales:
+ * <ul>
+ *     <li>Mostrar todos los productos en una tabla</li>
+ *     <li>Filtrar productos por sección o mostrar todos</li>
+ *     <li>Generar un reporte en un archivo TXT e intentar abrirlo automáticamente</li>
+ *     <li>Abrir una ventana auxiliar para listar los productos vencidos</li>
+ * </ul>
+ *
+ * La información de los productos se obtiene del método
+ * {@link Tienda#toString()}, que devuelve el inventario en formato de texto.
  *
  * @author diazv
  */
 public class VentanaListarProductos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificarProducto
-     */
+    /** Tienda que contiene los productos a listar */
     private Tienda tienda;
+
+    /**
+     * Constructor de la ventana de listado de productos.
+     * <p>
+     * Inicializa los componentes gráficos, carga los productos en la tabla
+     * y rellena el filtro de secciones disponibles.
+     *
+     * @param tienda Tienda desde la cual se listan los productos
+     */
     public VentanaListarProductos(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
+
+        // Cargar productos en la tabla desde el toString() de Tienda
         String texto = tienda.toString();
-        String [] arrayTexto = texto.split("\n");
+        String[] arrayTexto = texto.split("\n");
         DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
-        
-        for(int i = 0; i< arrayTexto.length;i++){
-            String[] fila = arrayTexto[i].split(",");
+
+        for (String linea : arrayTexto) {
+            String[] fila = linea.split(",");
             modelo.addRow(fila);
         }
-        
+
+        // Cargar secciones en el filtro
         this.filtroSecciones.addItem("Todas");
-        for(int i = 0; i < this.tienda.getListSecciones().size();i++){
+        for (int i = 0; i < this.tienda.getListSecciones().size(); i++) {
             this.filtroSecciones.addItem(this.tienda.getListSecciones().get(i).getNombreSeccion());
         }
-        
     }
+
+    /**
+     * Refresca la tabla de productos.
+     * <p>
+     * Muestra solo los productos correspondientes a la sección seleccionada
+     * en el {@link javax.swing.JComboBox} de filtros, o todos los productos
+     * si la opción seleccionada es "Todas".
+     */
     public void refrescarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
-        modelo.setRowCount(0); // limpia la tabla
+        modelo.setRowCount(0); // limpiar tabla
 
         String texto = tienda.toString();
         String[] arrayTexto = texto.split("\n");
@@ -49,8 +78,8 @@ public class VentanaListarProductos extends javax.swing.JFrame {
                 modelo.addRow(fila);
             }
         }
-}
-    
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,11 +187,27 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del botón "Salir".
+     * <p>
+     * Cierra la ventana actual.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    /**
+     * Acción del botón "Imprimir en txt".
+     * <p>
+     * Genera un reporte de todos los productos de la tienda en un archivo
+     * <b>reporte.txt</b> y, si es posible, abre el archivo automáticamente
+     * usando la aplicación predeterminada del sistema.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImprimirActionPerformed
         // TODO add your handling code here:
         
@@ -178,6 +223,15 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonImprimirActionPerformed
 
+     /**
+     * Acción del botón "Listar Productos Vencidos".
+     * <p>
+     * Abre la ventana {@link VentanaListarProductosVencidos} que muestra
+     * únicamente los productos vencidos. Cuando esta ventana se cierra,
+     * la tabla de productos de esta ventana se refresca.
+     *
+     * @param evt Evento de acción del botón
+     */
     private void botonListarVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarVencidosActionPerformed
         // TODO add your handling code here:
         VentanaListarProductosVencidos ventanaVencidos = new VentanaListarProductosVencidos(this.tienda);
@@ -192,6 +246,14 @@ public class VentanaListarProductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonListarVencidosActionPerformed
 
+     /**
+     * Acción al cambiar la sección en el filtro.
+     * <p>
+     * Vuelve a cargar la tabla mostrando únicamente los productos
+     * que pertenecen a la sección seleccionada o todos si se eligió "Todas".
+     *
+     * @param evt Evento de acción del JComboBox
+     */
     private void filtroSeccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroSeccionesActionPerformed
 
     String seccionSeleccionada = (String) filtroSecciones.getSelectedItem();

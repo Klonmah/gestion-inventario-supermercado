@@ -5,11 +5,18 @@
 package com.mycompany.gestioninventariomercado.Exepciones;
 
 /**
- *
- * @author diazv
+ * Excepción que se lanza cuando un número supera el límite permitido de 10.000.000.
+ * Usada para validar cantidades máximas.
  */
 public class ExcepcionLimiteNumerico extends Exception {
-    public ExcepcionLimiteNumerico(){
+
+    /**
+     * Crea una nueva instancia de la excepción con un mensaje por defecto.
+     */
+    public ExcepcionLimiteNumerico() {
         super("El Valor de codigo, precio y cantidad no pueden ser mayores a 10 millones");
     }
 }
+
+
+

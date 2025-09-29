@@ -7,7 +7,7 @@ package com.mycompany.gestioninventariomercado;
 import com.mycompany.gestioninventariomercado.Clases.Tienda;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaSecciones;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaListarProductos;
-import com.mycompany.gestioninventariomercado.Ventanas.VentanaBuscarProducto;
+import com.mycompany.gestioninventariomercado.Ventanas.VentanaBuscarModificarProducto;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaAgregarProducto;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaEliminarProductos;
 import com.mycompany.gestioninventariomercado.Ventanas.VentanaGestionDeStock;
@@ -258,7 +258,7 @@ public class VentanaMenuPrincipalGrafico extends javax.swing.JFrame {
 
     private void buscarModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarModificarProductoActionPerformed
         // TODO add your handling code here:
-        VentanaBuscarProducto ventanaBuscar = new VentanaBuscarProducto(this.tienda);
+        VentanaBuscarModificarProducto ventanaBuscar = new VentanaBuscarModificarProducto(this.tienda);
         ventanaBuscar.setVisible(true);
     }//GEN-LAST:event_buscarModificarProductoActionPerformed
 

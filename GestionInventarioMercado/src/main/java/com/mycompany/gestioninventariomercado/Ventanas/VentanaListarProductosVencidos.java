@@ -8,23 +8,40 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Desktop;
 import java.io.File;
 /**
+ * Ventana de interfaz gráfica que lista todos los productos vencidos en la tienda.
+ * 
+ * <p>Los productos vencidos se muestran en una tabla con detalles como sección, 
+ * código, nombre, cantidad, vendedor, precio de compra, fecha de vencimiento 
+ * y cantidad por lote.</p>
+ *
+ * <p>El usuario puede:</p>
+ * <ul>
+ *   <li>Visualizar los productos vencidos.</li>
+ *   <li>Eliminar todos los productos vencidos de la tienda con un botón.</li>
+ *   <li>Cerrar la ventana.</li>
+ * </ul>
  *
  * @author diazv
  */
 public class VentanaListarProductosVencidos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificarProducto
-     */
     private Tienda tienda;
+
+    /**
+     * Crea una nueva ventana para listar los productos vencidos de una tienda.
+     *
+     * <p>Se consultan los productos vencidos en la tienda y se cargan en la tabla.</p>
+     *
+     * @param tienda instancia de la tienda sobre la cual se realiza la búsqueda
+     */
     public VentanaListarProductosVencidos(Tienda tienda) {
         this.tienda = tienda;
         initComponents();
         String texto = tienda.listarProductosVencidos();
-        String [] arrayTexto = texto.split("\n");
+        String[] arrayTexto = texto.split("\n");
         DefaultTableModel modelo = (DefaultTableModel) TablaLista.getModel();
         
-        for(int i = 0; i< arrayTexto.length;i++){
+        for (int i = 0; i < arrayTexto.length; i++) {
             String[] fila = arrayTexto[i].split(",");
             modelo.addRow(fila);
         }
@@ -115,11 +132,22 @@ public class VentanaListarProductosVencidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del botón "Salir". Cierra la ventana actual.
+     *
+     * @param evt evento de acción disparado al presionar el botón
+     */
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    /**
+     * Acción del botón "Borrar Productos Vencidos".
+     *
+     * <p>Elimina todos los productos vencidos de la tienda y luego cierra la ventana.</p>
+     *
+     * @param evt evento de acción disparado al presionar el botón
+     */
     private void botonBorrarVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarVencidosActionPerformed
         // TODO add your handling code here:
         this.tienda.eliminarProductosVencidos();

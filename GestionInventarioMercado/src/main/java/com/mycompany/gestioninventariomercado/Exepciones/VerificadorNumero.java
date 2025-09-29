@@ -8,8 +8,25 @@ package com.mycompany.gestioninventariomercado.Exepciones;
  *
  * @author diazv
  */
+/**
+ * Clase de utilidades para verificar números enteros y decimales.
+ * Lanza excepciones si los números no cumplen ciertas condiciones.
+ */
 public class VerificadorNumero {
 
+    /**
+     * Verifica que un número entero sea válido.
+     * <p>
+     * Condiciones:
+     * <ul>
+     *     <li>No puede ser negativo.</li>
+     *     <li>No puede superar 10,000,000.</li>
+     * </ul>
+     *
+     * @param numero el número entero a verificar
+     * @throws ExcepcionNumNegativo si el número es negativo
+     * @throws ExcepcionLimiteNumerico si el número supera el límite permitido
+     */
     public static void verificar(int numero) throws ExcepcionNumNegativo, ExcepcionLimiteNumerico {
         if (numero < 0) {
             throw new ExcepcionNumNegativo();
@@ -18,7 +35,23 @@ public class VerificadorNumero {
             throw new ExcepcionLimiteNumerico();
         }
     }
-    public static void verificar(float numero) throws ExcepcionNumNegativo, ExcepcionLimiteNumerico,ExcepcionLimiteDecimales {
+
+    /**
+     * Verifica que un número decimal (float) sea válido.
+     * <p>
+     * Condiciones:
+     * <ul>
+     *     <li>No puede ser negativo.</li>
+     *     <li>No puede superar 10,000,000.</li>
+     *     <li>No puede tener más de 2 decimales.</li>
+     * </ul>
+     *
+     * @param numero el número decimal a verificar
+     * @throws ExcepcionNumNegativo si el número es negativo
+     * @throws ExcepcionLimiteNumerico si el número supera el límite permitido
+     * @throws ExcepcionLimiteDecimales si el número tiene más de 2 decimales
+     */
+    public static void verificar(float numero) throws ExcepcionNumNegativo, ExcepcionLimiteNumerico, ExcepcionLimiteDecimales {
         if (numero < 0) {
             throw new ExcepcionNumNegativo();
         }

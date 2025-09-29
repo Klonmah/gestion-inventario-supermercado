@@ -9,33 +9,57 @@ import java.io.*;
 import java.time.LocalDate;
 
 /**
- *
+ * Representa una tienda que contiene múltiples secciones.
+ * Permite agregar, buscar, eliminar secciones y productos.
+ * También maneja la carga y guardado de datos en archivos,
+ * así como la generación de reportes.
+ * 
  * @author diazv
  */
-
-
 public class Tienda {
-    /*Variables y Objetos*/
+
+    /** Lista de secciones de la tienda */
     private ArrayList<Seccion> secciones ;
+
+    /** Nombre de la tienda */
     private String nombreTienda;
-   
-    
+
     /*Constructor*/
+
+    /**
+     * Constructor de Tienda con nombre.
+     * @param nombreTienda Nombre de la tienda
+     */
     public Tienda(String nombreTienda){
         this.secciones = new ArrayList<>();
         this.nombreTienda = nombreTienda;
     }
-    
+
     /*Setters*/
+
+    /**
+     * Establece el nombre de la tienda.
+     * @param nombreTienda Nombre de la tienda
+     */
     public void setNombreTienda(String nombreTienda){
         this.nombreTienda = nombreTienda;
     }
-    
+
     /*Getters*/
+
+    /**
+     * Obtiene el nombre de la tienda.
+     * @return Nombre de la tienda
+     */
     public String getNombreTienda(){
         return this.nombreTienda;
     }
-    
+
+    /**
+     * Obtiene una sección por su nombre.
+     * @param nombreSeccion Nombre de la sección
+     * @return Sección encontrada o null si no existe
+     */
     public Seccion getSeccion(String nombreSeccion){
         for(Seccion i: secciones){
             if(i.getNombreSeccion().equalsIgnoreCase(nombreSeccion)){
@@ -44,15 +68,28 @@ public class Tienda {
         }
         return null;
     }
-    
+
+    /**
+     * Obtiene la lista de secciones.
+     * @return ArrayList de secciones
+     */
     public ArrayList<Seccion> getListSecciones(){
         return secciones;
     }
-    
+
+    /**
+     * Agrega una sección a la tienda.
+     * @param seccion Sección a agregar
+     */
     public void agregarSeccion(Seccion seccion){
         this.secciones.add(seccion);
     }
-    
+
+    /**
+     * Busca una sección por nombre.
+     * @param nombre Nombre de la sección
+     * @return Sección encontrada o null si no existe
+     */
     public Seccion buscarSeccion(String nombre){
         for(Seccion i: secciones){
             if(i.getNombreSeccion().equals(nombre)){
@@ -61,8 +98,12 @@ public class Tienda {
         }
         return null;
     }
-    
-    public void eliminarSeccionPorNombre(String nombre){
+
+    /**
+     * Elimina una sección por nombre.
+     * @param nombre Nombre de la sección a eliminar
+     */
+    public void eliminarSeccion(String nombre){
         for(int i = 0 ; i < secciones.size() ; i++ ){
             if(secciones.get(i).getNombreSeccion().equals(nombre)){
                 this.secciones.remove(i);
@@ -70,7 +111,12 @@ public class Tienda {
             }
         }
     }
-    
+
+    /**
+     * Verifica si existe una sección con un nombre dado.
+     * @param nombre Nombre de la sección
+     * @return true si existe, false si no
+     */
     public boolean existeSeccion(String nombre){
         for(Seccion i: secciones){
             if(i.getNombreSeccion().equals(nombre)){
@@ -79,8 +125,13 @@ public class Tienda {
         }
         return false;
     }
-    
-    
+
+    /**
+     * Guarda los datos de la tienda en un archivo de texto.
+     * Incluye todas las secciones y productos.
+     * @param archivo Ruta del archivo
+     * @throws IOException Si ocurre un error al escribir
+     */
     public void guardarDatos(String archivo) throws IOException{
         BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
         for (Seccion sec : secciones){
@@ -116,69 +167,25 @@ public class Tienda {
         }
         escritor.close();
     }
-    
-    public void escribirCosasEnComun(BufferedWriter escritor, Producto p, int key) throws IOException{
-        File archivo = new File("reporte.txt");
-        escritor.write(p.getNombre()+" ("+key+")");
-        escritor.newLine();
-        escritor.newLine();
-        escritor.write("Stock Disponible: "+p.getCantidad());
-        escritor.newLine();
-        escritor.write("Proveedor: "+p.getVendedor());
-        escritor.newLine();
-        escritor.write("Precio Compra: "+p.getPrecioCompra());
-        escritor.newLine();
-    }
-    
+
+    /**
+     * Genera un reporte completo de la tienda en un archivo "reporte.txt".
+     * @throws IOException Si ocurre un error al escribir
+     */
     public void generarReporte() throws IOException{
         File archivo = new File("reporte.txt");
         BufferedWriter escritor = new BufferedWriter (new FileWriter(archivo));
         for (Seccion sec : secciones){
-            escritor.write("--------------------------------------------");
-            escritor.newLine();
-            escritor.write("Seccion: "+sec.getNombreSeccion());
-            escritor.newLine();
-            escritor.newLine();
-            escritor.newLine();
-            for (Integer key : sec.getProductos().keySet()) {
-                Producto p = sec.getProductoCodigo(key);
-                if (p instanceof ProductoPerecible)
-                {
-                    ProductoPerecible per = (ProductoPerecible) p;
-                    escribirCosasEnComun(escritor, p, key);
-                    escritor.write("Fecha de Vencimiento: "+per.getFechaVencimiento());
-                    escritor.newLine();
-                    escritor.newLine();
-                }
-                else if (p instanceof ProductoPorLote)
-                {
-                    ProductoPorLote lote = (ProductoPorLote) p;
-                    escribirCosasEnComun(escritor, p, key);
-                    escritor.write("Cantidad Por Lote: "+lote.getCantidadLote());
-                    escritor.newLine();
-                }
-                else if (p instanceof ProductoPereciblePorLote)
-                {
-                    ProductoPereciblePorLote perlote = (ProductoPereciblePorLote) p;
-                    escribirCosasEnComun(escritor, p, key);
-                    escritor.write("Fecha de Vencimiento: "+perlote.getFechaVencimiento());
-                    escritor.newLine();
-                    escritor.write("Cantidad Por Lote: "+perlote.getCantidadLote());
-                    escritor.newLine();
-                    escritor.newLine();
-                }
-                else
-                {
-                    escribirCosasEnComun(escritor, p, key);
-                    escritor.newLine();
-                }
-            }
-            escritor.newLine();
-            
+            sec.generarReporteSeccion(escritor);
         }
         escritor.close();
     }
-    
+
+    /**
+     * Carga los datos de la tienda desde un archivo de texto.
+     * @param archivo Ruta del archivo
+     * @throws IOException Si ocurre un error al leer
+     */
     public void cargarDatos(String archivo) throws IOException
     {
         BufferedReader lector = new BufferedReader(new FileReader(archivo));
@@ -245,7 +252,12 @@ public class Tienda {
             }
         }
     }
-    
+
+    /**
+     * Obtiene un producto por código dentro de todas las secciones.
+     * @param codigo Código del producto
+     * @return Producto encontrado o null si no existe
+     */
     public Producto getProductoEnSeccionPorCodigo(int codigo)
     {
         for (Seccion sec : secciones) {
@@ -256,17 +268,26 @@ public class Tienda {
         }
         return null; 
     }
-    
+
+    /**
+     * Obtiene el nombre de la sección donde se encuentra un producto.
+     * @param codigo Código del producto
+     * @return Nombre de la sección o "" si no existe
+     */
     public String getNombreSeccionDeProducto(int codigo){
         for (Seccion sec : secciones) {
             if(sec.buscarProducto(codigo) != null){
                 return sec.getNombreSeccion();
-                
             }
         }
         return "";
     }
-    
+
+    /**
+     * Elimina un producto por su código.
+     * @param codigo Código del producto
+     * @return true si se eliminó, false si no existe
+     */
     public boolean eliminarProductoPorCodigo(int codigo){
         for (Seccion sec : secciones) {
             if(sec.getProductoCodigo(codigo) != null){
@@ -276,7 +297,13 @@ public class Tienda {
         }
         return false;
     }
-    
+
+    /**
+     * Cambia la sección de un producto.
+     * @param codigoProducto Código del producto
+     * @param nombreSeccionNueva Nueva sección donde mover el producto
+     * @return true si se pudo cambiar, false si no existe
+     */
     public boolean cambiarSeccionProducto(int codigoProducto,String nombreSeccionNueva){
         Producto buscado = this.getProductoEnSeccionPorCodigo(codigoProducto);
         if(buscado != null){
@@ -287,13 +314,20 @@ public class Tienda {
             return false;
         }
     }
-    
+
+    /**
+     * Elimina todos los productos vencidos de todas las secciones.
+     */
     public void eliminarProductosVencidos(){
         for(int i = 0; i < this.secciones.size();i++){
             this.secciones.get(i).eliminarProductosVencidosPorSeccion();
         }
     }
-    
+
+    /**
+     * Lista todos los productos vencidos de todas las secciones.
+     * @return String con todos los productos vencidos
+     */
     public String listarProductosVencidos(){
         String text = "";
         for(Seccion i: this.secciones){
@@ -301,7 +335,11 @@ public class Tienda {
         }
         return text;
     }
-    
+
+    /**
+     * Devuelve una representación en String de toda la tienda y sus secciones.
+     * @return String con todas las secciones y productos
+     */
     @Override
     public String toString(){
         String text = "";
@@ -311,4 +349,3 @@ public class Tienda {
         return text;
     }
 }
-
